@@ -1,34 +1,37 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import { GoArrowLeft } from "react-icons/go";
-import { useNavigate, useParams } from "react-router";
-// import { token } from "./Login";
+import { useNavigate, useLocation } from "react-router-dom";
+import queryString from 'query-string';
 
 function ResetPassword() {
-  const router = useNavigate();
-  const { id, token } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = queryString.parse(location.search); // parse query parameters
+  const token = queryParams.token;  // extract token
+
   const formik = useFormik({
     initialValues: { password: "", passwordConfirm: "" },
     onSubmit: (values) => {
       axios
         .patch(
-          `https://kids-oasis-smti.onrender.com/api/v1/users/resetPassword/${id}/${token}`,
+          `https://kids-oasis-smti.onrender.com/api/v1/users/resetPassword?token=${token}`,  // use token from query params
           values
         )
         .then((res) => {
           console.log(res);
-          const token = res.data.token;
-          document.cookie = `authToken=${token}; path=/`;
-          localStorage.setItem("authToken", token);
-          router("/login", { state: { values } });
+          const newToken = res.data.token;  
+          document.cookie = `authToken=${newToken}; path=/`; 
+          localStorage.setItem("authToken", newToken); 
+          navigate("/login");
         })
         .catch((err) => console.log(err));
     },
   });
+
   return (
     <div className="login-container">
       <div className="image-container"></div>
-
       <div className="form">
         <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6 ">
           <div className="form-header">
@@ -39,11 +42,11 @@ function ResetPassword() {
           </div>
 
           <div className="grid w-full">
-            <label className="block">password</label>
+          <label className="block">password</label>
             <input
               onChange={formik.handleChange}
               className="input-container"
-              placeholder="password"
+              placeholder="Enter new password"
               type="password"
               name="password"
               value={formik.values.password}
@@ -51,11 +54,11 @@ function ResetPassword() {
             />
           </div>
           <div className="grid w-full">
-            <label className="block">password Confirm</label>
+            <label className="block">Confirm Password</label>
             <input
               onChange={formik.handleChange}
               className="input-container"
-              placeholder="password reset"
+              placeholder="Confirm new password"
               type="password"
               name="passwordConfirm"
               value={formik.values.passwordConfirm}
