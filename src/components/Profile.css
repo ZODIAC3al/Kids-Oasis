@@ -1,0 +1,65 @@
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100vh;
+}
+.user-form {
+  padding-left: 48px;
+  padding-top: 48px;
+}
+.user-image {
+  background-image: url("Pictures/profile.jpg");
+  background-size: cover;
+  background-repeat: none;
+  width: 64px;
+  height: 64px;
+}
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  color: #053b47;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  position: relative;
+}
+.change-account {
+  margin-bottom: 48px;
+}
+.btn {
+  background-color: #053b47;
+  padding: 6px 24px;
+  font-weight: 400;
+  font-size: 24px;
+  color: #faf3ee;
+}
+.custom-file-upload::before {
+  content: "";
+  width: 80%;
+  border-bottom: solid 1px #053b47;
+  position: absolute;
+  left: 10%;
+  top: 80%;
+  z-index: 1;
+}
+.user-name {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.user-container {
+  padding-left: 48px;
+}
+.user-container::before {
+  content: "";
+  width: 180px;
+  border-bottom: solid 1px #fff;
+  position: absolute;
+  left: 52px;
+  top: 23%;
+  z-index: 1;
+}

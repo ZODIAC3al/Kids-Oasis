@@ -1,0 +1,16 @@
+.hero-bg {
+  position: absolute;
+
+  z-index: -1;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+.hero-description p,
+.hero-description h1 {
+  font-weight: 300;
+}
+.hero-description h2 {
+  font-weight: 700;
+}

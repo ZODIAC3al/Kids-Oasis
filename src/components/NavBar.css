@@ -1,0 +1,18 @@
+/* 
+main colors:
+shades:
+#053b47
+#5e9299
+#e88867
+tents:
+##ffc1a2
+#ffeae0
+#faf3ee
+*/
+.active {
+  color: #5e9299;
+}
+.logo {
+  width: 8rem;
+  height: 6rem;
+}
