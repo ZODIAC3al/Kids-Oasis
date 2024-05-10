@@ -33,6 +33,24 @@ function NavBar() {
               >
                 About Us
               </NavLink>
+              <NavLink
+                to="/login"
+                className="text-black hover:text-teal-700 block rounded-md px-3 py-2 text-base font-medium"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/signup"
+                className="text-black hover:text-teal-700 block rounded-md px-3 py-2 text-base font-medium"
+              >
+                SignUp
+              </NavLink>
+              <NavLink
+                to="/profile"
+                className="text-black hover:text-teal-700 block rounded-md px-3 py-2 text-base font-medium"
+              >
+                Profile
+              </NavLink>
             </div>
           </div>
           {/* Profile Button */}
