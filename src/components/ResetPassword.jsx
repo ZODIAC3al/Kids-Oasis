@@ -2,27 +2,27 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { GoArrowLeft } from "react-icons/go";
 import { useNavigate, useLocation } from "react-router-dom";
-import queryString from 'query-string';
+import queryString from "query-string";
 
 function ResetPassword() {
   const navigate = useNavigate();
   const location = useLocation();
-  const queryParams = queryString.parse(location.search); // parse query parameters
-  const token = queryParams.token;  // extract token
+  const queryParams = queryString.parse(location.search);
+  const token = queryParams.token;
 
   const formik = useFormik({
     initialValues: { password: "", passwordConfirm: "" },
     onSubmit: (values) => {
       axios
         .patch(
-          `https://kids-oasis-smti.onrender.com/api/v1/users/resetPassword?token=${token}`,  // use token from query params
+          `https://kids-oasis-smti.onrender.com/api/v1/users/resetPassword?token=${token}`, // use token from query params
           values
         )
         .then((res) => {
           console.log(res);
-          const newToken = res.data.token;  
-          document.cookie = `authToken=${newToken}; path=/`; 
-          localStorage.setItem("authToken", newToken); 
+          const newToken = res.data.token;
+          document.cookie = `authToken=${newToken}; path=/`;
+          localStorage.setItem("authToken", newToken);
           navigate("/login");
         })
         .catch((err) => console.log(err));
@@ -30,10 +30,13 @@ function ResetPassword() {
   });
 
   return (
-    <div className="login-container">
+    <div className="login-container  ">
       <div className="image-container"></div>
       <div className="form">
-        <form onSubmit={formik.handleSubmit} className="flex flex-col gap-6 ">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex flex-col align-middle gap-6 "
+        >
           <div className="form-header">
             <button className="btn-back">
               <GoArrowLeft />
@@ -42,7 +45,7 @@ function ResetPassword() {
           </div>
 
           <div className="grid w-full">
-          <label className="block">password</label>
+            <label className="block">password</label>
             <input
               onChange={formik.handleChange}
               className="input-container"

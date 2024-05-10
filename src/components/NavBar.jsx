@@ -33,12 +33,6 @@ function NavBar() {
               >
                 About Us
               </NavLink>
-              <NavLink
-                to="/contact"
-                className="text-black hover:text-teal-700 block rounded-md px-3 py-2 text-base font-medium"
-              >
-                Contact Us
-              </NavLink>
             </div>
           </div>
           {/* Profile Button */}

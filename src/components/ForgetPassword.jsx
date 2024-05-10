@@ -15,7 +15,7 @@ function ForgetPassword() {
         )
         .then((res) => {
           console.log(res);
-          router("/", { state: { values } });
+          router("/reset", { state: { values } });
         })
         .catch((err) => console.log(err));
     },

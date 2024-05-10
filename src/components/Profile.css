@@ -6,6 +6,7 @@
 .user-form {
   padding-left: 48px;
   padding-top: 48px;
+  padding-bottom: 48px;
 }
 .user-image {
   background-image: url("Pictures/profile.jpg");
@@ -54,12 +55,13 @@ input[type="file"] {
 .user-container {
   padding-left: 48px;
 }
+
 .user-container::before {
   content: "";
   width: 180px;
   border-bottom: solid 1px #fff;
   position: absolute;
   left: 52px;
-  top: 23%;
+  top: 28%;
   z-index: 1;
 }
