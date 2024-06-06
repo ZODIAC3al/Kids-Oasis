@@ -16,3 +16,62 @@ tents:
   width: 8rem;
   height: 6rem;
 }
+/* NavBar.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  background-color: #ffffff;
+}
+
+.navbar img {
+  max-height: 100%;
+}
+
+.navbar .text-black {
+  color: #000000;
+}
+
+.navbar .hover\\:text-teal-700:hover {
+  color: #38b2ac;
+}
+
+.navbar .rounded-md {
+  border-radius: 0.375rem;
+}
+
+.navbar .bg-slate-200 {
+  background-color: #e2e8f0;
+}
+
+.navbar .rounded-3xl {
+  border-radius: 1.5rem;
+}
+
+/* Mobile menu styles */
+.navbar .md\\:hidden {
+  display: none;
+}
+
+.navbar button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+@media (max-width: 532px) {
+  .navbar-links {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    color: #000;
+  }
+}

@@ -20,7 +20,7 @@ tents:
 body {
 }
 .showing-data {
-  visibility: hidden;
+  display: none;
 }
 
 .login-container {
@@ -31,6 +31,7 @@ body {
   background-repeat: none;
   display: grid;
   grid-template-columns: 0.6fr 0.4fr;
+
   font-size: 62.5%;
 }
 .form-header {
@@ -56,6 +57,19 @@ body {
   color: #053b47;
 }
 
+.form {
+  font-family: sans-serif;
+  display: flex;
+  padding: 0 10% 0 5%;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  background-color: #faf3ee;
+  position: relative;
+  box-shadow: 0 0.4rem 6rem 0 rgba(0, 0, 0, 0.1);
+  border-radius: 1.2rem 0 0 1.2rem;
+}
 .form {
   font-family: sans-serif;
   display: flex;
@@ -190,7 +204,7 @@ label {
     display: flex;
     justify-content: start;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
   }
   .login-container {
     grid-template-columns: 1fr;
@@ -199,7 +213,7 @@ label {
     width: 100vw;
   }
   .form-header p {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 300;
   }
   .name-container:last-child {
@@ -218,7 +232,10 @@ label {
     height: 100vh;
   }
   .showing-data {
-    visibility: visible;
+    display: block;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     margin-top: 48px;
   }
   .image-container {
@@ -243,6 +260,7 @@ label {
     justify-content: center;
     padding: 0 24px;
     gap: 6rem;
+    height: 100vh;
     justify-content: stretch;
   }
   .name-container {

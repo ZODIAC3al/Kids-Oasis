@@ -1,37 +1,44 @@
 import NavBar from "./NavBar";
 import "./AboutUs.css";
-import { about } from "../main";
+import { about } from "../main"; // Make sure to update the path to your image
+
 function AboutUs() {
   return (
-    <section className="w-full  md:h-full flex flex-col justify-items-stretch">
-      <NavBar className="w-full" />
-      <main className="about">
-        <div className="main-content ">
-          <h2 className="md:text-lg">About Company</h2>
-          <p className="md:text-sm">Welcome to state</p>
-        </div>
-        <div className="flex justify-center">
-          <img
-            src={about}
-            className="image md:w-100% md:h-full   "
-            alt="about users"
-          />
-        </div>
-      </main>
-      <footer>
-        <div className="about-content flex flex-col justify-center pt-4 ">
-          <div className="footer-header grid justify-center mb-4  ">
-            <h4 className="">Company Unique Partners</h4>
-            <p>We are thrilled to Partner With them !</p>
+    <section className="about-us-container">
+      <NavBar />
+      <section className="content-section">
+        <main className="main-content">
+          <div className="about-content-container">
+            <div className="about-company">
+              <h2>About Company</h2>
+              <p>Welcome to our state-of-the-art company.</p>
+            </div>
+            <div className="about-image-container">
+              <img
+                src={about}
+                className="image block "
+                alt="about our company"
+              />
+            </div>
           </div>
-          <div className="flex justify-center gap-14 mb-14">
-            <div className="partener-image"></div>
-            <div className="partener-image"></div>
-            <div className="partener-image"></div>
-            <div className="partener-image"></div>
+        </main>
+        <footer className="footer">
+          <div className="about-content">
+            <div className="footer-header">
+              <h4 className="footer-title">Company Unique Partners</h4>
+              <p className="footer-subtitle">
+                We are thrilled to partner with them!
+              </p>
+            </div>
+            <div className="partner-images">
+              <div className="partner-image"></div>
+              <div className="partner-image"></div>
+              <div className="partner-image"></div>
+              <div className="partner-image"></div>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </section>
     </section>
   );
 }

@@ -3,12 +3,14 @@ import "./Login.css";
 import { GoArrowLeft, GoChevronDown } from "react-icons/go";
 import { useFormik } from "formik";
 import axios from "axios";
+import { useState } from "react";
 
 export const token = (token) => {
   return token;
 };
 function Login() {
-  // axios.defaults.withCredentials = true;
+  let error = "";
+  const [errMessage, setErrMessage] = useState({ message: "" });
   const router = useNavigate();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -23,25 +25,33 @@ function Login() {
           localStorage.setItem("authToken", token);
           router("/", { state: { values } });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => setErrMessage({ message: err.response.data.message }));
     },
   });
-
+  if (errMessage.message) {
+    error = (
+      <div className=" flex flex-col justify-center bg-red-200 tracking-wide align-middle">
+        <p className="text-sm text-center py-3 text-red-500 ">
+          {errMessage.message}
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="login-container ">
       <div className="image-container"></div>
       <div className="form container pl-8">
         <form
           onSubmit={formik.handleSubmit}
-          className=" flex flex-col gap-6 pl-12"
+          className=" flex flex-col gap-6 lg:pl-12 md:pl-16 sm:pl-0"
         >
           <div className="form-header">
-            <span className="btn-back">
+            <Link to="/" className="btn-back">
               <GoArrowLeft />
-            </span>
+            </Link>
             <p className="">Welcome Back!</p>
           </div>
-
+          <div>{error}</div>
           <div className="grid w-full input">
             <label className="block">Email</label>
             <input

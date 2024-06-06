@@ -2,3 +2,54 @@
   background-color: rgb(238, 159, 57);
   margin-top: 16px;
 }
+
+.carousel-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.carousel-item img {
+  width: 100%;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1;
+}
+
+.prev {
+  left: 10px;
+  border-radius: 50%;
+}
+
+.next {
+  right: 10px;
+  border-radius: 50%;
+}
+
+@media (max-width: 536px) {
+  .card {
+    background-color: rgb(238, 159, 57);
+    margin-top: 16px;
+    width: 15%;
+  }
+}

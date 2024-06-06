@@ -1,8 +1,13 @@
+.hero {
+}
 .hero-bg {
   position: absolute;
+  height: 470px;
+  width: 85%;
 
   z-index: -1;
 }
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -11,6 +16,117 @@
 .hero-description h1 {
   font-weight: 300;
 }
+.hero-description p {
+  word-spacing: 2px;
+}
 .hero-description h2 {
   font-weight: 700;
+}
+.img {
+  background-image: url(Pictures/partner.png);
+  background-size: cover;
+  background-repeat: none;
+  height: 84px;
+  width: 84px;
+}
+.hero-mobile-bg {
+  display: none;
+}
+@media (max-width: 920px) {
+  section img:first-child {
+    margin-right: 64px;
+
+    /* width: 100%; */
+  }
+  .hero-mobile-bg {
+    display: none;
+  }
+  .hero-description p,
+  .hero-description h1 {
+    font-weight: 300;
+  }
+  .hero-description h2 {
+    font-weight: 700;
+  }
+  .hero-bg {
+    position: absolute;
+    height: 320px;
+    width: 85%;
+
+    z-index: -1;
+  }
+  img {
+    height: 320px;
+  }
+}
+@media (max-width: 536px) {
+  section img:first-child {
+    margin-right: 48px;
+
+    /* width: 100%; */
+  }
+  .hero {
+    margin-top: 24px;
+  }
+  .hero-data {
+    padding-top: 65%;
+  }
+  .hero-partner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  .hero-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    margin-top: 12px;
+  }
+  .hero-description p {
+    font-weight: 400;
+  }
+  .hero-description h1 {
+    font-weight: 500;
+    color: #053b47;
+  }
+  .hero-description p {
+    font-size: 12px;
+  }
+  .hero-description h2 {
+    font-weight: 900;
+    color: #053b47;
+  }
+  .hero-bg {
+    position: absolute;
+    height: 320px;
+    width: 85%;
+    display: none;
+
+    z-index: -1;
+  }
+  .hero-mobile-bg {
+    position: absolute;
+    height: 320px;
+    width: 85%;
+    display: block;
+
+    z-index: -1;
+  }
+  .img {
+    background-image: url(Pictures/partner.png);
+    background-size: cover;
+    background-repeat: none;
+    height: 104px;
+    width: 104px;
+  }
+  .hero-partner div p {
+    display: none;
+  }
+  .partner-one {
+    display: none;
+  }
+
+  main img {
+    display: none;
+  }
 }

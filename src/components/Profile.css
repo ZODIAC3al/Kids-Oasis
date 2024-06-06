@@ -5,8 +5,11 @@
 }
 .user-form {
   padding-left: 48px;
-  padding-top: 48px;
-  padding-bottom: 48px;
+  padding-top: 18px;
+  /* padding-bottom: 48px; */
+}
+.input-container {
+  padding: 5px 0;
 }
 .user-image {
   background-image: url("Pictures/profile.jpg");
@@ -28,7 +31,7 @@ input[type="file"] {
   position: relative;
 }
 .change-account {
-  margin-bottom: 48px;
+  margin-bottom: 18px;
 }
 .btn {
   background-color: #053b47;
@@ -62,6 +65,69 @@ input[type="file"] {
   border-bottom: solid 1px #fff;
   position: absolute;
   left: 52px;
-  top: 28%;
+  top: 32%;
   z-index: 1;
+}
+@media (max-width: 1080px) {
+  .user-container::before {
+    content: "";
+    width: 180px;
+    border-bottom: solid 1px #fff;
+    position: absolute;
+    left: 52px;
+    top: 18%;
+    z-index: 1;
+  }
+}
+@media (max-width: 920px) {
+  .user-container::before {
+    content: "";
+    width: 180px;
+    border-bottom: solid 1px #fff;
+    position: absolute;
+    left: 52px;
+    top: 20%;
+    z-index: 1;
+  }
+}
+@media (max-width: 532px) {
+  .user-container::before {
+    content: "";
+    width: 180px;
+    border-bottom: solid 1px #fff;
+    position: absolute;
+    left: 52px;
+    top: 20%;
+    z-index: 1;
+  }
+  .profile {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    background-color: #dddddd82;
+  }
+  .profile-sidebar {
+    display: none;
+  }
+  .change-account {
+    margin-bottom: 32px;
+  }
+  div .input-container {
+    width: 60%;
+  }
+  nav {
+    height: 60px;
+  }
+  .user-form {
+    padding-top: 0;
+  }
+  /* nav a {
+    padding-left: 20px;
+  }
+  nav button {
+    padding-right: 20px;
+  } */
+  .profile-navigation {
+    padding: 0 30px;
+  }
 }
