@@ -3,7 +3,7 @@ import { GoArrowRight } from "react-icons/go";
 import StarRating from "./StarRating";
 
 import { CarouselComponent } from "./CarouselComponent";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import NursaryDescription from "./NursaryDescription";
 const imgs = [
   "https://images.unsplash.com/photo-1562094974-037b733a5a0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDEyfHxuZXh0fGVufDB8fHx8MTYzNjcyMzE4Mw&ixlib=rb-1.2.1&q=80&w=400",
@@ -49,12 +49,16 @@ function Card({
       <CarouselComponent imgs={imgs} />
 
       <div className="p-2">
-        <h5 className="mb-2 text-lg font-medium leading-tight flex  align-middle justify-between  text-teal-800">
+        <h5 className="mb-2 text-xl font-medium leading-tight flex  align-middle justify-between  text-teal-800">
           {name}
           <StarRating maxRating={5} size={18} color="#053b47" />
         </h5>
-        <p className="mb-2 text-sm text-teal-800">{summary}</p>
-        <p className="mb-8 text-sm text-teal-800">{location}</p>
+        <p className="mb-2 lg:text-sm md:text-sm sm:text-xs text-teal-800">
+          {summary}
+        </p>
+        <p className="mb-8 lg:text-sm md:text-sm sm:text-xs text-teal-800">
+          {location}
+        </p>
         <div className="bottom-2 right-2 absolute ">
           <button
             type="button"

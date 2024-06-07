@@ -1,5 +1,5 @@
 import "./SignUp.css";
-import { GoArrowLeft, GoChevronDown } from "react-icons/go";
+import { GoArrowLeft } from "react-icons/go";
 import { MdLocationOn } from "react-icons/md";
 import { useFormik } from "formik";
 // import * as yup from "yup";

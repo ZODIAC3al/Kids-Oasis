@@ -14,18 +14,17 @@ function NavBar() {
     <section className="container mx-auto h-16 md:h-32 shadow-gray-300">
       <nav className="shadow w-full px-4 md:px-8 md:py-8 m-auto">
         <div className="md:h-16 h-16 md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
-          {/* Logo */}
           <div className="order-1 w-16 h-16 md:w-32 md:h-32 flex justify-center items-center">
             <img src={logo} className="h-12 md:h-20" alt="logo" />
           </div>
-          {/* Mobile Menu Button */}
+
           <button
             className="md:hidden text-green-800 text-3xl z-10"
             onClick={handleMobileMenuToggle}
           >
             ☰
           </button>
-          {/* Navigation Links */}
+
           <div
             className={`text-gray-500 md:w-auto md:flex md:items-center order-3 md:order-2 ${
               isMobileMenuOpen ? "block" : "hidden"
@@ -74,7 +73,7 @@ function NavBar() {
           <div className="order-2 md:order-3">
             <Link
               to="/profile"
-              className="h-auto w-auto px-4 py-2 bg-slate-200 text-black rounded-3xl flex items-center gap-2"
+              className="h-auto w-auto px-4 py-2 bg-slate-200 text-black block rounded-3xl flex items-center gap-2"
             >
               <span className="hidden md:block md:text-xs lg:text-base">
                 Log in/Sign up

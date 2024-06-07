@@ -10,7 +10,7 @@ function AboutUs() {
         <main className="main-content">
           <div className="about-content-container">
             <div className="about-company">
-              <h2>About Company</h2>
+              <h2 className="text-2xl">About Company</h2>
               <p>Welcome to our state-of-the-art company.</p>
             </div>
             <div className="about-image-container">

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router";
 import { CarouselComponent } from "./CarouselComponent";
 import { Link } from "react-router-dom";
-
+import "../components/NursaryDescription.css";
 function NursaryDescription() {
   const location = useLocation();
   // <h1>{location.state.name}</h1>
@@ -23,10 +23,12 @@ function NursaryDescription() {
     <section className="h-screen">
       <CarouselComponent />
       <section className="w-11/12 m-auto ">
-        <div className="bg-blue-200  mt-8 mb-8  px-4 lg:mt-4 md:mb-0 lg:mb-0 md:mt-8  py-2 flex justify-between align-middle rounded-lg">
-          <h2 className="text-2xl text-teal-950">{location.state.name}</h2>
-          <div className="flex align-middle gap-2 text-teal-950 text-sm pt-2 ">
-            <span>
+        <div className="bg-blue-200  mt-8 mb-8  px-4 lg:mt-4 md:mb-0 lg:mb-0 md:mt-8  py-2 flex justify-between text-center  align-middle rounded-lg">
+          <h2 className="lg:text-2xl md:text-xl sm:text-sm text-teal-950">
+            {location.state.name}
+          </h2>
+          <div className=" flex align-middle gap-2 text-teal-950 text-sm lg:pt-2 md:pt-2 sm:pt-0 ">
+            <span className="nursary-description lg:text-sm md:text-sm sm:text-xs">
               {location.state.reviews} review |{" "}
               {location.state.numberOfChildren} Registered
             </span>
@@ -91,7 +93,7 @@ function NursaryDescription() {
               </div>
             </div>
           </aside>
-          <article className="lg:block md:block hidden">
+          <article className="lg:block md:block ">
             <main className="shadow-xl">
               <div className="bg-blue-200 rounded-t-lg mb-6">
                 <h4 className="px-4 py-2 text-teal-950">Description</h4>

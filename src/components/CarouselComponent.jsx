@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
-import { GoArrowRight } from "react-icons/go";
-import StarRating from "./StarRating";
+// import { GoArrowRight } from "react-icons/go";
+// import StarRating from "./StarRating";
 import "./Card.css";
 
 const imgs = [

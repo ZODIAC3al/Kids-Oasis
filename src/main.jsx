@@ -21,8 +21,6 @@ export { vector2 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <App />
-    </AuthContextProvider>
+    <App />
   </React.StrictMode>
 );
