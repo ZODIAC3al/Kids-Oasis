@@ -11,6 +11,7 @@ import ResetPassword from "./components/ResetPassword";
 import SignUp from "./components/SignUp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NursaryDescription from "./components/NursaryDescription";
+
 // import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   // const [isAuthenticated, setIsAuthenticated] = useState(false);

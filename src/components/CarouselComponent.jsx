@@ -1,137 +1,129 @@
-import { useEffect, useState } from "react";
-import { motion, useMotionValue } from "framer-motion";
-// import { GoArrowRight } from "react-icons/go";
-// import StarRating from "./StarRating";
-import "./Card.css";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const imgs = [
-  "https://happyfeetnursery.com/wp-content/uploads/2016/02/DSC_5329.jpg",
-  "https://s7d1.scene7.com/is/image/goddardsysinc/GS_PW_0258_Schaumburg_IL_Classroom?qlt=85&ts=1697147402745&dpr=off",
-  "https://www.petitjourney.com.au/wp-content/uploads/2017/03/PetitJourney-Barton-103.jpg",
-  "https://th.bing.com/th/id/R.d4e9b463aa9eb9926079a65ff04e3ec3?rik=BHHV21oaB5RUjQ&pid=ImgRaw&r=0",
-  "https://media.stridetreglown.com/wp-content/uploads/2016/01/17160518/Dewi-Sant-053-1185x790.jpg",
-];
+const CarouselComponent = ({ imgs = [], autoPlay = true, interval = 5000 }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(null);
 
-const ONE_SECOND = 1000;
-const AUTO_DELAY = ONE_SECOND * 10;
-const DRAG_BUFFER = 50;
-
-const SPRING_OPTIONS = {
-  type: "spring",
-  mass: 3,
-  stiffness: 400,
-  damping: 50,
-};
-
-export const CarouselComponent = () => {
-  const [imgIndex, setImgIndex] = useState(0);
-
-  const dragX = useMotionValue(0);
-
-  useEffect(() => {
-    const intervalRef = setInterval(() => {
-      const x = dragX.get();
-
-      if (x === 0) {
-        setImgIndex((pv) => {
-          if (pv === imgs.length - 1) {
-            return 0;
-          }
-          return pv + 1;
-        });
-      }
-    }, AUTO_DELAY);
-
-    return () => clearInterval(intervalRef);
-  }, []);
-
-  const onDragEnd = () => {
-    const x = dragX.get();
-
-    if (x <= -DRAG_BUFFER && imgIndex < imgs.length - 1) {
-      setImgIndex((pv) => pv + 1);
-    } else if (x >= DRAG_BUFFER && imgIndex > 0) {
-      setImgIndex((pv) => pv - 1);
-    }
+  const nextSlide = () => {
+    setDirection("right");
+    setCurrentIndex((prevIndex) =>
+      prevIndex === imgs.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
-  return (
-    <div className="relative rounded-t-lg overflow-hidden bg-neutral-950 py-4">
-      <motion.div
-        drag="x"
-        dragConstraints={{
-          left: 0,
-          right: 0,
-        }}
-        style={{
-          x: dragX,
-        }}
-        animate={{
-          translateX: `-${imgIndex * 100}%`,
-        }}
-        transition={SPRING_OPTIONS}
-        onDragEnd={onDragEnd}
-        className="flex cursor-grab items-center active:cursor-grabbing"
-      >
-        <Images imgIndex={imgIndex} />
-      </motion.div>
+  const prevSlide = () => {
+    setDirection("left");
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? imgs.length - 1 : prevIndex - 1
+    );
+  };
 
-      <Dots imgIndex={imgIndex} setImgIndex={setImgIndex} />
-      <GradientEdges />
-    </div>
-  );
-};
+  const goToSlide = (index) => {
+    setDirection(index > currentIndex ? "right" : "left");
+    setCurrentIndex(index);
+  };
 
-const Images = ({ imgIndex }) => {
+  useEffect(() => {
+    if (!autoPlay || imgs.length <= 1) return;
+
+    const timer = setTimeout(() => {
+      nextSlide();
+    }, interval);
+
+    return () => clearTimeout(timer);
+  }, [currentIndex, autoPlay, interval, imgs.length]);
+
+  if (!imgs.length) return null;
+
   return (
-    <>
-      {imgs.map((imgSrc, idx) => {
-        return (
+    <div className="relative w-full h-full group">
+      <div className="relative w-full h-full overflow-hidden">
+        <AnimatePresence custom={direction} initial={false}>
           <motion.div
-            key={idx}
-            style={{
-              backgroundImage: `url(${imgSrc})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "none",
-              width: "100%",
-              height: "200px",
-            }}
-            animate={{
-              scale: imgIndex === idx ? 1 : 0.85,
-            }}
-            transition={SPRING_OPTIONS}
-            className="aspect-video w-screen shrink-0 rounded-md bg-neutral-800 object-cover"
-          />
-        );
-      })}
-    </>
-  );
-};
+            key={currentIndex}
+            custom={direction}
+            initial={{ opacity: 0, x: direction === "right" ? "100%" : "-100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction === "right" ? "-100%" : "100%" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full"
+          >
+            <img
+              src={imgs[currentIndex]}
+              alt={`Slide ${currentIndex}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
-const Dots = ({ imgIndex, setImgIndex }) => {
-  return (
-    <div className="mt-2 flex w-full justify-center gap-2">
-      {imgs.map((_, idx) => {
-        return (
+      {/* Navigation Arrows */}
+      {imgs.length > 1 && (
+        <>
           <button
-            key={idx}
-            onClick={() => setImgIndex(idx)}
-            className={`h-3 w-3 rounded-full transition-colors ${
-              idx === imgIndex ? "bg-neutral-50" : "bg-neutral-500"
-            }`}
-          />
-        );
-      })}
+            onClick={prevSlide}
+            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80 text-teal-800 border-none cursor-pointer p-2 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Previous slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80 text-teal-800 border-none cursor-pointer p-2 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all opacity-0 group-hover:opacity-100"
+            aria-label="Next slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </>
+      )}
+
+      {/* Indicators */}
+      {imgs.length > 1 && (
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+          {imgs.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                currentIndex === index
+                  ? "bg-teal-600 w-6"
+                  : "bg-white/50 hover:bg-white/80"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
-const GradientEdges = () => {
-  return (
-    <>
-      <div className="pointer-events-none absolute bottom-0 left-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-r from-neutral-950/50 to-neutral-950/0" />
-      <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-[10vw] max-w-[100px] bg-gradient-to-l from-neutral-950/50 to-neutral-950/0" />
-    </>
-  );
-};
+export default CarouselComponent;
