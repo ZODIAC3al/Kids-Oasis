@@ -87,7 +87,7 @@ function Footer() {
           >
             <motion.div whileHover="hover" variants={hoverVariants}>
               <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-300 to-teal-300 bg-clip-text text-transparent">
-                InnovateX
+                Kids Oasis
               </h3>
             </motion.div>
             <p className="text-teal-100 leading-relaxed">
@@ -209,7 +209,7 @@ function Footer() {
                 className="flex items-center"
               >
                 <FaEnvelope className="flex-shrink-0 mr-3 text-cyan-300" />
-                hello@KidsOusis.com
+                hello@KidsOasis.com
               </motion.p>
             </address>
           </motion.div>
@@ -232,7 +232,7 @@ function Footer() {
             variants={itemVariants}
             className="text-center md:text-left text-teal-200 mb-6 md:mb-0"
           >
-            © {new Date().getFullYear()} KidsOusis. All rights reserved.
+            © {new Date().getFullYear()} KidsOasis. All rights reserved.
           </motion.p>
           
           <motion.div 
