@@ -18,11 +18,7 @@ export function KidsPlayingAnimation({ className = "" }: { className?: string })
   if (!animationData) {
     return (
       <div className={`flex items-center justify-center min-h-[300px] ${className}`}>
-        <img
-          src="/kids playing - kidcare.svg"
-          alt="Kids playing animation"
-          className="w-full h-auto object-contain max-h-[420px]"
-        />
+        <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
