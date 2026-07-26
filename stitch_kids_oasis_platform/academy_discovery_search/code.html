@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Academy Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#0f0069",
+                      "on-tertiary-container": "#67f4b7",
+                      "outline-variant": "#c7c4d8",
+                      "error": "#ba1a1a",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "surface-container": "#e7eefe",
+                      "surface-tint": "#4d44e3",
+                      "text-primary": "#111827",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "background": "#f9f9ff",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#002113",
+                      "inverse-surface": "#2a313d",
+                      "surface-dim": "#d3daea",
+                      "surface-bright": "#f9f9ff",
+                      "on-surface-variant": "#464555",
+                      "outline": "#777587",
+                      "on-surface": "#151c27",
+                      "tertiary": "#005338",
+                      "bg-dark": "#0F172A",
+                      "tertiary-fixed": "#6ffbbe",
+                      "secondary-fixed": "#c9e6ff",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "on-secondary-fixed": "#001e2f",
+                      "secondary": "#006591",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "on-secondary-container": "#004666",
+                      "surface-container-high": "#e2e8f8",
+                      "surface-variant": "#dce2f3",
+                      "on-primary": "#ffffff",
+                      "on-background": "#151c27",
+                      "secondary-container": "#39b8fd",
+                      "primary-container": "#4f46e5",
+                      "secondary-fixed-dim": "#89ceff",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "inverse-on-surface": "#ebf1ff",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface": "#f9f9ff",
+                      "primary-fixed": "#e2dfff",
+                      "bg-light": "#FAFAFC",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "inverse-primary": "#c3c0ff",
+                      "on-primary-container": "#dad7ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-highest": "#dce2f3",
+                      "surface-container-low": "#f0f3ff",
+                      "tertiary-container": "#006e4b",
+                      "primary": "#3525cd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px",
+                      "2xl": "1.25rem",
+                      "3xl": "1.5rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-mobile": "16px",
+                      "container-max": "1440px",
+                      "gutter": "24px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Geist"],
+                      "body-lg": ["Geist"],
+                      "display-lg": ["Geist"],
+                      "headline-md": ["Geist"],
+                      "label-xs": ["Geist"],
+                      "body-md": ["Geist"],
+                      "display-lg-mobile": ["Geist"]
+              },
+              "fontSize": {
+                      "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-xs": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for clean aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dce2f3;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c7c4d8;
+        }
+        
+        .glass-header {
+            background: rgba(249, 249, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .card-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        
+        .card-hover:hover {
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        
+        /* Map hidden by default on mobile unless toggled */
+        @media (max-width: 1023px) {
+            .map-view-active .list-view-container {
+                display: none;
+            }
+            .map-view-active .map-container {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface/70 dark:bg-bg-dark/70 backdrop-blur-xl docked full-width top-0 sticky border-b border-glass-stroke shadow-sm z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-6">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed" href="#">Kids Oasis</a>
+<!-- Desktop Search Bar -->
+<div class="hidden lg:flex items-center bg-surface-container-low border border-outline-variant/30 rounded-full px-4 py-2 shadow-sm focus-within:ring-2 ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-outline mr-2 text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface w-32 placeholder:text-outline/70" placeholder="Location" type="text"/>
+<div class="h-6 w-px bg-outline-variant/50 mx-3"></div>
+<span class="material-symbols-outlined text-outline mr-2 text-[20px]">calendar_today</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface w-24 placeholder:text-outline/70" placeholder="Dates" type="text"/>
+<button class="bg-primary text-on-primary rounded-full w-8 h-8 flex items-center justify-center ml-2 hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</button>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-primary dark:text-primary-fixed font-bold border-b-2 border-primary py-1" href="#">Find Classes</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors py-1" href="#">For Educators</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors py-1" href="#">Pricing</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors py-1" href="#">Resources</a>
+</nav>
+<div class="hidden md:flex items-center gap-4">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Log In</a>
+<a class="font-label-sm text-label-sm bg-primary text-on-primary px-5 py-2.5 rounded-[14px] hover:bg-primary/90 transition-colors shadow-sm" href="#">Join Now</a>
+<button class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30 ml-2">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a smiling user in a bright, modern setting, wearing casual business attire. The lighting is soft and natural, conveying approachability and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgjgFaXiOlGdZqb3hvlc-PjwHdnyrMfRiEr5d5B8yJI8VegQ-EyvWiV76EZzKPzF0x56_7tw-E0WsVQSID6IEdm0jGxNOjDO0JEwV_TZIM4OgN83_OVgY1oA04k2vYCTW8MjuRLCyeiJVz4ebO2G1qpyYtWiYlD4x2HTXQNxhA4ASy6ycoT00Eaqc34d0Bg6Sas0o2zZqq40TTIrSkwPLaglogbcshAVGav5mtystVKj9SDkubC2oJGJe1GGpeaR-ZkM7aSGz9JrUD"/>
+</button>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Mobile Search Bar (Only visible on small screens) -->
+<div class="lg:hidden w-full px-margin-mobile pb-4 pt-2">
+<div class="flex items-center bg-surface-container-low border border-outline-variant/30 rounded-full px-4 py-2 shadow-sm">
+<span class="material-symbols-outlined text-outline mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface w-full placeholder:text-outline/70" placeholder="Where to?" type="text"/>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-container-max mx-auto flex flex-col lg:flex-row relative">
+<!-- Filter Sidebar (Desktop) / Filter Modal Trigger (Mobile) -->
+<aside class="hidden lg:block w-[280px] shrink-0 border-r border-outline-variant/30 bg-surface-bright h-[calc(100vh-80px)] sticky top-[80px] overflow-y-auto custom-scrollbar p-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Filters</h2>
+<button class="text-label-sm font-label-sm text-primary hover:underline">Reset</button>
+</div>
+<!-- Filter: Age -->
+<div class="mb-8 border-b border-outline-variant/30 pb-6">
+<h3 class="font-label-sm text-label-sm text-on-surface mb-4">Age Range</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-full border border-primary bg-primary-container/10 text-primary font-label-xs text-label-xs transition-colors">0-3 Yrs</button>
+<button class="px-3 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:border-outline font-label-xs text-label-xs transition-colors">4-6 Yrs</button>
+<button class="px-3 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:border-outline font-label-xs text-label-xs transition-colors">7-9 Yrs</button>
+<button class="px-3 py-1.5 rounded-full border border-outline-variant text-on-surface-variant hover:border-outline font-label-xs text-label-xs transition-colors">10+ Yrs</button>
+</div>
+</div>
+<!-- Filter: Distance -->
+<div class="mb-8 border-b border-outline-variant/30 pb-6">
+<div class="flex justify-between mb-4">
+<h3 class="font-label-sm text-label-sm text-on-surface">Distance</h3>
+<span class="font-label-xs text-label-xs text-on-surface-variant">Up to 10 mi</span>
+</div>
+<input class="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="50" min="1" type="range" value="10"/>
+</div>
+<!-- Filter: Price -->
+<div class="mb-8 border-b border-outline-variant/30 pb-6">
+<h3 class="font-label-sm text-label-sm text-on-surface mb-4">Monthly Fee</h3>
+<div class="flex items-center gap-3">
+<div class="relative flex-1">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-outline font-label-sm text-label-sm">$</span>
+<input class="w-full pl-7 pr-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-[14px] text-body-md font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Min" type="number"/>
+</div>
+<span class="text-outline-variant">-</span>
+<div class="relative flex-1">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-outline font-label-sm text-label-sm">$</span>
+<input class="w-full pl-7 pr-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-[14px] text-body-md font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Max" type="number"/>
+</div>
+</div>
+</div>
+<!-- Filter: Facilities -->
+<div class="mb-8 pb-6">
+<h3 class="font-label-sm text-label-sm text-on-surface mb-4">Facilities &amp; Services</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center">
+<input checked="" class="peer appearance-none w-5 h-5 border border-outline-variant rounded bg-surface-container-lowest checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-on-primary absolute opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Transportation</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center">
+<input class="peer appearance-none w-5 h-5 border border-outline-variant rounded bg-surface-container-lowest checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-on-primary absolute opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Meals Included</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center">
+<input checked="" class="peer appearance-none w-5 h-5 border border-outline-variant rounded bg-surface-container-lowest checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-on-primary absolute opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">STEM Lab</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center">
+<input class="peer appearance-none w-5 h-5 border border-outline-variant rounded bg-surface-container-lowest checked:bg-primary checked:border-primary transition-colors cursor-pointer" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-on-primary absolute opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">Outdoor Playground</span>
+</label>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-sm text-label-sm py-3 rounded-[14px] hover:bg-primary/90 transition-colors shadow-sm mb-4">
+                Apply Filters
+            </button>
+</aside>
+<!-- Main Content Area (Results Canvas) -->
+<div class="flex-1 flex flex-col relative list-view-container h-[calc(100vh-80px)] lg:h-auto overflow-hidden lg:overflow-visible">
+<!-- Context Header (Sticky below nav on mobile, standard on desktop) -->
+<div class="px-margin-mobile md:px-gutter py-6 bg-background z-10">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-1">Academies in San Francisco</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Over 40 premium facilities found</p>
+</div>
+<!-- View Controls -->
+<div class="flex items-center gap-3 shrink-0">
+<button class="lg:hidden flex items-center gap-2 px-4 py-2 bg-surface-container-highest rounded-[14px] font-label-sm text-label-sm text-on-surface border border-outline-variant/20">
+<span class="material-symbols-outlined text-[18px]">tune</span> Filters
+                        </button>
+<div class="hidden sm:flex bg-surface-container-low p-1 rounded-[14px] border border-outline-variant/30">
+<button class="px-3 py-1.5 rounded-[10px] bg-background shadow-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">grid_view</span>
+</button>
+<button class="px-3 py-1.5 rounded-[10px] text-on-surface-variant hover:text-on-surface flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">view_list</span>
+</button>
+</div>
+<!-- Toggle Map Button -->
+<button class="flex items-center gap-2 px-4 py-2 bg-surface text-on-surface rounded-[14px] font-label-sm text-label-sm border border-outline-variant shadow-sm hover:bg-surface-variant transition-colors" id="toggleMapBtn">
+<span class="material-symbols-outlined text-[18px]">map</span>
+<span class="map-btn-text">Show Map</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Grid Content -->
+<div class="px-margin-mobile md:px-gutter pb-margin-desktop overflow-y-auto lg:overflow-visible h-full lg:h-auto custom-scrollbar">
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-[20px] border border-outline-variant/30 card-shadow card-hover overflow-hidden flex flex-col group relative">
+<div class="relative h-56 w-full overflow-hidden">
+<img alt="Academy Image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A bright, modern children's classroom with floor-to-ceiling windows, light wood floors, and neatly organized colorful learning stations. Natural sunlight fills the room, creating an inviting, premium educational environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkocFz9brEY8Ktd_iEZHkTgR-cy43O5hWFF0LP9eYmQV5FSiXOppyxQToLSsgOCWdZC7p9J4i40k3ETQtBTM49I_tVlWTrWgBdehpoWMJ9ErcIkWvjO3XSYeruoTSgrTscEKnh0Io4o5AUufCci-6QCvPDlkm6Mc1CqOBMmI4fxmlGJQucdMt0VXwWB5US-gWNiTFznXp6CdnUltD-6gywfvEE2YM8FrhRb9C6dwoTKkQXgCsgk_L0Wp4Amug26ZXrQX-_vNXGshBZ"/>
+<button class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm flex items-center justify-center text-outline hover:text-error transition-colors z-10">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-[8px] flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-amber-500" data-weight="fill">star</span>
+<span class="font-label-xs text-label-xs text-on-surface">4.9</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">(128)</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-[20px] leading-tight text-on-surface font-semibold line-clamp-1">Lighthouse Early Learning</h3>
+<div class="text-right shrink-0 ml-4">
+<span class="block font-label-sm text-label-sm text-on-surface font-semibold">$1,200</span>
+<span class="block font-label-xs text-label-xs text-on-surface-variant">/ mo</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-body-md text-[14px]">0.8 mi away • Hayes Valley</span>
+</div>
+<div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-outline-variant/20">
+<span class="inline-flex items-center px-2 py-1 rounded-[6px] bg-secondary-fixed-dim/20 text-on-secondary-fixed-variant font-label-xs text-label-xs">STEM Focus</span>
+<span class="inline-flex items-center px-2 py-1 rounded-[6px] bg-surface-variant text-on-surface-variant font-label-xs text-label-xs">Transportation</span>
+<span class="inline-flex items-center px-2 py-1 rounded-[6px] bg-surface-variant text-on-surface-variant font-label-xs text-label-xs">0-5 Yrs</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-[20px] border border-outline-variant/30 card-shadow card-hover overflow-hidden flex flex-col group relative">
+<div class="relative h-56 w-full overflow-hidden">
+<img alt="Academy Image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An outdoor playground area of a high-end preschool, featuring natural wooden climbing structures, soft green turf, and a small organic garden bathed in warm afternoon sunlight. Clean, safe, and engaging." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9ae--ISeBdWZwUV-bhBKCv699s5W6fY9178exg1qmiAYhkcwikzzS00va7bHVXYpLuaosoSJjeW3ERDlC2Zh3C8Dw5o9V_JH1FSgmjc0ZluU6t0UnRcxFvE8K4i5jQGxRjdSYLMVNMLKR_JjE-HE8MgXl8CcN4R9w569IkgH-ua43Qr7mufWlthMWHMSKVxCW2sYdpPe-oZQ4SLFCGhvWabd1l7CqvzQJ_SyfZHe4TAPjDgn0zzc6NZciMQkZvRxhwg0G9NFOQnIK"/>
+<button class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm flex items-center justify-center text-error transition-colors z-10">
+<span class="material-symbols-outlined text-[20px]" data-weight="fill">favorite</span>
+</button>
+<div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-[8px] flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-amber-500" data-weight="fill">star</span>
+<span class="font-label-xs text-label-xs text-on-surface">4.7</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">(84)</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-[20px] leading-tight text-on-surface font-semibold line-clamp-1">Nature's Way Academy</h3>
+<div class="text-right shrink-0 ml-4">
+<span class="block font-label-sm text-label-sm text-on-surface font-semibold">$950</span>
+<span class="block font-label-xs text-label-xs text-on-surface-variant">/ mo</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-body-md text-[14px]">1.2 mi away • Presidio</span>
+</div>
+<div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-outline-variant/20">
+<span class="inline-flex items-center px-2 py-1 rounded-[6px] bg-tertiary-fixed-dim/30 text-on-tertiary-fixed-variant font-label-xs text-label-xs">Outdoor Focus</span>
+<span class="inline-flex items-center px-2 py-1 rounded-[6px] bg-surface-variant text-on-surface-variant font-label-xs text-label-xs">Organic Meals</span>
+<span class="inline-flex items-center px-2 py-1 rounded-[6px] bg-surface-variant text-on-surface-variant font-label-xs text-label-xs">3-6 Yrs</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-[20px] border border-outline-variant/30 card-shadow card-hover overflow-hidden flex flex-col group relative">
+<div class="relative h-56 w-full overflow-hidden">
+<img alt="Academy Image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sleek, modern art room for children with white tables, colorful paints neatly organized, and large abstract artworks on the wall. The room feels creative yet highly structured and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbZyKIrXEHPUuoUd-CEjecX7l_L7-SNqdO4ZZexB41QkpsbvF40jj2tncl-z8auvbuYGwqsofps1PjnMrCppfrNFp35V851PUaKwqFxB_z-SJzLifpimxG8xszORuZpMCSvsy20it4ECyXdlzIbIROUdHhENADQw-tCeKqv-BpxUzubthf96IaKF1MZFXz89OIqqr63atYTbLJvNAD5Iwr9O7lAFGmCVIYp-9KZovCCF6um0DH9SX3YNaVauC0gWak3I39Mcd2VaSi"/>
+<button class="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-container-lowest/80 backdrop-blur-sm flex items-center justify-center text-outline hover:text-error transition-colors z-10">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-[8px] flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-amber-500" data-weight="fill">star</span>
+<span class="font-label-xs text-label-xs text-on-surface">5.0</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">(210)</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-[20px] leading-tight text-on-surface font-semibold line-clamp-1">Creative Minds Montessori</h3>
+<div class="text-right shrink-0 ml-4">
+<span class="block font-label-sm text-label-sm text-on-surface font-semibold">$1,450</span>
+<span class="block font-label-xs text-label-xs text-on-surface-variant">/ mo</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span class="font-body-md text-[14px]">2.5 mi away • Marina District</span>
+</div>
+<div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-outline-variant/20">
+<span class="inline-flex items-center px-2 py-1 rounded-[6px] bg-primary-container/20 text-primary font-label-xs text-label-xs">Montessori</span>
+<span class="inline-flex items-center px-2 py-1 rounded-[6px] bg-surface-variant text-on-surface-variant font-label-xs text-label-xs">Language Immersion</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center items-center gap-2 mt-12 pb-8">
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface hover:bg-surface-variant transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary font-label-sm">1</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant text-on-surface font-label-sm transition-colors">2</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant text-on-surface font-label-sm transition-colors">3</button>
+<span class="text-outline-variant">...</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant text-on-surface font-label-sm transition-colors">8</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Map Area (Hidden on mobile unless toggled, hidden on desktop unless toggled) -->
+<div class="hidden lg:hidden w-full lg:w-[45%] xl:w-[50%] h-[calc(100vh-80px)] sticky top-[80px] border-l border-outline-variant/30 map-container bg-surface-dim relative" id="mapView">
+<!-- Simulated Map Image with data-location -->
+<img alt="Map of academies" class="w-full h-full object-cover grayscale opacity-80" data-alt="A clean, minimalist street map interface of San Francisco, featuring soft blue and gray tones, subtle road lines, and small premium pin drops marking locations." data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB-X41ysIigrjU2S_s0zC7YSLmHGx_2GhGV_-IBROmcLTOs2V_ZbSXwSQXKDxXNxCLmkjt7Au2derFy_95RWBbbWyFSdUCQpEBxymz1Wi55novogvvICuDayuV5OJu6DEzLRVKlSW-3lYbMS7sJCurbBGGuT3zUQYdijd9G3hA1XFuhqqTTfUmDKG0_-8LgNHzwGvtYphslIIV5DGjz9ndnieJSw-xKWOlFtxOhXJN1F-HTbI5-_sD4hUj60dC9WUsa0Fkm8UCdc0e"/>
+<!-- Map Overlay Controls -->
+<div class="absolute top-4 left-4 right-4 flex justify-between items-start pointer-events-none">
+<div class="flex flex-col gap-2 pointer-events-auto">
+<button class="w-10 h-10 bg-surface-container-lowest rounded-[14px] shadow-sm flex items-center justify-center text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-lowest rounded-[14px] shadow-sm flex items-center justify-center text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+</div>
+</div>
+<!-- Simulated Map Pins -->
+<div class="absolute top-1/4 left-1/3 pointer-events-auto group cursor-pointer">
+<div class="bg-surface-container-lowest px-3 py-1.5 rounded-full shadow-md font-label-sm text-label-sm font-bold text-on-surface group-hover:bg-primary group-hover:text-on-primary transition-colors border border-outline-variant/20 relative z-10">
+                    $1.2k
+                </div>
+<!-- Tooltip preview -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-surface-container-lowest rounded-[16px] shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none p-2 border border-outline-variant/20 z-20">
+<div class="h-24 w-full rounded-[10px] overflow-hidden mb-2">
+<img class="w-full h-full object-cover" data-alt="A small preview thumbnail of a bright classroom interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_qLnwZt5hLEuI-eiyp6z5TeaEW0qkVypY0c10Z8iAK9kwNrVKHiRZfCK6VGQ72DUTWpfIzk9jQiKepegkcCvTbBXIVPKgGuwnhi2qAJBKB84SD6-yc-rcrIS0jM8aI0S3KjV0dhS2yg1W_2nchjh6orA2g8JGw773GKsZSjOyisRuHYzIbUzNXqCv4OFbZTswqLpTnCvvi-QmwhL0D5PM9RH3FCTM8kTM-22lwg1V4bQWpaqat2NUZ0SKAvBRUK64k9PrzQnGVK3O"/>
+</div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Lighthouse Early Learning</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px] text-amber-500" data-weight="fill">star</span>
+<span class="font-label-xs text-[11px] text-on-surface-variant">4.9 (128)</span>
+</div>
+</div>
+</div>
+<div class="absolute top-1/2 left-2/3 pointer-events-auto group cursor-pointer">
+<div class="bg-primary px-3 py-1.5 rounded-full shadow-md font-label-sm text-label-sm font-bold text-on-primary scale-110 transition-transform border border-outline-variant/20 relative z-10">
+                    $950
+                </div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-highest dark:bg-bg-dark w-full mt-auto border-t border-outline-variant">
+<div class="w-full px-margin-mobile md:px-margin-desktop py-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div>
+<a class="font-headline-md text-headline-md font-bold text-primary mb-4 block" href="#">Kids Oasis</a>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Empowering educators and parents to find the perfect learning environment for every child.</p>
+<div class="font-body-md text-body-md text-on-surface-variant">© 2024 Kids Oasis. All rights reserved.</div>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider mb-2">Company</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Careers</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider mb-2">Legal</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-wider mb-2">Stay Updated</h4>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-2">Subscribe to our newsletter for the latest academy openings.</p>
+<div class="flex">
+<input class="w-full px-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-l-[8px] text-body-md focus:outline-none focus:border-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-r-[8px] hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple toggle for map view
+        const toggleMapBtn = document.getElementById('toggleMapBtn');
+        const mapView = document.getElementById('mapView');
+        const btnText = toggleMapBtn.querySelector('.map-btn-text');
+        const btnIcon = toggleMapBtn.querySelector('.material-symbols-outlined');
+        
+        let isMapVisible = false;
+
+        toggleMapBtn.addEventListener('click', () => {
+            isMapVisible = !isMapVisible;
+            
+            if (isMapVisible) {
+                // Show Map Layout
+                mapView.classList.remove('hidden');
+                mapView.classList.add('lg:block');
+                
+                // Adjust Grid Container when Map is shown
+                const listContainer = document.querySelector('.list-view-container');
+                listContainer.classList.add('lg:w-[55%]', 'xl:w-[50%]');
+                
+                // Change Grid layout to 2 columns max when map is open
+                const grid = document.querySelector('.grid');
+                grid.classList.remove('xl:grid-cols-3');
+                
+                // Mobile behavior (handled mostly by CSS body class)
+                document.body.classList.add('map-view-active');
+                
+                btnText.textContent = 'Hide Map';
+                btnIcon.textContent = 'list';
+                toggleMapBtn.classList.add('bg-surface-variant');
+            } else {
+                // Hide Map Layout
+                mapView.classList.add('hidden');
+                mapView.classList.remove('lg:block');
+                
+                const listContainer = document.querySelector('.list-view-container');
+                listContainer.classList.remove('lg:w-[55%]', 'xl:w-[50%]');
+                
+                const grid = document.querySelector('.grid');
+                grid.classList.add('xl:grid-cols-3');
+                
+                document.body.classList.remove('map-view-active');
+                
+                btnText.textContent = 'Show Map';
+                btnIcon.textContent = 'map';
+                toggleMapBtn.classList.remove('bg-surface-variant');
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Academy Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container": "#e7eefe",
+                        "on-background": "#151c27",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-secondary-container": "#004666",
+                        "primary": "#3525cd",
+                        "inverse-surface": "#2a313d",
+                        "on-primary-container": "#dad7ff",
+                        "surface-tint": "#4d44e3",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#c9e6ff",
+                        "surface-container-high": "#e2e8f8",
+                        "outline-variant": "#c7c4d8",
+                        "background": "#f9f9ff",
+                        "surface-container-low": "#f0f3ff",
+                        "secondary-container": "#39b8fd",
+                        "on-secondary-fixed": "#001e2f",
+                        "surface-container-highest": "#dce2f3",
+                        "on-surface-variant": "#464555",
+                        "inverse-on-surface": "#ebf1ff",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d3daea",
+                        "surface-variant": "#dce2f3",
+                        "tertiary-container": "#006e4b",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "bg-dark": "#0F172A",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error-container": "#ffdad6",
+                        "outline": "#777587",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "text-primary": "#111827",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary": "#005338",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary": "#006591",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#151c27",
+                        "primary-container": "#4f46e5",
+                        "on-tertiary-container": "#67f4b7",
+                        "error": "#ba1a1a",
+                        "bg-light": "#FAFAFC"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-xs": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-xs": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 right-0 w-[calc(100%-280px)] z-50 bg-surface-container-lowest/70 backdrop-blur-xl border-b border-outline-variant hidden md:flex justify-between items-center h-16 px-gutter max-w-container-max font-body-md text-body-md text-primary">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-64 placeholder:text-outline" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<button class="hover:text-primary transition-all"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary transition-all"><span class="material-symbols-outlined">help_outline</span></button>
+<img alt="Administrator Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a school administrator in a bright, modern office setting. Light mode, high-end corporate photography style. Subtle blue and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAts3vIBNzpg14uGszN71Ta_LlqYKGhsNrQ3EsNYmBgPH4RcIYXGWrelE1KWNXNg80mKabDS89mS8NHX5aGEDTFhcJSmh_hhfQ6tDgZW_oJp6ze9Cx8kjU1UMskVSGArtvytDiwpUjJ-PJ4tH6BAie5pVIARm9MHExipFNVKWj22PSzRyGSGCdo75_0JaB1_2ylkhxZG6JTsOms-F9Qq5HASJGL8m52q2kVy36D0rlM9FQHu5VMEcsHoR1J35ag4L_BMNqYZO_Rwxwl"/>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] bg-surface-container-lowest shadow-sm flex flex-col border-r border-outline-variant font-body-md text-body-md text-primary z-40 hidden md:flex">
+<div class="p-6 border-b border-outline-variant flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-headline-md">
+                K
+            </div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary m-0">Kids Oasis</h1>
+<p class="font-label-xs text-label-xs text-outline m-0">Academy Management</p>
+</div>
+</div>
+<div class="p-4">
+<button class="w-full bg-primary text-on-primary rounded-xl py-3 px-4 font-label-sm text-label-sm flex items-center justify-center gap-2 hover:bg-surface-tint transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-t border-white/20">
+<span class="material-symbols-outlined text-sm">add</span> New Application
+            </button>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 py-2 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container text-on-primary-container font-bold transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span> Academy Profile
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span> Branches
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">category</span> Programs
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">group</span> Teachers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">person</span> Students
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">description</span> Applications
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">event_available</span> Bookings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span> Events
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">star</span> Reviews
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">payments</span> Payments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">leaderboard</span> Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">mail</span> Messages
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors scale-98 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-[280px] pt-16 min-h-screen px-margin-mobile md:px-margin-desktop py-8 max-w-container-max mx-auto">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-text-primary">Academy Profile</h2>
+<p class="font-body-lg text-body-lg text-outline mt-2">Manage your public presence and showcase your facilities.</p>
+</div>
+<div class="flex gap-4 hidden sm:flex">
+<button class="px-6 py-2 rounded-xl border border-outline-variant font-label-sm text-label-sm text-on-surface hover:bg-surface-container-low transition-colors">Discard Changes</button>
+<button class="px-6 py-2 rounded-xl bg-primary text-on-primary font-label-sm text-label-sm hover:bg-surface-tint shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-t border-white/20 transition-colors">Save Profile</button>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Left Column: Main Profile Info -->
+<div class="xl:col-span-8 flex flex-col gap-6">
+<!-- Hero Cover & Logo Bento -->
+<div class="bg-surface-container-lowest rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 overflow-hidden relative group">
+<div class="h-64 w-full bg-surface-container relative">
+<img class="w-full h-full object-cover" data-alt="A wide architectural shot of a modern, bright school building with large glass windows and surrounded by lush green trees. Sunny day, highly detailed, professional exterior photography. Light mode aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPeCoOvGeyEDs6kOt0w6pW9UdPDLrXGtMsFIMgz1-DE-G8Csoycq_egaMo6NLodxzZTaS4i2wp3IrsFaei57-hY8P1PFr3ZHjtoWd7PKQJFFUkdC_Zf3sTyvRjSUNRXGSUn0Cf0r5zdlqXxnxMPbh5mHMPym38JYMrIdDMqulZ0vS_XyHWlTrXDrE_CuI4hVMHmizXTQ6owxgIrdJn3bwl5ZIPtWJn8PD7JaxCWMWZoJTzv70WGPL81aN2qMM4IihTKx7VXHrHhg3w"/>
+<button class="absolute top-4 right-4 bg-surface/90 backdrop-blur-md p-2 rounded-full border border-glass-stroke shadow-sm hover:bg-surface transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">edit</span>
+</button>
+</div>
+<div class="px-6 pb-6 pt-4 relative flex items-end gap-6 -mt-16">
+<div class="w-32 h-32 rounded-2xl bg-surface-container-lowest shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/50 p-2 relative z-10 flex-shrink-0">
+<div class="w-full h-full bg-primary-container/10 rounded-xl flex items-center justify-center border border-primary-fixed border-dashed relative group-hover/logo">
+<span class="material-symbols-outlined text-primary text-4xl">image</span>
+<button class="absolute inset-0 bg-surface/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-xl font-label-xs text-label-xs text-primary">Upload Logo</button>
+</div>
+</div>
+<div class="flex-1 mb-2">
+<input class="w-full font-headline-md text-headline-md text-text-primary bg-transparent border-none focus:ring-0 p-0 m-0" type="text" value="Kids Oasis Downtown Campus"/>
+<input class="w-full font-body-md text-body-md text-outline bg-transparent border-none focus:ring-0 p-0 m-0 mt-1" type="text" value="Where curiosity meets creativity in every child."/>
+</div>
+</div>
+</div>
+<!-- Academy Description -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-4 flex items-center justify-between">
+                        About the Academy
+                         <span class="material-symbols-outlined text-outline text-sm cursor-pointer hover:text-primary">edit</span>
+</h3>
+<textarea class="w-full h-32 bg-surface-bright border border-outline-variant rounded-[14px] p-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none resize-none transition-all">Welcome to Kids Oasis, a premier early learning center dedicated to fostering holistic development through experiential learning. Our state-of-the-art facilities and experienced educators provide a nurturing environment where every child can thrive.</textarea>
+</div>
+<!-- Facilities Grid -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-text-primary">Key Facilities</h3>
+<button class="text-primary font-label-sm text-label-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">add</span> Add Facility
+                        </button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col items-center justify-center text-center gap-2 group cursor-pointer hover:border-primary/50 transition-colors">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">science</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface">Innovation Lab</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col items-center justify-center text-center gap-2 group cursor-pointer hover:border-primary/50 transition-colors">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined">nature_people</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface">Outdoor Play</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col items-center justify-center text-center gap-2 group cursor-pointer hover:border-primary/50 transition-colors">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface">Library</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/30 flex flex-col items-center justify-center text-center gap-2 group cursor-pointer hover:border-primary/50 transition-colors border-dashed bg-transparent hover:bg-surface-container-lowest">
+<div class="w-12 h-12 rounded-full text-outline flex items-center justify-center">
+<span class="material-symbols-outlined">add</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">More</span>
+</div>
+</div>
+</div>
+<!-- Gallery -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-text-primary">Campus Gallery</h3>
+<button class="px-4 py-2 rounded-xl border border-outline-variant font-label-sm text-label-sm text-on-surface hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">upload</span> Upload
+                        </button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<div class="aspect-square rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A bright, colorful classroom interior designed for kindergarteners. Small wooden desks, colorful educational posters on the walls, abundant natural light streaming through large windows. Clean, modern, high-end photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRrul2uRusDKdQ3LU4Z6o_p4PhqM0O4gwMydp3D1_OunEHrkDidrt_4JSvoX5KYgb7YruAS-szzBxXY-Kooqo7uHxPtQNbm6n3j0igVN1hRXuzaAzrNlpVX4TBI5wDS-s6Ba1Wg1JxD9ddEDCh_qjh0pZ8DeQ1FL-z5cQHFK2pcsxC9VPNedxbNfJQ8LKyt1B3VOAeXQLuhgsjCLqQMoA3D02Ydbq3h9NWse634PA5fv0bKNLAhcSCKfWfwYK2OS7JpGWjOCHeC-lw"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-surface/90 backdrop-blur-md p-2 rounded-full flex items-center justify-center text-error hover:bg-surface"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A safe, modern outdoor playground area for young children. Features soft rubber flooring, a wooden climbing structure, and vibrant primary colors. Sunny day, sharp focus, inviting atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKJlAIvUhtpPXY7CdZPA9MYp_ivdLHWeJWbc2_2fpZoDCjuFc5FHijEqpWSi0kDK5Jn9xWH09rc0BfS7LINfBSFpACmdttOFiKC2aELrQHb06wzIheQGNpL-RB9h4aXIGhZPsGMgs_Mk3tINtru_wzmtUMuk5AsOImhPrVfvpkNq8pHVqVQgRJVA30wOqOf5oEr0iuvEdZzHaQMtuaYTzhR-H1yNFlIbWTINWx5iwmj5WSYBZ_Ptl5kKJKPc7MDcEZxYPAaszoGfQZ"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-surface/90 backdrop-blur-md p-2 rounded-full flex items-center justify-center text-error hover:bg-surface"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden border-2 border-dashed border-outline-variant/50 flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-outline text-3xl mb-2">add_photo_alternate</span>
+<span class="font-label-sm text-label-sm text-outline">Add Image</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Meta Information -->
+<div class="xl:col-span-4 flex flex-col gap-6">
+<!-- Contact Info -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-4">Contact Details</h3>
+<div class="space-y-4">
+<div>
+<label class="font-label-xs text-label-xs text-outline block mb-1 uppercase tracking-wider">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">mail</span>
+<input class="w-full h-11 pl-10 pr-3 bg-surface-bright border border-outline-variant rounded-[14px] font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-all" type="email" value="admissions@kidsoasis.edu"/>
+</div>
+</div>
+<div>
+<label class="font-label-xs text-label-xs text-outline block mb-1 uppercase tracking-wider">Phone Number</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">call</span>
+<input class="w-full h-11 pl-10 pr-3 bg-surface-bright border border-outline-variant rounded-[14px] font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-all" type="tel" value="+1 (555) 123-4567"/>
+</div>
+</div>
+<div>
+<label class="font-label-xs text-label-xs text-outline block mb-1 uppercase tracking-wider">Campus Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline text-sm">location_on</span>
+<textarea class="w-full h-24 pl-10 pr-3 py-2 bg-surface-bright border border-outline-variant rounded-[14px] font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none resize-none transition-all">123 Education Lane, Innovation District, Cityville, ST 12345</textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Operating Hours -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline-md text-headline-md text-text-primary">Operating Hours</h3>
+<span class="material-symbols-outlined text-outline text-sm cursor-pointer hover:text-primary">edit</span>
+</div>
+<ul class="space-y-3 font-body-md text-body-md text-on-surface">
+<li class="flex justify-between items-center pb-2 border-b border-outline-variant/30">
+<span class="font-medium">Monday</span>
+<span class="text-outline">7:30 AM - 6:00 PM</span>
+</li>
+<li class="flex justify-between items-center pb-2 border-b border-outline-variant/30">
+<span class="font-medium">Tuesday</span>
+<span class="text-outline">7:30 AM - 6:00 PM</span>
+</li>
+<li class="flex justify-between items-center pb-2 border-b border-outline-variant/30">
+<span class="font-medium">Wednesday</span>
+<span class="text-outline">7:30 AM - 6:00 PM</span>
+</li>
+<li class="flex justify-between items-center pb-2 border-b border-outline-variant/30">
+<span class="font-medium">Thursday</span>
+<span class="text-outline">7:30 AM - 6:00 PM</span>
+</li>
+<li class="flex justify-between items-center pb-2 border-b border-outline-variant/30">
+<span class="font-medium">Friday</span>
+<span class="text-outline">7:30 AM - 5:30 PM</span>
+</li>
+<li class="flex justify-between items-center text-outline">
+<span>Weekend</span>
+<span>Closed</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</body></html>

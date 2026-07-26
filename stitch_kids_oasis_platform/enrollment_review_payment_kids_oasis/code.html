@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Review &amp; Payment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f9f9ff",
+                    "secondary-fixed-dim": "#89ceff",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#004666",
+                    "inverse-surface": "#2a313d",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-secondary-fixed-variant": "#004c6e",
+                    "inverse-primary": "#c3c0ff",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "text-primary": "#111827",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-surface": "#151c27",
+                    "surface-container-highest": "#dce2f3",
+                    "surface-bright": "#f9f9ff",
+                    "secondary-container": "#39b8fd",
+                    "tertiary-container": "#006e4b",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-primary-container": "#dad7ff",
+                    "on-tertiary-container": "#67f4b7",
+                    "surface-dim": "#d3daea",
+                    "on-surface-variant": "#464555",
+                    "inverse-on-surface": "#ebf1ff",
+                    "surface-tint": "#4d44e3",
+                    "surface-container": "#e7eefe",
+                    "primary-fixed": "#e2dfff",
+                    "primary": "#3525cd",
+                    "outline-variant": "#c7c4d8",
+                    "on-background": "#151c27",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-variant": "#dce2f3",
+                    "surface-container-high": "#e2e8f8",
+                    "on-primary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-primary-fixed": "#0f0069",
+                    "on-tertiary-fixed": "#002113",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#005338",
+                    "primary-container": "#4f46e5",
+                    "surface-container-lowest": "#ffffff",
+                    "bg-dark": "#0F172A",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "outline": "#777587",
+                    "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "secondary-fixed": "#c9e6ff",
+                    "bg-light": "#FAFAFC",
+                    "secondary": "#006591",
+                    "on-secondary-fixed": "#001e2f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "container-max": "1440px",
+                    "unit": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "label-xs": ["Geist"],
+                    "display-lg-mobile": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "body-md": ["Geist"],
+                    "body-lg": ["Geist"]
+            },
+            "fontSize": {
+                    "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-xs": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        
+        .radio-custom:checked + div {
+            border-color: #4f46e5;
+            background-color: #eef2ff;
+        }
+        
+        .radio-custom:checked + div .radio-dot {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col antialiased">
+<!-- Top Navigation (Transactional Layout - Hidden primary navigation) -->
+<header class="w-full bg-surface/70 backdrop-blur-xl border-b border-glass-stroke shadow-sm top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">toys</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Kids Oasis</span>
+</div>
+<div>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">close</span>
+                    Exit Enrollment
+                </button>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<!-- Stepper Header -->
+<div class="w-full max-w-3xl mx-auto mb-10">
+<div class="flex justify-between items-center relative">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-container-highest -z-10 -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-0 w-[100%] h-[2px] bg-primary -z-10 -translate-y-1/2 transition-all duration-500"></div>
+<!-- Steps -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm shadow-sm ring-4 ring-surface">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden md:block">Student</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm shadow-sm ring-4 ring-surface">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden md:block">Guardian</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm shadow-sm ring-4 ring-surface">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden md:block">Program</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm shadow-sm ring-4 ring-surface">
+                        4
+                    </div>
+<span class="font-label-sm text-label-sm text-primary font-bold hidden md:block">Review</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Left Column: Review & Payment -->
+<div class="flex-1 flex flex-col gap-6">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-text-primary mb-2">Review &amp; Payment</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Please review your enrollment details and provide payment information below.</p>
+<!-- Information Summary Accordions / Cards -->
+<div class="glass-card rounded-[20px] p-6 flex flex-col gap-6 relative overflow-hidden">
+<!-- Decorative background blur -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary-fixed-dim/20 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Student Info -->
+<div class="group border border-outline-variant/50 rounded-xl bg-surface-container-lowest transition-all hover:border-primary/30">
+<div class="p-4 flex justify-between items-center cursor-pointer border-b border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">face</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary !text-[18px]">Student Information</h3>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline">Edit</button>
+</div>
+<div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 bg-surface-container-lowest/50 rounded-b-xl">
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-1">Full Name</p>
+<p class="font-body-md text-body-md text-text-primary font-medium">Noah Smith</p>
+</div>
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-1">Age &amp; Grade</p>
+<p class="font-body-md text-body-md text-text-primary font-medium">8 Years Old • Grade 3</p>
+</div>
+<div class="md:col-span-2">
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-1">Medical Notes</p>
+<p class="font-body-md text-body-md text-text-primary">None reported.</p>
+</div>
+</div>
+</div>
+<!-- Guardian Info -->
+<div class="group border border-outline-variant/50 rounded-xl bg-surface-container-lowest transition-all hover:border-primary/30">
+<div class="p-4 flex justify-between items-center cursor-pointer border-b border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">family_restroom</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary !text-[18px]">Guardian Information</h3>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline">Edit</button>
+</div>
+<div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 bg-surface-container-lowest/50 rounded-b-xl">
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-1">Primary Guardian</p>
+<p class="font-body-md text-body-md text-text-primary font-medium">Jane Doe</p>
+</div>
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-1">Relationship</p>
+<p class="font-body-md text-body-md text-text-primary font-medium">Parent</p>
+</div>
+<div class="md:col-span-2">
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-1">Contact</p>
+<p class="font-body-md text-body-md text-text-primary">(555) 123-4567 • jane.doe@example.com</p>
+</div>
+</div>
+</div>
+<!-- Program Info -->
+<div class="group border border-outline-variant/50 rounded-xl bg-surface-container-lowest transition-all hover:border-primary/30">
+<div class="p-4 flex justify-between items-center cursor-pointer border-b border-outline-variant/30">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">school</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary !text-[18px]">Selected Program</h3>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline">Edit</button>
+</div>
+<div class="p-4 flex flex-col md:flex-row gap-4 bg-surface-container-lowest/50 rounded-b-xl items-start md:items-center">
+<div class="w-16 h-16 rounded-lg bg-surface-container overflow-hidden shrink-0">
+<img alt="Robotics Level 1" class="w-full h-full object-cover" data-alt="A clean, minimalist 3D rendering of a small robot on a bright white background, representing a robotics class. Soft studio lighting, bright pastel accents, premium educational branding style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRhXG74FNAbXJN4QpBUPAwMpfeqoh8oZ4_z1D7YGmBiMQz7d6-ATpAf-s8mELyXYbkJeAr7Xjedzr90PO3HAbbpgeSyWpKLkbSKqrpghsS6Ui2v757_on6eFJGR5fd1sMotpo-Tujn-eRjAzF9SismtVL0u-sSrW9VNOHQ_6kuhO0WxaZRvNipw_HtxuvqPq_RrQPwxPz6JsVEQWdfDpp_yMbeakrutfJU7Umxl2qoQDALIXDJv7JIaArYShjgV0KhWPSJP4u1wBBQ"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-sm text-label-sm text-text-primary font-bold text-lg mb-1">Robotics Level 1</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Elite Robotics Academy
+                                </p>
+<div class="inline-flex items-center gap-1 bg-surface-container px-2 py-1 rounded-md text-xs font-medium text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span> Mon/Wed 4:00 PM - 5:30 PM
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Section -->
+<div class="glass-card rounded-[20px] p-6 mt-4">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+                        Payment Method
+                    </h3>
+<!-- Payment Options Toggle -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<label class="relative cursor-pointer">
+<input checked="" class="radio-custom sr-only" name="payment_method" type="radio"/>
+<div class="border border-outline-variant/50 rounded-xl p-4 flex items-center gap-3 transition-colors bg-surface-container-lowest hover:bg-surface">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center shrink-0">
+<div class="radio-dot w-2.5 h-2.5 rounded-full bg-primary scale-0 transition-transform"></div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">credit_card</span>
+<span class="font-label-sm text-label-sm text-text-primary font-medium">Credit / Debit Card</span>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="radio-custom sr-only" name="payment_method" type="radio"/>
+<div class="border border-outline-variant/50 rounded-xl p-4 flex items-center gap-3 transition-colors bg-surface-container-lowest hover:bg-surface">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center shrink-0">
+<div class="radio-dot w-2.5 h-2.5 rounded-full bg-primary scale-0 transition-transform"></div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">account_balance</span>
+<span class="font-label-sm text-label-sm text-text-primary font-medium">Bank Transfer (ACH)</span>
+</div>
+</label>
+</div>
+<!-- Card Details Form -->
+<div class="space-y-4">
+<div>
+<label class="block font-label-sm text-label-sm text-text-primary mb-1">Card Number</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-xl py-3 px-4 pl-10 font-body-md text-body-md text-text-primary focus:ring-2 focus:ring-primary focus:border-primary transition-shadow placeholder:text-outline" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant">credit_card</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm text-label-sm text-text-primary mb-1">Expiry Date</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-xl py-3 px-4 font-body-md text-body-md text-text-primary focus:ring-2 focus:ring-primary focus:border-primary transition-shadow placeholder:text-outline" placeholder="MM/YY" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-primary mb-1">CVC</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-xl py-3 px-4 font-body-md text-body-md text-text-primary focus:ring-2 focus:ring-primary focus:border-primary transition-shadow placeholder:text-outline" placeholder="123" type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant text-[18px] cursor-help" title="3 or 4 digits on back of card">help</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-primary mb-1">Billing ZIP Code</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-xl py-3 px-4 font-body-md text-body-md text-text-primary focus:ring-2 focus:ring-primary focus:border-primary transition-shadow placeholder:text-outline" placeholder="90210" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary Sticky Sidebar -->
+<div class="w-full lg:w-[380px] shrink-0">
+<div class="glass-card rounded-[20px] p-6 sticky top-24">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-6 border-b border-outline-variant/30 pb-4">Enrollment Summary</h3>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md text-text-primary font-medium">Tuition (Fall Term)</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Robotics Level 1</p>
+</div>
+<p class="font-body-md text-body-md text-text-primary">$450.00</p>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body-md text-body-md text-text-primary font-medium">Registration Fee</p>
+<p class="font-label-xs text-label-xs text-on-surface-variant">One-time processing</p>
+</div>
+<p class="font-body-md text-body-md text-text-primary">$50.00</p>
+</div>
+</div>
+<div class="border-t border-outline-variant/30 pt-4 mb-8">
+<div class="flex justify-between items-center">
+<p class="font-headline-md text-headline-md text-text-primary">Total Due</p>
+<p class="font-headline-md text-headline-md text-primary font-bold">$500.00</p>
+</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant text-right mt-1">Includes all applicable taxes</p>
+</div>
+<div class="flex flex-col gap-3">
+<button class="w-full bg-primary text-on-primary font-label-sm text-label-sm py-3 px-4 rounded-xl shadow-[0px_1px_2px_rgba(0,0,0,0.1),inset_0px_1px_1px_rgba(255,255,255,0.2)] hover:bg-primary-container transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+                            Complete Enrollment
+                        </button>
+<button class="w-full bg-transparent border border-outline-variant/50 text-text-primary font-label-sm text-label-sm py-3 px-4 rounded-xl hover:bg-surface-variant/50 transition-colors">
+                            Back to Program Selection
+                        </button>
+</div>
+<div class="mt-6 flex items-center justify-center gap-2 text-on-surface-variant opacity-70">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="font-label-xs text-label-xs">Secure, encrypted transaction</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

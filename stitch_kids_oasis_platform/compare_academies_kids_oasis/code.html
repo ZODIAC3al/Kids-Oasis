@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academy Comparison</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#464555",
+                      "surface-variant": "#dce2f3",
+                      "on-tertiary-container": "#67f4b7",
+                      "bg-dark": "#0F172A",
+                      "outline": "#777587",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "tertiary": "#005338",
+                      "error": "#ba1a1a",
+                      "surface-container": "#e7eefe",
+                      "surface-dim": "#d3daea",
+                      "primary-fixed": "#e2dfff",
+                      "on-primary-container": "#dad7ff",
+                      "surface-bright": "#f9f9ff",
+                      "on-background": "#151c27",
+                      "secondary": "#006591",
+                      "on-tertiary-fixed": "#002113",
+                      "background": "#f9f9ff",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-surface": "#151c27",
+                      "surface-container-highest": "#dce2f3",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#c3c0ff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "secondary-fixed-dim": "#89ceff",
+                      "primary": "#3525cd",
+                      "bg-light": "#FAFAFC",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#39b8fd",
+                      "tertiary-container": "#006e4b",
+                      "primary-container": "#4f46e5",
+                      "outline-variant": "#c7c4d8",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface": "#f9f9ff",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#e2e8f8",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "on-secondary-fixed": "#001e2f",
+                      "on-primary-fixed": "#0f0069",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#c9e6ff",
+                      "inverse-surface": "#2a313d",
+                      "inverse-on-surface": "#ebf1ff",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f0f3ff",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "text-primary": "#111827",
+                      "surface-tint": "#4d44e3",
+                      "on-secondary-container": "#004666"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "margin-mobile": "16px",
+                      "unit": "8px",
+                      "container-max": "1440px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "label-xs": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "label-xs": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background h-full font-body-md text-body-md overflow-hidden">
+<!-- JSON Components Rendered Manually -->
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col p-6 gap-2 bg-surface-container-lowest dark:bg-bg-dark border-r border-outline-variant dark:border-glass-stroke w-[280px] h-screen fixed left-0 top-0 overflow-y-auto z-40">
+<div class="mb-8">
+<h1 class="font-display-lg text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">Kids Oasis</h1>
+<p class="text-on-surface-variant font-label-sm text-label-sm mt-1">Parent Academy</p>
+</div>
+<button class="mb-6 w-full bg-primary text-on-primary py-3 px-4 rounded-[14px] font-label-sm text-label-sm font-semibold shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            Book New Class
+        </button>
+<div class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">child_care</span>
+<span class="font-label-sm text-label-sm">My Children</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-semibold bg-surface-container rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-sm text-label-sm">Discover</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-sm text-label-sm">Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">assignment_ind</span>
+<span class="font-label-sm text-label-sm">Enrollments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-label-sm text-label-sm">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-sm text-label-sm">Favorites</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-label-sm text-label-sm">Events</span>
+</a>
+</div>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="hidden md:flex justify-between items-center px-margin-desktop w-[calc(100%-280px)] h-16 fixed top-0 right-0 z-50 bg-surface/70 dark:bg-bg-dark/70 backdrop-blur-md border-b border-outline-variant dark:border-glass-stroke">
+<div class="flex items-center gap-4 flex-1">
+<h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary mr-8 lg:hidden">Kids Oasis</h2>
+<div class="relative w-full max-w-md focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 rounded-[14px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-[48px] pl-10 pr-4 rounded-[14px] border border-outline-variant bg-surface-container-lowest focus:outline-none focus:border-transparent font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50" placeholder="Search academies, programs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-px bg-outline-variant/50 mx-2"></div>
+<button class="flex items-center gap-2 hover:bg-surface-container-low p-1.5 pr-4 rounded-full transition-colors">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close up, high key, high resolution professional portrait of a parent smiling, well lit, against a plain studio background. Clean aesthetic, soft lighting, optimistic mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHhIXVSH-IOJ3k9S6LIKhwrBfXNs7rjhHoGTajDorGYdVZZysXtEnYftV2k3YT39nHR8HZfJS76AxYq5X8-3oWPrcOkzN4SCGlm6PM4RIiBXqdgxcww0x8xP0_7xMqWpvwKcUGJWRkibz3B2iJPggSbNjdW2viBeRTG-sWrzkxN3C7E1NV2vHf7Kh8ccyv2-p_chuBFUb68gWcSDz7NjUZnEMRVXa-9dPWM16yQK9lECEf7uUGOq4qDEUHIkzdHc1g064IhdBLZYGQ"/>
+</div>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Profile</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full md:w-[calc(100%-280px)] h-full ml-auto md:pt-16 overflow-y-auto bg-background">
+<div class="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant/30 pb-6">
+<div>
+<div class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<a class="font-label-sm text-label-sm hover:text-primary transition-colors" href="#">Back to Discover</a>
+</div>
+<h1 class="font-display-lg text-headline-md md:text-display-lg text-on-background tracking-tight">Compare Academies</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">Evaluate top educational institutions side-by-side to make the best choice for your child's future.</p>
+</div>
+</div>
+<!-- Comparison Table Container -->
+<div class="bg-surface-container-lowest rounded-[20px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<!-- Table Head: Academy Profiles -->
+<thead>
+<tr class="border-b border-outline-variant/30 bg-surface-bright/50">
+<th class="p-6 w-[20%] font-label-sm text-label-sm text-on-surface-variant font-medium align-bottom">
+                                    Compare Features
+                                </th>
+<!-- Academy 1 -->
+<th class="p-6 w-[26.6%] align-top">
+<div class="flex flex-col gap-4">
+<div class="w-full h-32 rounded-[14px] overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A wide, bright exterior shot of a modern, premium early learning academy building. Glass facade, clean lines, sunny day, professional high-end aesthetic. Minimalist architecture with a touch of nature." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl5Z_SlWY6t25synGd7yTiKVNwTTTOmbiLQpeolyHykyrnTs7mbVA0m7vZbUusFuwCCaKkiBOFotahz7OIDC1mZURDnPZBrjS89i8rOBA4ELKnrap8MhOMnwTXuL5cJQFarFQPU8GPyuWetACN8G-sJsug7j_TaeTwXf1oShl2qPc7jktaS7nduoBkhk29gcPvZwt0c-XbGxABvfpv1-Thq_TNguSDvjV6ZrkcOmPobP_WGxv_zIrbhpSR40Gj-Xlk7wm66NA2CXIU"/>
+<div class="absolute top-2 right-2 bg-surface-container-lowest/80 backdrop-blur-sm p-1.5 rounded-full text-error cursor-pointer hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg md:text-headline-md text-on-surface mb-1">Oakridge Montessori</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[16px] text-[#F59E0B]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-semibold">4.9</span>
+<span class="font-label-xs text-label-xs font-normal">(128 reviews)</span>
+</div>
+<button class="w-full bg-primary text-on-primary py-2.5 px-4 rounded-[14px] font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors">
+                                                Enroll Now
+                                            </button>
+</div>
+</div>
+</th>
+<!-- Academy 2 -->
+<th class="p-6 w-[26.6%] align-top border-l border-outline-variant/20">
+<div class="flex flex-col gap-4">
+<div class="w-full h-32 rounded-[14px] overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="An interior shot of a sophisticated, well-lit early childhood classroom. High ceilings, wooden toys, minimalist Scandinavian design, natural light streaming through large windows. Premium educational environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRofyOf2FIeKL0BVc6wC65BNAOxYOfxI1oLE5eRI_fmFTEst2UHYdkns7dMNGoEM5jcBteStldFGR-GufwlgveMBjVlBocuQxJj5ZLIiZoeEOOsP0l55CN6rqJTgQn2ovvm8ebz-OJMDmjjH8QVA3fUR0zdGNJ41w7HN7hUzUkjwLX-IInWWdDiieVJyux2ZlLOK6_Citbz7vme14SBaMfLvoc8PIos0yiHJ9P07D41_Zs791q3G6PYQbnJpe6noQ6ItNXYL0H7Q6O"/>
+<div class="absolute top-2 right-2 bg-surface-container-lowest/80 backdrop-blur-sm p-1.5 rounded-full text-error cursor-pointer hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg md:text-headline-md text-on-surface mb-1">Bright Horizons</h3>
+<div class="flex items-center gap-1 text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[16px] text-[#F59E0B]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm font-semibold">4.7</span>
+<span class="font-label-xs text-label-xs font-normal">(94 reviews)</span>
+</div>
+<button class="w-full bg-primary text-on-primary py-2.5 px-4 rounded-[14px] font-label-sm text-label-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors">
+                                                Enroll Now
+                                            </button>
+</div>
+</div>
+</th>
+<!-- Academy 3 -->
+<th class="p-6 w-[26.6%] align-top border-l border-outline-variant/20">
+<div class="flex flex-col gap-4">
+<div class="w-full h-32 rounded-[14px] overflow-hidden relative border border-dashed border-outline-variant bg-surface-container-low flex flex-col items-center justify-center cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-outline-variant text-[32px] mb-2">add_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Add Academy</span>
+</div>
+<div class="h-[104px] flex items-center justify-center">
+<!-- Empty state for unselected academy slot -->
+</div>
+</div>
+</th>
+</tr>
+</thead>
+<!-- Table Body: Features -->
+<tbody class="font-body-md text-body-md text-on-surface">
+<!-- Row: Price -->
+<tr class="border-b border-outline-variant/20 hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-6 font-label-sm text-label-sm font-semibold text-on-surface-variant group-hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">payments</span> Tuition (Monthly)
+                                </td>
+<td class="p-6 font-medium text-on-surface">$1,450 <span class="text-on-surface-variant font-normal font-label-xs text-label-xs ml-1">/mo</span></td>
+<td class="p-6 font-medium text-on-surface border-l border-outline-variant/20">$1,200 <span class="text-on-surface-variant font-normal font-label-xs text-label-xs ml-1">/mo</span></td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface-variant/30">-</td>
+</tr>
+<!-- Row: Programs -->
+<tr class="border-b border-outline-variant/20 hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-6 font-label-sm text-label-sm font-semibold text-on-surface-variant group-hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">school</span> Core Programs
+                                </td>
+<td class="p-6">
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-surface-container-high rounded-[8px] font-label-xs text-label-xs text-on-surface">Montessori</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded-[8px] font-label-xs text-label-xs text-on-surface">STEM Early</span>
+</div>
+</td>
+<td class="p-6 border-l border-outline-variant/20">
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-surface-container-high rounded-[8px] font-label-xs text-label-xs text-on-surface">Reggio Emilia</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded-[8px] font-label-xs text-label-xs text-on-surface">Arts Focus</span>
+</div>
+</td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface-variant/30">-</td>
+</tr>
+<!-- Row: Facilities -->
+<tr class="border-b border-outline-variant/20 hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-6 font-label-sm text-label-sm font-semibold text-on-surface-variant group-hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">architecture</span> Key Facilities
+                                </td>
+<td class="p-6">
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-on-surface"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> Outdoor Nature Campus</li>
+<li class="flex items-center gap-2 text-on-surface"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> Innovation Lab</li>
+<li class="flex items-center gap-2 text-on-surface"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> Organic Garden</li>
+</ul>
+</td>
+<td class="p-6 border-l border-outline-variant/20">
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-on-surface"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> Indoor Gym</li>
+<li class="flex items-center gap-2 text-on-surface-variant/50"><span class="material-symbols-outlined text-[16px]">cancel</span> Innovation Lab</li>
+<li class="flex items-center gap-2 text-on-surface"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span> Music Studio</li>
+</ul>
+</td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface-variant/30">-</td>
+</tr>
+<!-- Row: Meals -->
+<tr class="border-b border-outline-variant/20 hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-6 font-label-sm text-label-sm font-semibold text-on-surface-variant group-hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">restaurant</span> Meal Plan
+                                </td>
+<td class="p-6 text-on-surface">Included (Organic, Chef-prepared)</td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface">Optional Add-on (+$150/mo)</td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface-variant/30">-</td>
+</tr>
+<!-- Row: Distance -->
+<tr class="border-b border-outline-variant/20 hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-6 font-label-sm text-label-sm font-semibold text-on-surface-variant group-hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">location_on</span> Distance
+                                </td>
+<td class="p-6 text-on-surface">2.4 miles <span class="text-on-surface-variant font-label-xs text-label-xs ml-1">(~8 min drive)</span></td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface">5.1 miles <span class="text-on-surface-variant font-label-xs text-label-xs ml-1">(~15 min drive)</span></td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface-variant/30">-</td>
+</tr>
+<!-- Row: Transportation -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-6 font-label-sm text-label-sm font-semibold text-on-surface-variant group-hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">directions_bus</span> Transportation
+                                </td>
+<td class="p-6 text-on-surface">Private Shuttle Service Available</td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface">Parent Drop-off Only</td>
+<td class="p-6 border-l border-outline-variant/20 text-on-surface-variant/30">-</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="h-12"></div> <!-- Bottom padding spacer -->
+</div>
+</main>
+</body></html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Applications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container": "#e7eefe",
+                        "on-background": "#151c27",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-secondary-container": "#004666",
+                        "primary": "#3525cd",
+                        "inverse-surface": "#2a313d",
+                        "on-primary-container": "#dad7ff",
+                        "surface-tint": "#4d44e3",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#c9e6ff",
+                        "surface-container-high": "#e2e8f8",
+                        "outline-variant": "#c7c4d8",
+                        "background": "#f9f9ff",
+                        "surface-container-low": "#f0f3ff",
+                        "secondary-container": "#39b8fd",
+                        "on-secondary-fixed": "#001e2f",
+                        "surface-container-highest": "#dce2f3",
+                        "on-surface-variant": "#464555",
+                        "inverse-on-surface": "#ebf1ff",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d3daea",
+                        "surface-variant": "#dce2f3",
+                        "tertiary-container": "#006e4b",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "bg-dark": "#0F172A",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error-container": "#ffdad6",
+                        "outline": "#777587",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#e2dfff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "text-primary": "#111827",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary": "#005338",
+                        "surface": "#f9f9ff",
+                        "inverse-primary": "#c3c0ff",
+                        "secondary": "#006591",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#151c27",
+                        "primary-container": "#4f46e5",
+                        "on-tertiary-container": "#67f4b7",
+                        "error": "#ba1a1a",
+                        "bg-light": "#FAFAFC"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-xs": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-xs": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid theme('colors.outline-variant'); }
+        
+        /* Custom Scrollbar for Kanban */
+        .kanban-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+        .kanban-scroll::-webkit-scrollbar-track { background: transparent; }
+        .kanban-scroll::-webkit-scrollbar-thumb { background: theme('colors.outline-variant'); border-radius: 4px; }
+        
+        .card-shadow { box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03); }
+    </style>
+</head>
+<body class="flex bg-background min-h-screen antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col border-r border-outline-variant bg-surface-container-lowest fixed left-0 top-0 h-screen w-[280px] shadow-sm z-40">
+<div class="p-gutter flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center font-bold text-lg">KO</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Kids Oasis</h1>
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Academy Management</p>
+</div>
+</div>
+<div class="px-gutter pb-4">
+<button class="w-full bg-primary text-on-primary font-label-sm text-label-sm py-3 px-4 rounded-[14px] flex items-center justify-center gap-2 hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Application
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto px-4 py-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">school</span>
+                Academy Profile
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+                Branches
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">category</span>
+                Programs
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+                Teachers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+                Students
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-primary font-bold bg-surface-container hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+                Applications
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">event_available</span>
+                Bookings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+                Events
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">star</span>
+                Reviews
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Payments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">mail</span>
+                Messages
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[280px] min-h-screen flex flex-col relative w-full">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center h-16 px-gutter max-w-container-max bg-surface-container-lowest/70 backdrop-blur-xl border-b border-outline-variant sticky top-0 z-30 w-full">
+<div class="flex items-center md:hidden">
+<span class="font-headline-md text-headline-md text-primary font-bold">Kids Oasis</span>
+</div>
+<div class="hidden md:flex items-center bg-surface-container-lowest border border-outline-variant rounded-[14px] px-3 py-2 w-64 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all">
+<span class="material-symbols-outlined text-outline mr-2 text-[20px]">search</span>
+<input class="bg-transparent border-none outline-none w-full font-body-md text-body-md text-on-surface placeholder:text-outline p-0 focus:ring-0" placeholder="Search applications..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors hidden sm:block">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant cursor-pointer">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a smiling school administrator in a modern office setting. High key lighting, clean corporate aesthetic, friendly demeanor. Shot with shallow depth of field to blur the background slightly. Bright, optimistic mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr5ZYCujA394A-CfisqC9ORXtj-HxQp3zcgQ0cRptaz-nOkSM0hOLhWEgN_bruwHBgauA86qzSLZtv2EirxBezuz6VuVNiWBGhpoqF_0eulmsjRihz-mezxskHVGIcoeSB2JUc50BCwVaCphVu5hQZhqv9qJShIlhxwg-7qOfpz10upW2rzVZgBmeN8G-OzQG_-hFY1ap494ATRiiXGoYt2zCmIjry23F18w3N4XbC3osrcjFmb72_0ERAJBS-cIuFkwKhhr0yKDjJ"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full flex-1 flex flex-col overflow-hidden">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-background">Applications Pipeline</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Manage student enrollments across all stages.</p>
+</div>
+<div class="flex items-center bg-surface-container-low p-1 rounded-lg border border-outline-variant">
+<button class="px-4 py-2 rounded-md bg-surface-container-lowest shadow-sm text-primary font-label-sm text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">view_kanban</span>
+                        Kanban
+                    </button>
+<button class="px-4 py-2 rounded-md text-on-surface-variant hover:text-primary font-label-sm text-label-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">list</span>
+                        List
+                    </button>
+</div>
+</div>
+<!-- Kanban Board -->
+<div class="flex-1 overflow-x-auto kanban-scroll pb-4 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0">
+<div class="flex gap-6 h-full min-w-max pb-2">
+<!-- Stage: Pending -->
+<div class="w-[320px] flex flex-col bg-surface-bright rounded-xl border border-outline-variant/50 h-full max-h-[calc(100vh-220px)]">
+<div class="p-4 border-b border-outline-variant/50 flex justify-between items-center bg-surface-container-lowest/50 rounded-t-xl sticky top-0 z-10 backdrop-blur-sm">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<h3 class="font-headline-md text-[16px] font-semibold text-on-surface">Pending Review</h3>
+<span class="bg-surface-container-highest text-on-surface-variant font-label-xs text-[11px] px-2 py-0.5 rounded-full ml-1">2</span>
+</div>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="p-3 flex-1 overflow-y-auto space-y-3">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/50 card-shadow hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-xs text-[10px] uppercase text-secondary font-bold tracking-wider">Early Years</span>
+<span class="font-label-xs text-outline">Today</span>
+</div>
+<h4 class="font-label-sm text-label-sm font-semibold text-on-surface mb-1">Emma Watson</h4>
+<p class="font-body-md text-[13px] text-on-surface-variant mb-4 line-clamp-2">Application for pre-school program starting Fall 2024. Siblings currently enrolled.</p>
+<div class="bg-surface-container-low rounded-lg p-2 mb-4">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[14px] text-primary">history</span>
+<span class="font-label-xs text-[11px] text-on-surface-variant">Timeline</span>
+</div>
+<div class="flex items-start gap-2 pl-1 border-l-2 border-outline-variant/30 ml-[7px] mt-2">
+<div class="w-1.5 h-1.5 rounded-full bg-primary mt-[5px] -ml-[5px]"></div>
+<div class="flex-1">
+<p class="font-label-xs text-[11px] text-on-surface">Form Submitted</p>
+<p class="font-label-xs text-[9px] text-outline">2 hours ago</p>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-container-highest hover:bg-surface-dim text-on-surface font-label-sm text-[12px] py-1.5 rounded-lg transition-colors border border-outline-variant/50">Review</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage: Interview -->
+<div class="w-[320px] flex flex-col bg-surface-bright rounded-xl border border-outline-variant/50 h-full max-h-[calc(100vh-220px)]">
+<div class="p-4 border-b border-outline-variant/50 flex justify-between items-center bg-surface-container-lowest/50 rounded-t-xl sticky top-0 z-10 backdrop-blur-sm">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary-container"></div>
+<h3 class="font-headline-md text-[16px] font-semibold text-on-surface">Interview</h3>
+<span class="bg-surface-container-highest text-on-surface-variant font-label-xs text-[11px] px-2 py-0.5 rounded-full ml-1">1</span>
+</div>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="p-3 flex-1 overflow-y-auto space-y-3">
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/50 card-shadow hover:border-primary/30 transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-xs text-[10px] uppercase text-primary font-bold tracking-wider">Primary</span>
+<span class="font-label-xs text-outline">Yesterday</span>
+</div>
+<h4 class="font-label-sm text-label-sm font-semibold text-on-surface mb-1">Liam Johnson</h4>
+<p class="font-body-md text-[13px] text-on-surface-variant mb-4 line-clamp-2">Transfer student from Oakridge Academy. Strong academic record.</p>
+<div class="bg-surface-container-low rounded-lg p-2 mb-4">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[14px] text-primary">history</span>
+<span class="font-label-xs text-[11px] text-on-surface-variant">Timeline</span>
+</div>
+<div class="flex items-start gap-2 pl-1 border-l-2 border-outline-variant/30 ml-[7px] mt-2 pb-2">
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant mt-[5px] -ml-[5px]"></div>
+<div class="flex-1">
+<p class="font-label-xs text-[11px] text-on-surface-variant">Form Submitted</p>
+</div>
+</div>
+<div class="flex items-start gap-2 pl-1 border-l-2 border-transparent ml-[7px]">
+<div class="w-1.5 h-1.5 rounded-full bg-primary mt-[5px] -ml-[5px]"></div>
+<div class="flex-1">
+<p class="font-label-xs text-[11px] text-on-surface">Interview Scheduled</p>
+<p class="font-label-xs text-[9px] text-outline">Oct 24, 10:00 AM</p>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary hover:bg-primary-container text-on-primary font-label-sm text-[12px] py-1.5 rounded-lg transition-colors shadow-sm">View Details</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Stage: Accepted -->
+<div class="w-[320px] flex flex-col bg-surface-bright rounded-xl border border-outline-variant/50 h-full max-h-[calc(100vh-220px)]">
+<div class="p-4 border-b border-outline-variant/50 flex justify-between items-center bg-surface-container-lowest/50 rounded-t-xl sticky top-0 z-10 backdrop-blur-sm">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<h3 class="font-headline-md text-[16px] font-semibold text-on-surface">Accepted</h3>
+</div>
+<button class="text-outline hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="p-3 flex-1 overflow-y-auto space-y-3">
+<div class="h-32 border-2 border-dashed border-outline-variant/30 rounded-xl flex items-center justify-center">
+<p class="text-on-surface-variant text-[13px]">Drop applications here</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

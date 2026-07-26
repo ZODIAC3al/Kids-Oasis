@@ -1,0 +1,171 @@
+{
+  "site": {
+    "name": "Kids Oasis",
+    "phone": "+20 123 456 7890",
+    "email": "info@kidsoasis.com",
+    "address": "Alexandria, Egypt"
+  },
+  "nav": {
+    "links": [
+      { "label": "Home", "href": "#home" },
+      { "label": "Pages", "href": "#programs" },
+      { "label": "Portfolio", "href": "#gallery" },
+      { "label": "Blog", "href": "#news" },
+      { "label": "Contacts", "href": "#contact" }
+    ]
+  },
+  "hero": {
+    "eyebrow": "Welcome to Kids Oasis!",
+    "title": "Learn & Play!",
+    "description": "We work every day to build the foundation for amazing futures, both for the child and for our community.",
+    "cta": "Read More",
+    "image": "/images/hero.jpg"
+  },
+  "programs": {
+    "title": "Discover Our Educational Programs",
+    "items": [
+      {
+        "id": "early-education",
+        "title": "Early Education",
+        "description": "Children will love our exciting activity center classrooms.",
+        "theme": "pink",
+        "icon": "brontosaurus"
+      },
+      {
+        "id": "abc-program",
+        "title": "ABC Program",
+        "description": "Children build before they read, learning shapes, letter sounds.",
+        "theme": "sky",
+        "icon": "trex"
+      },
+      {
+        "id": "first-steps",
+        "title": "First Steps 4K",
+        "description": "Children will love our exciting activity center classrooms.",
+        "theme": "sun",
+        "icon": "triceratops"
+      }
+    ]
+  },
+  "whyEducation": {
+    "title": "Why Early Education Matters",
+    "description": "Look into the eyes of a young child and see the sparkle and wonder. Develop that promise and watch the adult bloom into someone special. At LittleDino Center, we work every day to build the foundations for amazing futures.",
+    "cta": "Read More",
+    "image": "/images/family.jpg",
+    "stats": [
+      { "label": "Total Groups", "value": 15 },
+      { "label": "Qualified Teachers", "value": 32 },
+      { "label": "Years of Experience", "value": 10 },
+      { "label": "Students Enrolled", "value": 255 }
+    ]
+  },
+  "offer": {
+    "title": "What We Offer",
+    "description": "The LittleDino's mission is to provide affordable, high-quality early education and childcare services for working families to ensure every child thrives.",
+    "items": [
+      { "title": "Art Classes", "description": "Look into the eyes of a young child and see the sparkle.", "icon": "palette" },
+      { "title": "Special Education", "description": "Look into the eyes of a young child and see the sparkle.", "icon": "puzzle" },
+      { "title": "Activity Rooms", "description": "Look into the eyes of a young child and see the sparkle.", "icon": "ball" },
+      { "title": "Languages", "description": "Look into the eyes of a young child and see the sparkle.", "icon": "bear" },
+      { "title": "Birthday Party", "description": "Look into the eyes of a young child and see the sparkle.", "icon": "cake" },
+      { "title": "Healthy Food", "description": "Look into the eyes of a young child and see the sparkle.", "icon": "apple" }
+    ]
+  },
+  "gallery": {
+    "title": "Our Photo Gallery",
+    "cta": "More Photos",
+    "images": [
+      "/images/gallery-0.jpg",
+      "/images/gallery-1.jpg",
+      "",
+      "/images/gallery-3.jpg",
+      "/images/gallery-4.jpg",
+      "/images/gallery-5.jpg"
+    ]
+  },
+  "badges": [
+    { "title": "Better Skills", "description": "Stronger basic math skills.", "icon": "check" },
+    { "title": "Drop Out Rates", "description": "Better pre-reading skills.", "icon": "heart" },
+    { "title": "Future Success", "description": "Richer vocabularies.", "icon": "star" }
+  ],
+  "activities": {
+    "title": "We Provide the Main Kids Activities",
+    "description": "Our programs focus on each child's development in social-emotional growth, gross and fine motor skills, language and literacy, mathematics.",
+    "items": ["Outdoor Games", "Sport Activities", "Table/Floor Toys", "Water Games"],
+    "image": "/images/boy.jpg"
+  },
+  "testimonials": {
+    "title": "What Parents Say",
+    "description": "The Kids Oasis mission is to provide affordable, high-quality early education and childcare services for working families.",
+    "items": [
+      {
+        "quote": "The best decision we made was enrolling our daughter here — she runs to the door every morning excited for class.",
+        "name": "Kate Brown",
+        "role": "Mom of 2 Girls",
+        "avatar": "/images/avatar-kate.jpg"
+      },
+      {
+        "quote": "Incredible development in social skills and confidence since joining. The teachers genuinely care about every child.",
+        "name": "Tina Roberts",
+        "role": "Mom of a Boy",
+        "avatar": "/images/avatar-tina.jpg"
+      },
+      {
+        "quote": "A warm, safe, and playful environment. We could not have asked for a better early education experience.",
+        "name": "James Coles",
+        "role": "Dad of a Girl",
+        "avatar": "/images/avatar-james.jpg"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Enroll Your Child Now! Call Us",
+    "phone": "+20 123 456 7890",
+    "button": "Enroll Now"
+  },
+  "news": {
+    "title": "Our Latest News",
+    "cta": "View All",
+    "posts": [
+      {
+        "id": "clean-himself",
+        "title": "How to Teach a Child to Clean Himself",
+        "date": "September 22, 2024",
+        "author": "by Tina White",
+        "category": "Tips",
+        "image": "/images/news-0.jpg"
+      },
+      {
+        "id": "indoor-activities",
+        "title": "Best Indoor Activities for Your Child",
+        "date": "September 22, 2024",
+        "author": "by Tina White",
+        "category": "Play",
+        "image": "/images/news-1.jpg"
+      },
+      {
+        "id": "parenting-books",
+        "title": "Five Best Books About Parenting",
+        "date": "September 22, 2024",
+        "author": "by Tina White",
+        "category": "Books",
+        "image": "/images/news-2.jpg"
+      }
+    ]
+  },
+  "footer": {
+    "about": "Come visit The Kids Oasis Center for yourself and meet more of our squeaky wonderful early educators.",
+    "gallery": [
+      "/images/footer-0.jpg",
+      "/images/footer-1.jpg",
+      "/images/footer-2.jpg",
+      "/images/footer-3.jpg"
+    ],
+    "hours": [
+      { "day": "Mon - Fri", "time": "7:00 - 18:00" },
+      { "day": "Saturday", "time": "9:00 - 14:00" },
+      { "day": "Sunday", "time": "Closed" }
+    ],
+    "social": ["facebook", "twitter", "instagram", "pinterest"]
+  }
+}

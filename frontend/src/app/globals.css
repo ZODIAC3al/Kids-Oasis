@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------- */
+/* Design tokens — mapped 1:1 from Kinetic Education System              */
+/* ---------------------------------------------------------------------- */
+:root {
+  --surface: #f9f9ff;
+  --surface-dim: #d3daea;
+  --surface-bright: #f9f9ff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f0f3ff;
+  --surface-container: #e7eefe;
+  --surface-container-high: #e2e8f8;
+  --surface-container-highest: #dce2f3;
+  --on-surface: #151c27;
+  --on-surface-variant: #464555;
+  --inverse-surface: #2a313d;
+  --inverse-on-surface: #ebf1ff;
+  --outline: #777587;
+  --outline-variant: #c7c4d8;
+  --surface-tint: #4d44e3;
+  --primary: #3525cd;
+  --on-primary: #ffffff;
+  --primary-container: #4f46e5;
+  --on-primary-container: #dad7ff;
+  --inverse-primary: #c3c0ff;
+  --secondary: #006591;
+  --on-secondary: #ffffff;
+  --secondary-container: #39b8fd;
+  --on-secondary-container: #004666;
+  --tertiary: #005338;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #006e4b;
+  --on-tertiary-container: #67f4b7;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  --primary-fixed: #e2dfff;
+  --primary-fixed-dim: #c3c0ff;
+  --on-primary-fixed: #0f0069;
+  --on-primary-fixed-variant: #3323cc;
+  --secondary-fixed: #c9e6ff;
+  --secondary-fixed-dim: #89ceff;
+  --on-secondary-fixed: #001e2f;
+  --on-secondary-fixed-variant: #004c6e;
+  --tertiary-fixed: #6ffbbe;
+  --tertiary-fixed-dim: #4edea3;
+  --on-tertiary-fixed: #002113;
+  --on-tertiary-fixed-variant: #005236;
+  --background: #f9f9ff;
+  --on-background: #151c27;
+  --surface-variant: #dce2f3;
+  --bg-light: #fafafc;
+  --bg-dark: #0f172a;
+  --text-primary: #111827;
+  --glass-stroke: rgba(255, 255, 255, 0.55);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --shadow-soft: 0px 4px 20px rgba(31, 26, 90, 0.06);
+  --shadow-modal: 0px 20px 50px rgba(31, 26, 90, 0.14);
+  --radius-control: 14px;
+  --radius-card: 20px;
+  --radius-dialog: 24px;
+
+  --font-display: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", "Geist", ui-sans-serif, system-ui, sans-serif;
+}
+
+.dark {
+  --surface: #0f1420;
+  --surface-dim: #0b0e17;
+  --surface-bright: #1c2333;
+  --surface-container-lowest: #0a0d15;
+  --surface-container-low: #131a2a;
+  --surface-container: #171f32;
+  --surface-container-high: #1e2740;
+  --surface-container-highest: #26304c;
+  --on-surface: #e6e9f5;
+  --on-surface-variant: #a9adc4;
+  --inverse-surface: #e6e9f5;
+  --inverse-on-surface: #151c27;
+  --outline: #6b6c85;
+  --outline-variant: #2c3350;
+  --primary: #a29bff;
+  --on-primary: #1a1160;
+  --primary-container: #4f46e5;
+  --on-primary-container: #e2dfff;
+  --secondary: #6fd0ff;
+  --on-secondary: #003049;
+  --secondary-container: #075b82;
+  --on-secondary-container: #c9e6ff;
+  --tertiary: #4edea3;
+  --on-tertiary: #003824;
+  --tertiary-container: #005236;
+  --on-tertiary-container: #6ffbbe;
+  --error: #ffb4ab;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+  --background: #0b0e17;
+  --on-background: #e6e9f5;
+  --surface-variant: #2c3350;
+  --glass-stroke: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(20, 24, 38, 0.65);
+  --shadow-soft: 0px 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-modal: 0px 24px 60px rgba(0, 0, 0, 0.55);
+}
+
+* {
+  border-color: var(--outline-variant);
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--on-background);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--outline); }
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-stroke);
+  }
+  .shadow-elevation-1 {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-elevation-2 {
+    box-shadow: var(--shadow-modal);
+  }
+  .card-surface {
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+  }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { scrollbar-width: none; }
+}

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academy Discovery &amp; Search - Kids Oasis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#464555",
+                      "surface-variant": "#dce2f3",
+                      "on-tertiary-container": "#67f4b7",
+                      "bg-dark": "#0F172A",
+                      "outline": "#777587",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "tertiary": "#005338",
+                      "error": "#ba1a1a",
+                      "surface-container": "#e7eefe",
+                      "surface-dim": "#d3daea",
+                      "primary-fixed": "#e2dfff",
+                      "on-primary-container": "#dad7ff",
+                      "surface-bright": "#f9f9ff",
+                      "on-background": "#151c27",
+                      "secondary": "#006591",
+                      "on-tertiary-fixed": "#002113",
+                      "background": "#f9f9ff",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-surface": "#151c27",
+                      "surface-container-highest": "#dce2f3",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#c3c0ff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "secondary-fixed-dim": "#89ceff",
+                      "primary": "#3525cd",
+                      "bg-light": "#FAFAFC",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#39b8fd",
+                      "tertiary-container": "#006e4b",
+                      "primary-container": "#4f46e5",
+                      "outline-variant": "#c7c4d8",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface": "#f9f9ff",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#e2e8f8",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "on-secondary-fixed": "#001e2f",
+                      "on-primary-fixed": "#0f0069",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#c9e6ff",
+                      "inverse-surface": "#2a313d",
+                      "inverse-on-surface": "#ebf1ff",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f0f3ff",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "text-primary": "#111827",
+                      "surface-tint": "#4d44e3",
+                      "on-secondary-container": "#004666"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "margin-mobile": "16px",
+                      "unit": "8px",
+                      "container-max": "1440px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "label-xs": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "label-xs": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .soft-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .floating-shadow {
+            box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Hide scrollbar for clean look in map view list */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-margin-desktop transition-all duration-300">
+<div class="flex-1 flex items-center gap-4">
+<!-- Search within nav area if search_bar is on_left as per json, though usually a separate component, applying intent here -->
+<div class="relative w-full max-w-md hidden md:block focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg border border-outline-variant bg-surface-container-lowest focus:outline-none focus:border-primary text-label-sm font-label-sm" placeholder="Search academies, classes..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Parent User Profile" class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of an elegant parent user in a brightly lit, modern environment. Light mode, premium aesthetic, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlHqznQH_i7sfR4QqmGn6Y7hApvc9gMaPnQOE4TE13EX0FoQNmtlIF0N8cM9wXcaNlpw9WF8KEPMQHUfWFfYl7JrcuMR4S-Ip_cAHpu5LEuDYVNb3uUMkwRql32Nz94sfqjyhSKnSBbIiWdOpaYJiAV7zqXo7eDt01z857kQCTV6jsfVq1fYp6UBiAUnh9fS0jBSbLdCAbkd_pq1fR3AijO5cCif36uiIa5IOcgX7zVnctuTY4ETX5Eger-8SvRlgwuURxQtfr2-4m"/>
+<span class="font-label-sm text-label-sm text-on-surface">Profile</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="w-[280px] h-screen fixed left-0 top-0 overflow-y-auto bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col p-6 gap-2">
+<!-- Brand -->
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary font-bold text-xl">K</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Kids Oasis</h1>
+<p class="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">Parent Academy</p>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full mb-6 bg-primary text-on-primary py-3 px-4 rounded-[14px] font-label-sm text-label-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors scale-98 active:opacity-80 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">
+<span class="material-symbols-outlined text-sm">add</span>
+            Book New Class
+        </button>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="child_care">child_care</span>
+<span class="font-label-sm text-label-sm">My Children</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary font-semibold bg-surface-container" href="#">
+<span class="material-symbols-outlined" data-icon="search" data-weight="fill" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-sm text-label-sm">Discover</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm">Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+<span class="font-label-sm text-label-sm">Enrollments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-label-sm text-label-sm">Messages</span>
+<span class="ml-auto bg-primary text-on-primary text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-label-sm text-label-sm">Favorites</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-label-sm text-label-sm">Events</span>
+</a>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] mt-16 p-margin-desktop min-h-[calc(100vh-64px)] pb-32 flex flex-col gap-8">
+<!-- Header & Filters -->
+<section class="flex flex-col gap-6">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface">Discover Academies</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Find the perfect learning environment for your child.</p>
+</div>
+<div class="flex bg-surface-container-low p-1 rounded-lg border border-outline-variant">
+<button class="px-4 py-2 rounded-md bg-surface-container-lowest text-primary font-label-sm text-label-sm shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+                        Grid
+                    </button>
+<button class="px-4 py-2 rounded-md text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">list</span>
+                        Map List
+                    </button>
+</div>
+</div>
+<!-- Complex Filter Bar (Bento-ish) -->
+<div class="grid grid-cols-12 gap-4">
+<div class="col-span-5 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-14 pl-12 pr-4 rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary font-body-md soft-shadow" placeholder="Search by name, subject, or methodology..." type="text"/>
+</div>
+<div class="col-span-2 relative">
+<select class="w-full h-14 pl-4 pr-10 rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary font-body-md appearance-none text-on-surface soft-shadow cursor-pointer">
+<option value="">Age Group</option>
+<option value="toddler">Toddler (1-3)</option>
+<option value="preschool">Preschool (3-5)</option>
+<option value="primary">Primary (5-11)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="col-span-2 relative">
+<select class="w-full h-14 pl-4 pr-10 rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary font-body-md appearance-none text-on-surface soft-shadow cursor-pointer">
+<option value="">Distance</option>
+<option value="5">&lt; 5 miles</option>
+<option value="10">&lt; 10 miles</option>
+<option value="20">&lt; 20 miles</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="col-span-2 relative">
+<select class="w-full h-14 pl-4 pr-10 rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary font-body-md appearance-none text-on-surface soft-shadow cursor-pointer">
+<option value="">Price Range</option>
+<option value="1">$</option>
+<option value="2">$$</option>
+<option value="3">$$$</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="col-span-1 flex items-center justify-center">
+<button class="w-14 h-14 rounded-xl border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors soft-shadow group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">tune</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Discovery Grid layout -->
+<div class="grid grid-cols-12 gap-gutter h-full">
+<!-- Left Side: Cards & Recommendations (Takes up 8 columns) -->
+<div class="col-span-8 flex flex-col gap-8">
+<!-- AI Recommendations Bento Box -->
+<section class="bg-gradient-to-br from-surface-container-low to-primary-fixed/30 rounded-2xl p-6 border border-primary/10 relative overflow-hidden soft-shadow">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+<div class="flex items-center gap-2 mb-4 relative z-10">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Recommended for Noah</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 max-w-xl relative z-10">Based on Noah's interest in robotics and past enrollment in STEM camps, these academies have high-rated programs that match his profile.</p>
+<div class="grid grid-cols-2 gap-4 relative z-10">
+<!-- Rec Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/50 hover:border-primary/50 transition-colors flex gap-4 cursor-pointer group">
+<img alt="Academy Image" class="w-20 h-20 rounded-lg object-cover" data-alt="A modern robotics classroom in a high-end academy, bright natural light, children collaborating on a small robot, clean white and indigo aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcju_q__NqXajzbJu3Ddy9PknVr483LKThjEjihg358JP6g8LK3m5gbEKj7KZGQDhxmn5-qWiaCLff0maNHqLsULHxtTVtZEvL_0rcWpQ9yjFbkVmg7FiK8XObehEv-RU-xrr_-vlhtkewsjr2uVFsnNkrGwrX1Wp1cE4nqB4r4t6hfT2KI4vyEqptJ-cgRivYEpz3BqZ4Rg9WSF3Em975TiRc3Iq1tVOCe6WdzfKf6CIY_-43qCDOmrv16tsHW6mucs8xFy4TxRvE"/>
+<div class="flex-1">
+<h4 class="font-label-sm text-label-sm font-semibold text-on-surface group-hover:text-primary transition-colors">TechNova Academy</h4>
+<div class="flex items-center gap-1 text-on-surface-variant text-xs mt-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">star</span>
+<span>4.9 (120)</span>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-semibold text-primary">Robotics</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-semibold text-primary">Coding</span>
+</div>
+</div>
+</div>
+<!-- Rec Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/50 hover:border-primary/50 transition-colors flex gap-4 cursor-pointer group">
+<img alt="Academy Image" class="w-20 h-20 rounded-lg object-cover" data-alt="A bright, minimalist Montessori classroom with wooden educational toys and large windows, peaceful and focused environment, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsX5dw4vU48KzLYg0CnT4RpU9sFSpMzb76-IqW_jVDA8GzTHIbDdXOl2XgOKm1DO-eiSnfe3yTuNb1_QsE4DLSC41NZECOc99LHR2XpKDSryfPs7t8c4tkGPYNIwykZdk8YYxNAj_igmE5VB0IJBZaceF5uEYo8abo1ITtxyXTdi_uunPfU80-hYrGSNVF2kALY1WXPVf9AVrfSEmcp4Jl85Ru_1zYA24MCBPjQ8UqHQdpHHJ2rY8ceoSqMy03wXzeObdN-C8CRabK"/>
+<div class="flex-1">
+<h4 class="font-label-sm text-label-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Lumina Montessori</h4>
+<div class="flex items-center gap-1 text-on-surface-variant text-xs mt-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">star</span>
+<span>4.8 (85)</span>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-semibold text-primary">Advanced Math</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Grid of Academies -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface">All Results</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Showing 42 academies</span>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<!-- Academy Card 1 -->
+<div class="bg-surface-container-lowest rounded-[20px] border border-outline-variant/50 overflow-hidden soft-shadow hover:shadow-[0px_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Academy Exterior" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Exterior view of a modern early childhood education center with large glass windows and a safe, colorful playground. Bright, optimistic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfH0mTKKaP4J_twsCVivG1MVyHhS37JAqR_U1YCX15Rjb4VCOZUu1TKR5LX7HhOve7sQYuLHrfCR64H2e_lzmM95kiCEk0gmgwEpO3gP9GY3pfoLVuZ7PVJ2NvUTlvOCiChK2vOfnttWfi1BmT7c4VYnqjFFhXvNfXHly6rXsE0ZuIEiediUiqM03cSFrLW0bngNkWXyGS7PcpZocaEnAvFCRxkVcP9KkGyd4PMm_06DscIV9brkFxkNOQQXzh-nMYaojVsjQ41QgC"/>
+<button class="absolute top-3 right-3 w-8 h-8 rounded-full glass-panel flex items-center justify-center text-on-surface hover:text-error transition-colors">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+<div class="absolute bottom-3 left-3 flex gap-2">
+<span class="bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-md text-[11px] font-bold text-on-surface flex items-center gap-1">
+                                        $$$
+                                    </span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-[18px] leading-tight font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-1">The Evergreen School</h4>
+<div class="flex items-center gap-1 bg-surface-container px-1.5 py-0.5 rounded text-xs font-semibold text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        4.9
+                                    </div>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant mb-4 line-clamp-2">Holistic education focusing on environmental stewardship and project-based learning for primary years.</p>
+<div class="mt-auto flex items-center justify-between border-t border-outline-variant/50 pt-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        2.4 miles away
+                                    </div>
+<label class="flex items-center gap-2 cursor-pointer group/checkbox">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="text-xs font-label-sm text-on-surface-variant group-hover/checkbox:text-on-surface transition-colors">Compare</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Academy Card 2 -->
+<div class="bg-surface-container-lowest rounded-[20px] border border-outline-variant/50 overflow-hidden soft-shadow hover:shadow-[0px_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Academy Interior" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Children engaged in an interactive science experiment in a modern, clean laboratory classroom. Bright white and subtle blue tones, professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWmti4TvEavyQ3beQJEAkGIv1GoXTtUtH5JV02vIwiQfvF0yxdlohWigqgtjtieGU4IhAj9iIDvgAuTYjHMEdrZ9Alzbx4QWQ6BxYg5BacfEUeJt__aP2ivyXmY35QhbpxGrGvJ7Cb2sGffyNRVZj3kGHH8w4Eg1-OmQGmDXNfitRBxU7jBVKlCn58_pyMaVziOUWxAejQ91Emi_BEPMvhcBYjnrqkqkXBYKXv8peHWp6lsc6BeKnDANvJTtymGSNs8tMAt-83xQ5l"/>
+<button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-error/10 border border-error/20 flex items-center justify-center text-error transition-colors">
+<span class="material-symbols-outlined text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-3 left-3 flex gap-2">
+<span class="bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-md text-[11px] font-bold text-on-surface flex items-center gap-1">
+                                        $$
+                                    </span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-[18px] leading-tight font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-1">Pioneer STEM Prep</h4>
+<div class="flex items-center gap-1 bg-surface-container px-1.5 py-0.5 rounded text-xs font-semibold text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        4.7
+                                    </div>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant mb-4 line-clamp-2">Advanced curriculum emphasizing science, technology, engineering, and mathematics through hands-on labs.</p>
+<div class="mt-auto flex items-center justify-between border-t border-outline-variant/50 pt-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        4.1 miles away
+                                    </div>
+<label class="flex items-center gap-2 cursor-pointer group/checkbox">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="text-xs font-label-sm text-on-surface-variant group-hover/checkbox:text-on-surface transition-colors">Compare</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Academy Card 3 -->
+<div class="bg-surface-container-lowest rounded-[20px] border border-outline-variant/50 overflow-hidden soft-shadow hover:shadow-[0px_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 group flex flex-col opacity-60">
+<!-- Showcasing a slightly different state, maybe fully booked or less relevant -->
+<div class="relative h-48 w-full overflow-hidden">
+<img alt="Academy Library" class="w-full h-full object-cover grayscale-[30%] group-hover:scale-105 transition-transform duration-500" data-alt="A quiet, high-end library in an academy, filled with natural light, rows of wooden bookshelves, and soft reading nooks. Clean, sophisticated look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhpfobe3K3lYQyzI7k3YPoMnFzddhXyCaKj83JmXQ6a0hlb8pcXg6ZHS4KXFWUN25-JJCBi9hfZ-PlbNRHG0tKPq63TpRzfzcKMcAgnFV0GKqrhsdTsxj6bh5oVXZ41TXfLhnxPZPGaPjiQpQ8JQL0E-ARsuTd8AJgUMrsfnG5Z_Up64pvNnxltA-OhkvpjL0kUtP-JVgHeb_MyZOfAhDPgAZe40U-Liz7H4Dd-dRmj5PWqjwTHm6n0VUQad-35VPSrhRb8CYfdVX1"/>
+<button class="absolute top-3 right-3 w-8 h-8 rounded-full glass-panel flex items-center justify-center text-on-surface hover:text-error transition-colors">
+<span class="material-symbols-outlined text-sm">favorite</span>
+</button>
+<div class="absolute top-3 left-3">
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Waitlist Only</span>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-[18px] leading-tight font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-1">Athenaeum Arts</h4>
+<div class="flex items-center gap-1 bg-surface-container px-1.5 py-0.5 rounded text-xs font-semibold text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-tertiary-container" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+                                        5.0
+                                    </div>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant mb-4 line-clamp-2">Premier classical arts and humanities academy fostering creative expression and critical thinking.</p>
+<div class="mt-auto flex items-center justify-between border-t border-outline-variant/50 pt-4">
+<div class="flex items-center gap-1.5 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                        5.8 miles away
+                                    </div>
+<label class="flex items-center gap-2 cursor-pointer group/checkbox">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4 cursor-pointer" type="checkbox"/>
+<span class="text-xs font-label-sm text-on-surface-variant group-hover/checkbox:text-on-surface transition-colors">Compare</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="mt-8 flex justify-center">
+<button class="px-6 py-2.5 rounded-full border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+                            Load More Results
+                        </button>
+</div>
+</section>
+</div>
+<!-- Right Side: Interactive Map (Takes up 4 columns, sticky) -->
+<div class="col-span-4 relative">
+<div class="sticky top-24 h-[calc(100vh-140px)] rounded-2xl overflow-hidden border border-outline-variant soft-shadow bg-surface-container">
+<!-- Map Placeholder -->
+<div class="absolute inset-0 bg-surface-variant" data-alt="A stylized, highly minimal, modern digital map interface centered on a metropolitan area, light mode with subtle indigo and emerald accents marking locations. Premium SaaS aesthetic." data-location="San Francisco" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTnoNt9ArAHTvrQdEQ5fH3rnaHYPGT00VP2WUfYIMmnEv3UpmAe4Bj-miXlyCzlD7_3Pu7lrZ6qMGfKr-RsN8Nd8CdVj-XzU1qF-lX7kepa0uh5M1ZlhqFxalanrV7xZllvZdf3ILxhMwyj-cROQwCitea4mpqff96orrM8LqsuRMbb53TF_A4nVTDU2g4MVeioHSp-wIAYVPO3SnxvcRSFcc96TkbDLwGw1clTugheQNElNkNln-s2_aobs7EwvpEWPiNDw7P0q4T')"></div>
+<!-- Map UI Overlay -->
+<div class="absolute inset-0 pointer-events-none p-4 flex flex-col justify-between">
+<!-- Map Controls -->
+<div class="flex justify-end pointer-events-auto">
+<div class="flex flex-col gap-2 bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg border border-outline-variant/50 p-1">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-low rounded-md transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<div class="w-full h-px bg-outline-variant/50"></div>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:bg-surface-container-low rounded-md transition-colors">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+</div>
+</div>
+<!-- Map Markers (Simulated) -->
+<div class="absolute top-1/3 left-1/4 pointer-events-auto group cursor-pointer">
+<div class="relative">
+<div class="w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg border-2 border-surface-container-lowest z-10 relative">
+<span class="material-symbols-outlined text-sm">school</span>
+</div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 w-2 h-2 bg-primary rotate-45 border-r border-b border-surface-container-lowest z-0"></div>
+</div>
+<!-- Tooltip -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-surface-container-lowest rounded-lg p-2 shadow-lg border border-outline-variant/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+<p class="text-xs font-semibold text-on-surface">The Evergreen School</p>
+<p class="text-[10px] text-on-surface-variant mt-0.5">2.4 mi • $$$</p>
+</div>
+</div>
+<div class="absolute top-1/2 right-1/3 pointer-events-auto group cursor-pointer">
+<div class="relative">
+<div class="w-8 h-8 bg-surface-container-lowest text-primary rounded-full flex items-center justify-center shadow-lg border-2 border-primary z-10 relative">
+<span class="material-symbols-outlined text-sm">school</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-1/3 left-1/2 pointer-events-auto group cursor-pointer">
+<div class="relative">
+<div class="w-8 h-8 bg-surface-container-lowest text-primary rounded-full flex items-center justify-center shadow-lg border-2 border-primary z-10 relative">
+<span class="material-symbols-outlined text-sm">school</span>
+</div>
+</div>
+</div>
+<!-- Map Bottom action -->
+<div class="pointer-events-auto w-full">
+<button class="w-full py-2 bg-surface-container-lowest/90 backdrop-blur-md border border-outline-variant rounded-xl font-label-sm text-sm text-on-surface shadow-sm hover:bg-surface-container-lowest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+                                Search this area
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Comparison Footer / Drawer -->
+<div class="fixed bottom-0 left-[280px] right-0 bg-surface-container-lowest border-t border-outline-variant floating-shadow z-40 transform transition-transform duration-300 translate-y-0">
+<div class="px-margin-desktop py-4 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div>
+<h4 class="font-label-sm text-label-sm font-semibold text-on-surface flex items-center gap-2">
+                        Compare Academies
+                        <span class="bg-primary-container text-on-primary-container px-2 py-0.5 rounded-full text-xs">2 Selected</span>
+</h4>
+<p class="text-xs text-on-surface-variant mt-0.5">Select up to 3 to compare features and pricing.</p>
+</div>
+<div class="flex gap-3 border-l border-outline-variant/50 pl-6">
+<!-- Selected Item 1 -->
+<div class="flex items-center gap-3 bg-surface-container-low px-3 py-1.5 rounded-lg border border-outline-variant/50 pr-2">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center overflow-hidden">
+<img alt="Thumb" class="w-full h-full object-cover" data-alt="Small thumbnail of a school building exterior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC4xDhzUFnKUsRlVjgfA0JkbFgLE_byC_QW8_VmxCm2o6f0Zq1Qs8VCtShazAv2KX9AfSTQymGz0GuNhfsOqYnfYOezfiYRK0MpVj4dKdbULvfA-7udZyN5ldGw83sjIggWJUVD1nlptqGd7hntBtE1opRMZ81HKqK6RFTQ3E2iHv42j7w-cWJs-slubrpQJ8MXZ5UNvaTUXtOdpzNuXqJ0XAAvRZBc_c-FTAUfEGlz51Ah73YklqIjIWNbF5tjf-ZyjUdHeY30vEo"/>
+</div>
+<span class="text-xs font-semibold text-on-surface max-w-[100px] truncate">Pioneer STEM</span>
+<button class="text-on-surface-variant hover:text-error ml-1">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Empty Slot -->
+<div class="flex items-center justify-center gap-2 bg-surface-bright border border-dashed border-outline-variant px-4 py-1.5 rounded-lg w-[160px]">
+<span class="material-symbols-outlined text-[16px] text-outline">add</span>
+<span class="text-xs text-outline font-medium">Add Academy</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-sm transition-colors">
+                    Clear All
+                </button>
+<button class="px-6 py-2 rounded-lg bg-primary text-on-primary font-label-sm text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm">
+                    Compare Now
+                </button>
+</div>
+</div>
+</div>
+</body></html>

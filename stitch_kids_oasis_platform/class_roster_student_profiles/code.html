@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Students</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface-container-highest": "#dce2f3",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-container": "#e7eefe",
+                        "on-tertiary-fixed": "#002113",
+                        "bg-light": "#FAFAFC",
+                        "surface-tint": "#4d44e3",
+                        "secondary-container": "#39b8fd",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "primary": "#3525cd",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-surface": "#151c27",
+                        "surface-bright": "#f9f9ff",
+                        "on-tertiary-container": "#67f4b7",
+                        "secondary": "#006591",
+                        "surface-container-low": "#f0f3ff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-container-lowest": "#ffffff",
+                        "bg-dark": "#0F172A",
+                        "tertiary-fixed": "#6ffbbe",
+                        "secondary-fixed-dim": "#89ceff",
+                        "surface-container-high": "#e2e8f8",
+                        "surface-dim": "#d3daea",
+                        "on-background": "#151c27",
+                        "surface-variant": "#dce2f3",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-secondary-fixed": "#001e2f",
+                        "primary-fixed": "#e2dfff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "outline": "#777587",
+                        "tertiary": "#005338",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "on-primary-container": "#dad7ff",
+                        "background": "#f9f9ff",
+                        "text-primary": "#111827",
+                        "tertiary-container": "#006e4b",
+                        "primary-container": "#4f46e5",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-container": "#004666",
+                        "outline-variant": "#c7c4d8",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2a313d",
+                        "surface": "#f9f9ff",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-tertiary-fixed-variant": "#005236"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "label-xs": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "display-lg-mobile": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "label-xs": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap');
+        body { font-family: 'Geist', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background h-full flex overflow-hidden antialiased">
+<!-- SideNavBar -->
+<nav class="w-[280px] h-screen sticky left-0 top-0 bg-surface-container-lowest dark:bg-bg-dark shadow-[0px_4px_20px_rgba(0,0,0,0.03)] flex flex-col p-gutter border-r border-outline-variant/10 z-40 hidden md:flex">
+<div class="mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold font-headline-md text-headline-md shadow-sm">
+                KO
+            </div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">Kids Oasis</h1>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Teacher Workspace</p>
+</div>
+</div>
+<button class="mb-8 w-full py-3 px-4 bg-primary text-on-primary rounded-xl font-label-sm text-label-sm font-medium hover:bg-primary/90 transition-colors duration-200 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Assignment
+        </button>
+<div class="flex-1 overflow-y-auto space-y-1 pr-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">school</span>
+                Classes
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-primary dark:text-inverse-primary font-bold bg-surface-container-low dark:bg-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">group</span>
+                Students
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">event_available</span>
+                Attendance
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">assessment</span>
+                Reports
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+                Assignments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+                Messages
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                Calendar
+            </a>
+</div>
+<div class="mt-auto pt-6 border-t border-outline-variant/20 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl font-medium text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container hover:text-on-surface transition-colors duration-200 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar (Mobile Only - Simplified for focus) -->
+<header class="md:hidden sticky top-0 z-50 flex justify-between items-center w-full px-margin-mobile py-4 backdrop-blur-xl bg-white/70 dark:bg-bg-dark/70 border-b border-outline-variant/10">
+<h1 class="font-headline-md text-headline-md text-primary dark:text-inverse-primary font-bold">Kids Oasis</h1>
+<button class="p-2 text-on-surface-variant rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop bg-surface-bright">
+<div class="max-w-container-max mx-auto space-y-8">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">Student Directory</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your roster, track attendance, and view student profiles.</p>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<div class="relative flex-1 md:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all shadow-sm" placeholder="Search students..." type="text"/>
+</div>
+<button class="p-2.5 bg-surface-container-lowest border border-outline-variant rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0 hide-scrollbar">
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm whitespace-nowrap shadow-sm">All Students (42)</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors whitespace-nowrap">Grade 3 Math</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors whitespace-nowrap">Grade 4 Science</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors whitespace-nowrap">Needs Review (3)</button>
+</div>
+<!-- Student List Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Student Card 1 -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 flex flex-col gap-5 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.06)] transition-all group">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="A portrait of a young elementary school student, smiling, diverse classroom setting, soft bright natural light, high-quality realistic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcI6bGMH0YSMAPCKjUuSY3-TXMn4taMKzKDkXO0DBL5zZyzVzPCWJY2qJ3jaKmgDgcGUyVazVwqeQiwBYLkpWBA9N5kzqN-vCP4K0PUdV75dtpKtaT5GAaMTTRLBOIFlllSwGnv3qiWfwJxwFYuQ50WR5IAU1rumTeP5uN9NwncWgyMibfvDmPIKGIexVMC5ESuXjmulzv5bihSbuOGNWOPCxN-6-bZYorzghgiQelrPkEE6HABBotm4Xi43UfgDfeanHqfUpDjhY3"/>
+<div>
+<h3 class="font-headline-md text-[18px] leading-tight text-on-surface font-bold group-hover:text-primary transition-colors">Emma Thompson</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Grade 3 • ID: 84729</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-tertiary-container/10 text-tertiary-container font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Present
+                            </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/20">
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-1 uppercase tracking-wider">Avg Grade</p>
+<p class="font-headline-md text-[20px] text-on-surface">92%</p>
+</div>
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-1 uppercase tracking-wider">Attendance</p>
+<p class="font-headline-md text-[20px] text-on-surface">98%</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary transition-colors tooltip" title="Medical Notes">
+<span class="material-symbols-outlined text-[18px]">medical_services</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary transition-colors tooltip" title="Behavioral Notes">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</button>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-variant font-medium flex items-center gap-1">
+                                View Profile <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Student Card 2 (Absent) -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 flex flex-col gap-5 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.06)] transition-all group">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center font-headline-md text-[20px] font-bold shadow-sm">
+                                    JR
+                                </div>
+<div>
+<h3 class="font-headline-md text-[18px] leading-tight text-on-surface font-bold group-hover:text-primary transition-colors">Jackson Reed</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Grade 3 • ID: 84730</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-error-container/20 text-error font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[14px]">cancel</span> Absent
+                            </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/20">
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-1 uppercase tracking-wider">Avg Grade</p>
+<p class="font-headline-md text-[20px] text-on-surface">78%</p>
+</div>
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-1 uppercase tracking-wider">Attendance</p>
+<p class="font-headline-md text-[20px] text-error">85%</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary transition-colors tooltip" title="Message Parent">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-variant font-medium flex items-center gap-1">
+                                View Profile <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Student Card 3 -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/30 flex flex-col gap-5 hover:shadow-[0px_8px_30px_rgba(0,0,0,0.06)] transition-all group">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="A portrait of a young boy student, looking attentive in class, well-lit educational environment, sharp focus, modern educational photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRB31yYYwpj8Ea5jXOM6EEiFXuE3ybl3dYAxZd7w9XP958PLN2f-rCLoaPBevZlVDWUzoYVzN_332dgoD8hG9Nc0K3TR54JqHKV9nA7XZo4G5tI8TBMquivNU9IQF9cqdOdDVOylVTF6-DECXBD2brnOeqX3-pF0KoYYr5D5wu_1FRVEY_HGM8KLZ13bk25ueNkCBfqPkcuFqp75YciLWWMJm5OEh37ABrLLyNMy3Qk4Hdh1F8KLLVoxf35bEZsHyLTyDFhP8B79dW"/>
+<div>
+<h3 class="font-headline-md text-[18px] leading-tight text-on-surface font-bold group-hover:text-primary transition-colors">Leo Patel</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Grade 4 • ID: 91204</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-tertiary-container/10 text-tertiary-container font-label-xs text-label-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Present
+                            </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/20">
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-1 uppercase tracking-wider">Avg Grade</p>
+<p class="font-headline-md text-[20px] text-on-surface">88%</p>
+</div>
+<div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mb-1 uppercase tracking-wider">Attendance</p>
+<p class="font-headline-md text-[20px] text-on-surface">95%</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary transition-colors tooltip" title="Behavioral Notes">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</button>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-variant font-medium flex items-center gap-1">
+                                View Profile <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

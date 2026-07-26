@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Find Academies - Kids Oasis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#4d44e3",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d3daea",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-variant": "#dce2f3",
+                        "on-tertiary-container": "#67f4b7",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface": "#f9f9ff",
+                        "surface-container": "#e7eefe",
+                        "on-surface": "#151c27",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "tertiary": "#005338",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-tertiary-fixed": "#002113",
+                        "bg-dark": "#0F172A",
+                        "on-secondary-fixed": "#001e2f",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "outline": "#777587",
+                        "secondary": "#006591",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "bg-light": "#FAFAFC",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-primary": "#c3c0ff",
+                        "surface-container-high": "#e2e8f8",
+                        "inverse-surface": "#2a313d",
+                        "secondary-container": "#39b8fd",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary-container": "#006e4b",
+                        "secondary-fixed-dim": "#89ceff",
+                        "surface-container-low": "#f0f3ff",
+                        "background": "#f9f9ff",
+                        "surface-container-highest": "#dce2f3",
+                        "tertiary-fixed": "#6ffbbe",
+                        "primary": "#3525cd",
+                        "outline-variant": "#c7c4d8",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#004666",
+                        "on-background": "#151c27",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "primary-container": "#4f46e5",
+                        "text-primary": "#111827",
+                        "secondary-fixed": "#c9e6ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#dad7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Geist"],
+                        "display-lg-mobile": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-xs": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-xs": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface/70 dark:bg-bg-dark/70 backdrop-blur-xl docked full-width top-0 sticky border-b border-glass-stroke shadow-sm z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-6">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed" href="#">
+                    Kids Oasis
+                </a>
+<!-- Optional Search Bar on Left as per JSON -->
+<div class="hidden md:flex relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-xl text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search academies..." type="text"/>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary pb-1 hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">Find Classes</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">For Educators</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">Pricing</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="#">Resources</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-label-sm text-label-sm text-primary hover:text-primary-container transition-colors">Log In</button>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-[14px] shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] hover:bg-primary-container transition-colors">Join Now</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-gutter flex flex-col gap-8">
+<!-- Search & Filter Header (Sticky below nav) -->
+<section class="bg-surface sticky top-[73px] z-40 py-4 -mx-margin-mobile px-margin-mobile md:-mx-margin-desktop md:px-margin-desktop border-b border-outline-variant/30 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center bg-surface-container-highest rounded-xl p-1 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-6 py-2 rounded-lg bg-surface shadow-[0px_2px_8px_rgba(0,0,0,0.05)] text-on-surface font-label-sm text-label-sm font-bold transition-all">List</button>
+<button class="flex-1 md:flex-none px-6 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 font-label-sm text-label-sm transition-all">Map</button>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-hide">
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant bg-surface text-on-surface font-label-sm text-label-sm hover:bg-surface-variant/30 whitespace-nowrap transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span> Filters
+                 </button>
+<button class="px-4 py-2 rounded-xl border border-outline-variant bg-surface text-on-surface font-label-sm text-label-sm hover:bg-surface-variant/30 whitespace-nowrap transition-colors">Age: 4-6</button>
+<button class="px-4 py-2 rounded-xl border border-outline-variant bg-surface text-on-surface font-label-sm text-label-sm hover:bg-surface-variant/30 whitespace-nowrap transition-colors">Montessori</button>
+<button class="px-4 py-2 rounded-xl border border-outline-variant bg-surface text-on-surface font-label-sm text-label-sm hover:bg-surface-variant/30 whitespace-nowrap transition-colors">Immediate Start</button>
+</div>
+</section>
+<!-- Bento Grid of Academies -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<article class="group bg-surface rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 overflow-hidden flex flex-col hover:shadow-[0px_10px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+<div class="relative h-48 w-full">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A bright, sunlit modern kindergarten classroom with wooden furniture, colorful educational toys neatly arranged on shelves, and large windows revealing a green garden outside. The mood is cheerful, safe, and professional, embodying a high-end educational environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALLEUPfN2CnEVXYwz0-t_-0yaHMaigJOx1sUB8qK6ImXaoUQbpxr6Xy5B8LlZOZXG1BzECCFmsmqtZqmw5w5vy82yEb9mMA_mfiBx7g39H53LKmMyTQVA3IssUNJwbFYpHI4F2_cjK5GMX-YgJzc6rsZYmvghBXc38NtgXAVeQuB8DmmKu7si0soKIFa5GxmNEPtZeIDluyFqB5rcEFwzSF-JMLkUbc6Z3K1aUJIjgloeg-q58p2FyzKOw959ha6rrvR2SQxMBpJYT"/>
+<button class="absolute top-3 right-3 p-2 bg-surface/80 backdrop-blur-md rounded-full text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 font-label-xs text-label-xs text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span> 4.9 (128)
+                    </div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface line-clamp-1">Sunrise Early Learning</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow line-clamp-2">Reggio Emilia inspired program focusing on outdoor exploration and creative arts.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs rounded-md">Preschool</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs rounded-md">Ages 3-5</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">$1,200</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">/month</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> 1.2 mi
+                        </span>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="group bg-surface rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 overflow-hidden flex flex-col hover:shadow-[0px_10px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
+<div class="relative h-48 w-full">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist Montessori classroom setting with specialized tactile learning materials arranged on low wooden shelves. Soft natural light illuminates the space, emphasizing order, calmness, and high-quality educational design in a light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATuK_CJav4JrxL_Rkrn2Surdro95BJgJzYwkwDmvAswvONtBYuy5hb-2FgJ7n3ayximX2ESVrOvmOItSwJ6JRfm1HLoQTI8v088-vYWX-maw-Slhwn3OsbRZo3jgNWUjJIRDTafWJIz-wNOcxCH12qxlTOoYxyPceGU-J8e8GoDKZee_GmNFpiUicHROiDcO2jB02zoCq69oAX0hDXzDuM2mDmyxFWgwGfBOaFG_ib5X5msjfsIbVIq-gPVUSHR5EQwpuHkd20apdL"/>
+<button class="absolute top-3 right-3 p-2 bg-surface/80 backdrop-blur-md rounded-full text-error hover:text-error transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 font-label-xs text-label-xs text-on-surface">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span> 4.7 (85)
+                    </div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface line-clamp-1">Oak Tree Montessori</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-grow line-clamp-2">Authentic Montessori environment fostering independence and self-directed learning.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs rounded-md">Toddler</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant font-label-xs text-label-xs rounded-md">Primary</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">$1,450</span>
+<span class="font-label-xs text-label-xs text-on-surface-variant">/month</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> 2.5 mi
+                        </span>
+</div>
+</div>
+</article>
+<!-- Additional Cards can be repeated with similar structure -->
+</section>
+<!-- Pagination -->
+<div class="mt-8 flex justify-center items-center gap-2 pb-8">
+<button class="p-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-variant/30 transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-bold flex items-center justify-center">1</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-variant/30 transition-colors flex items-center justify-center">2</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-variant/30 transition-colors flex items-center justify-center">3</button>
+<span class="text-on-surface-variant px-2">...</span>
+<button class="w-10 h-10 rounded-lg border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-variant/30 transition-colors flex items-center justify-center">12</button>
+<button class="p-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-variant/30 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-bg-dark w-full mt-auto border-t border-outline-variant">
+<div class="w-full px-margin-desktop py-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="flex flex-col gap-4">
+<div class="font-headline-md text-headline-md font-bold text-primary">Kids Oasis</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Elevating early education discovery.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm font-bold text-on-surface">Company</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Careers</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm font-bold text-on-surface">Legal</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3 md:items-end">
+<p class="font-label-xs text-label-xs text-on-surface-variant">© 2024 Kids Oasis. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>

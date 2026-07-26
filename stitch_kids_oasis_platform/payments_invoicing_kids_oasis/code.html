@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Payments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#6ffbbe",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#001e2f",
+                      "bg-dark": "#0F172A",
+                      "surface-bright": "#f9f9ff",
+                      "surface-variant": "#dce2f3",
+                      "background": "#f9f9ff",
+                      "surface-container-highest": "#dce2f3",
+                      "primary-fixed": "#e2dfff",
+                      "primary": "#3525cd",
+                      "tertiary-container": "#006e4b",
+                      "bg-light": "#FAFAFC",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#464555",
+                      "text-primary": "#111827",
+                      "error-container": "#ffdad6",
+                      "inverse-primary": "#c3c0ff",
+                      "surface-container-high": "#e2e8f8",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#002113",
+                      "surface-container": "#e7eefe",
+                      "tertiary": "#005338",
+                      "surface": "#f9f9ff",
+                      "primary-container": "#4f46e5",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "secondary-container": "#39b8fd",
+                      "secondary": "#006591",
+                      "on-tertiary-container": "#67f4b7",
+                      "surface-container-low": "#f0f3ff",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#4d44e3",
+                      "on-background": "#151c27",
+                      "on-surface": "#151c27",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "inverse-surface": "#2a313d",
+                      "outline": "#777587",
+                      "outline-variant": "#c7c4d8",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "secondary-fixed": "#c9e6ff",
+                      "secondary-fixed-dim": "#89ceff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface-dim": "#d3daea",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#0f0069",
+                      "on-secondary-container": "#004666",
+                      "inverse-on-surface": "#ebf1ff",
+                      "on-primary-container": "#dad7ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "unit": "8px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "label-xs": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-xs": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: #f9f9ff; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .card-shadow { box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03); }
+        
+        /* Table Styles */
+        .table-row-hover:hover { background-color: #f0f3ff; }
+        .status-paid { background-color: #d1fae5; color: #065f46; }
+        .status-pending { background-color: #fef3c7; color: #92400e; }
+        .status-overdue { background-color: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body class="text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- Side Navigation -->
+<nav class="bg-surface dark:bg-bg-dark text-primary dark:text-primary-fixed font-body-md text-body-md w-[280px] h-screen fixed left-0 top-0 shadow-sm z-40 flex flex-col hidden md:flex border-r border-outline-variant/20">
+<div class="flex flex-col h-full p-6 space-y-2">
+<!-- Brand -->
+<div class="mb-8 flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center font-bold text-xl">K</div>
+<div>
+<h1 class="font-display-lg text-headline-md tracking-tight text-primary dark:text-primary-fixed m-0 leading-none" style="font-size: 20px; font-weight: 700;">Kids Oasis</h1>
+<span class="text-xs text-on-surface-variant">Academy Management</span>
+</div>
+</div>
+<!-- Tabs -->
+<div class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">school</span>
+<span>Academy</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-primary font-semibold bg-primary-container/10 active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span>Payments</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">storefront</span>
+<span>Marketplace</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+<span>Students</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">badge</span>
+<span>Instructors</span>
+</a>
+</div>
+<!-- Bottom Section -->
+<div class="pt-4 border-t border-outline-variant/20 space-y-1">
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors active:scale-[0.98] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span>Settings</span>
+</a>
+<button class="w-full mt-4 bg-primary-container text-on-primary py-2.5 px-4 rounded-lg font-label-sm font-semibold hover:opacity-90 transition-opacity flex justify-center items-center shadow-sm">
+<span class="material-symbols-outlined mr-2 text-sm" style="font-variation-settings: 'FILL' 0;">add</span>
+                    New Academy
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-[280px] h-screen overflow-y-auto bg-background">
+<!-- Top App Bar -->
+<header class="bg-surface/70 dark:bg-bg-dark/70 text-primary dark:text-primary-fixed font-body-md text-body-md h-16 sticky top-0 z-30 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm flex justify-between items-center px-gutter w-full">
+<div class="flex items-center">
+<!-- Mobile Menu Button -->
+<button class="md:hidden mr-4 text-on-surface-variant hover:text-primary transition-all active:opacity-80">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-display-lg text-headline-md tracking-tight text-primary dark:text-primary-fixed md:hidden">Kids Oasis</div>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex space-x-6 ml-4">
+<a class="text-on-surface-variant hover:text-primary transition-all py-5" href="#">Overview</a>
+<a class="text-primary border-b-2 border-primary py-5 font-medium" href="#">Analytics</a>
+<a class="text-on-surface-variant hover:text-primary transition-all py-5" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant hover:text-primary transition-all cursor-pointer active:opacity-80 p-2 rounded-full hover:bg-surface-container-low hidden md:block">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all cursor-pointer active:opacity-80 p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hidden md:flex bg-primary-container text-on-primary px-4 py-2 rounded-lg font-label-sm font-semibold hover:opacity-90 transition-opacity shadow-sm items-center">
+<span class="material-symbols-outlined mr-1 text-sm">add</span>
+                    Create Invoice
+                </button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant/30 overflow-hidden cursor-pointer ml-2">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a female academy administrator with a friendly smile, wearing a neat blouse, softly lit against a blurred modern office background. High quality, corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQASknG3xVGgVQk-wh0cBjqN1iTHKHOb0s6VsBUCXh4gjZjnxhjXsVDxN3maeUU6iM7usSuK1E2Pi3yW1CGkIqdlBoBWEfwyq2CV3q7DqZ9ZCCTHKmGWsydiBjhGJUixEScgFtZtIPqUglarO1lpX-0erOmOhkKqRDVD4V62p9f79cKEL8KASPGAktqBNTVx0jLxLLpMYQneeD3FEuVmcB9M2pz5P7vqBP9jq66r6FizKtNe0niUz4Mjcyigw6nT_XQLdsBW2GoIfM"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="p-4 md:p-gutter max-w-container-max mx-auto w-full pb-24">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-8 mt-2">
+<div>
+<h2 class="font-headline-md text-headline-md text-text-primary">Payments &amp; Invoicing</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Manage revenue, payouts, and customer billing.</p>
+</div>
+<div class="hidden sm:flex space-x-3">
+<button class="bg-surface text-on-surface border border-outline-variant/50 px-4 py-2 rounded-lg font-label-sm font-medium hover:bg-surface-container-low transition-colors shadow-sm flex items-center">
+<span class="material-symbols-outlined mr-2 text-sm">download</span>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- Financial Overview Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<!-- Total Volume -->
+<div class="bg-surface rounded-[20px] p-6 card-shadow border border-outline-variant/20 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-sm">Total Volume</span>
+<span class="material-symbols-outlined text-outline">payments</span>
+</div>
+<div>
+<h3 class="font-display-lg text-[32px] leading-tight text-text-primary mb-2">$42,500.00</h3>
+<div class="flex items-center text-sm">
+<span class="text-tertiary-container bg-tertiary-container/10 px-1.5 py-0.5 rounded flex items-center font-medium mr-2">
+<span class="material-symbols-outlined text-[14px] mr-0.5">trending_up</span> 12.5%
+                            </span>
+<span class="text-on-surface-variant text-xs">vs last month</span>
+</div>
+</div>
+</div>
+<!-- Pending Payouts -->
+<div class="bg-surface rounded-[20px] p-6 card-shadow border border-outline-variant/20 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-sm">Pending Payouts</span>
+<span class="material-symbols-outlined text-outline">account_balance</span>
+</div>
+<div>
+<h3 class="font-display-lg text-[32px] leading-tight text-text-primary mb-2">$3,240.50</h3>
+<p class="text-on-surface-variant text-sm flex items-center">
+<span class="w-2 h-2 rounded-full bg-secondary-container mr-2"></span> Expected Tomorrow
+                        </p>
+</div>
+</div>
+<!-- Successful Payments -->
+<div class="bg-surface rounded-[20px] p-6 card-shadow border border-outline-variant/20 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-sm">Successful Payments</span>
+<span class="material-symbols-outlined text-outline">check_circle</span>
+</div>
+<div>
+<h3 class="font-display-lg text-[32px] leading-tight text-text-primary mb-2">142</h3>
+<p class="text-on-surface-variant text-sm">In the last 30 days</p>
+</div>
+</div>
+<!-- Open Invoices -->
+<div class="bg-surface rounded-[20px] p-6 card-shadow border border-outline-variant/20 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-sm">Open Invoices</span>
+<span class="material-symbols-outlined text-outline">receipt_long</span>
+</div>
+<div>
+<h3 class="font-display-lg text-[32px] leading-tight text-text-primary mb-2">8</h3>
+<p class="text-error text-sm flex items-center font-medium">
+<span class="material-symbols-outlined text-[16px] mr-1">warning</span> 2 Overdue ($450.00)
+                        </p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<!-- Revenue Chart Area -->
+<div class="lg:col-span-2 bg-surface rounded-[20px] p-6 card-shadow border border-outline-variant/20">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-lg text-text-primary">Revenue Growth</h3>
+<select class="bg-surface border border-outline-variant/30 text-on-surface text-sm rounded-lg focus:ring-primary focus:border-primary block p-2">
+<option>This Year</option>
+<option>Last 6 Months</option>
+<option>Last 30 Days</option>
+</select>
+</div>
+<!-- Chart Placeholder (Stylized CSS Grid) -->
+<div class="h-[250px] w-full flex items-end justify-between space-x-2 pt-4 border-b border-l border-outline-variant/20 pb-2 pl-2 relative">
+<!-- Y Axis Labels -->
+<div class="absolute left-[-30px] bottom-0 h-full flex flex-col justify-between text-xs text-outline-variant py-2">
+<span>40k</span>
+<span>30k</span>
+<span>20k</span>
+<span>10k</span>
+<span>0</span>
+</div>
+<!-- Bars -->
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors rounded-t-sm" style="height: 30%;"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors rounded-t-sm" style="height: 45%;"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors rounded-t-sm" style="height: 40%;"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors rounded-t-sm" style="height: 60%;"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors rounded-t-sm" style="height: 55%;"></div>
+<div class="w-full bg-primary-container/20 hover:bg-primary-container/40 transition-colors rounded-t-sm" style="height: 75%;"></div>
+<div class="w-full bg-primary-container/60 hover:bg-primary-container/80 transition-colors rounded-t-sm relative group" style="height: 85%;">
+<div class="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">$34,200</div>
+</div>
+</div>
+<!-- X Axis Labels -->
+<div class="flex justify-between mt-2 text-xs text-outline-variant px-2">
+<span>Jan</span>
+<span>Feb</span>
+<span>Mar</span>
+<span>Apr</span>
+<span>May</span>
+<span>Jun</span>
+<span>Jul</span>
+</div>
+</div>
+<!-- Active Invoices Side List -->
+<div class="bg-surface rounded-[20px] p-6 card-shadow border border-outline-variant/20 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-lg text-text-primary">Recent Invoices</h3>
+<a class="text-primary text-sm font-medium hover:underline" href="#">View All</a>
+</div>
+<div class="space-y-4 flex-1">
+<!-- Invoice Item -->
+<div class="flex justify-between items-center p-3 hover:bg-surface-container-low rounded-xl transition-colors border border-transparent hover:border-outline-variant/10 cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">description</span>
+</div>
+<div>
+<p class="font-label-sm text-text-primary">INV-2023-089</p>
+<p class="text-xs text-on-surface-variant">Sarah Jenkins • $250.00</p>
+</div>
+</div>
+<span class="status-overdue text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full">Overdue</span>
+</div>
+<!-- Invoice Item -->
+<div class="flex justify-between items-center p-3 hover:bg-surface-container-low rounded-xl transition-colors border border-transparent hover:border-outline-variant/10 cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">description</span>
+</div>
+<div>
+<p class="font-label-sm text-text-primary">INV-2023-090</p>
+<p class="text-xs text-on-surface-variant">Michael Chen • $180.00</p>
+</div>
+</div>
+<span class="status-pending text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full">Pending</span>
+</div>
+<!-- Invoice Item -->
+<div class="flex justify-between items-center p-3 hover:bg-surface-container-low rounded-xl transition-colors border border-transparent hover:border-outline-variant/10 cursor-pointer">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">description</span>
+</div>
+<div>
+<p class="font-label-sm text-text-primary">INV-2023-091</p>
+<p class="text-xs text-on-surface-variant">Emma Thompson • $450.00</p>
+</div>
+</div>
+<span class="status-paid text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-full">Paid</span>
+</div>
+</div>
+<button class="w-full mt-4 bg-surface text-primary border border-primary/20 py-2.5 rounded-xl font-label-sm font-medium hover:bg-primary/5 transition-colors">
+                        Send Reminders
+                    </button>
+</div>
+</div>
+<!-- Recent Transactions Table -->
+<div class="bg-surface rounded-[20px] card-shadow border border-outline-variant/20 overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-white/50">
+<h3 class="font-headline-md text-lg text-text-primary">Recent Transactions</h3>
+<div class="flex space-x-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline-variant text-sm">search</span>
+<input class="pl-9 pr-4 py-2 border border-outline-variant/30 rounded-lg text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none bg-surface w-64" placeholder="Search payments..." type="text"/>
+</div>
+<button class="p-2 border border-outline-variant/30 rounded-lg hover:bg-surface-container-low text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-outline-variant/10 text-xs uppercase tracking-wider text-outline font-semibold">
+<th class="p-4 pl-6 font-medium">Customer</th>
+<th class="p-4 font-medium">Amount</th>
+<th class="p-4 font-medium">Status</th>
+<th class="p-4 font-medium">Date</th>
+<th class="p-4 font-medium text-right pr-6">Action</th>
+</tr>
+</thead>
+<tbody class="text-sm font-body-md">
+<tr class="table-row-hover border-b border-outline-variant/5 transition-colors cursor-pointer">
+<td class="p-4 pl-6">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center font-bold text-xs">RJ</div>
+<div class="font-medium text-text-primary">Robert Johnson</div>
+</div>
+</td>
+<td class="p-4 font-medium">$320.00</td>
+<td class="p-4">
+<span class="inline-flex items-center status-paid text-xs font-medium px-2.5 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-current mr-1.5"></span>Paid
+                                    </span>
+</td>
+<td class="p-4 text-on-surface-variant">Today, 2:45 PM</td>
+<td class="p-4 pr-6 text-right">
+<button class="text-primary hover:text-primary-fixed-dim transition-colors font-medium text-xs">View</button>
+</td>
+</tr>
+<tr class="table-row-hover border-b border-outline-variant/5 transition-colors cursor-pointer">
+<td class="p-4 pl-6">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center font-bold text-xs">AW</div>
+<div class="font-medium text-text-primary">Alice Williams</div>
+</div>
+</td>
+<td class="p-4 font-medium">$150.00</td>
+<td class="p-4">
+<span class="inline-flex items-center status-pending text-xs font-medium px-2.5 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-current mr-1.5"></span>Pending
+                                    </span>
+</td>
+<td class="p-4 text-on-surface-variant">Today, 9:12 AM</td>
+<td class="p-4 pr-6 text-right">
+<button class="text-primary hover:text-primary-fixed-dim transition-colors font-medium text-xs">View</button>
+</td>
+</tr>
+<tr class="table-row-hover border-b border-outline-variant/5 transition-colors cursor-pointer">
+<td class="p-4 pl-6">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center font-bold text-xs">DM</div>
+<div class="font-medium text-text-primary">David Miller</div>
+</div>
+</td>
+<td class="p-4 font-medium">$450.00</td>
+<td class="p-4">
+<span class="inline-flex items-center status-overdue text-xs font-medium px-2.5 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-current mr-1.5"></span>Overdue
+                                    </span>
+</td>
+<td class="p-4 text-on-surface-variant">Yesterday</td>
+<td class="p-4 pr-6 text-right">
+<button class="text-primary hover:text-primary-fixed-dim transition-colors font-medium text-xs">View</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-outline-variant/10 text-center bg-surface-container-lowest">
+<button class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors">Load More Transactions</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

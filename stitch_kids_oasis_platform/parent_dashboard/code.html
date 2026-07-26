@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Parent Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#0f0069",
+                    "on-tertiary-container": "#67f4b7",
+                    "outline-variant": "#c7c4d8",
+                    "error": "#ba1a1a",
+                    "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                    "surface-container": "#e7eefe",
+                    "surface-tint": "#4d44e3",
+                    "text-primary": "#111827",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "background": "#f9f9ff",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#002113",
+                    "inverse-surface": "#2a313d",
+                    "surface-dim": "#d3daea",
+                    "surface-bright": "#f9f9ff",
+                    "on-surface-variant": "#464555",
+                    "outline": "#777587",
+                    "on-surface": "#151c27",
+                    "tertiary": "#005338",
+                    "bg-dark": "#0F172A",
+                    "tertiary-fixed": "#6ffbbe",
+                    "secondary-fixed": "#c9e6ff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#004c6e",
+                    "on-secondary-fixed": "#001e2f",
+                    "secondary": "#006591",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-secondary-container": "#004666",
+                    "surface-container-high": "#e2e8f8",
+                    "surface-variant": "#dce2f3",
+                    "on-primary": "#ffffff",
+                    "on-background": "#151c27",
+                    "secondary-container": "#39b8fd",
+                    "primary-container": "#4f46e5",
+                    "secondary-fixed-dim": "#89ceff",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "inverse-on-surface": "#ebf1ff",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "surface": "#f9f9ff",
+                    "primary-fixed": "#e2dfff",
+                    "bg-light": "#FAFAFC",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "inverse-primary": "#c3c0ff",
+                    "on-primary-container": "#dad7ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-highest": "#dce2f3",
+                    "surface-container-low": "#f0f3ff",
+                    "tertiary-container": "#006e4b",
+                    "primary": "#3525cd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-mobile": "16px",
+                    "container-max": "1440px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "label-xs": ["Geist"],
+                    "body-md": ["Geist"],
+                    "display-lg-mobile": ["Geist"]
+            },
+            "fontSize": {
+                    "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-xs": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: #f9f9ff; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        .soft-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 1024px) {
+            .bento-grid { grid-template-columns: repeat(8, 1fr); gap: 16px; }
+        }
+        @media (max-width: 768px) {
+            .bento-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        }
+    </style>
+</head>
+<body class="text-on-surface bg-surface flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full p-6 gap-unit fixed left-0 top-0 h-screen w-[280px] bg-surface-container-low dark:bg-bg-dark border-r border-outline-variant/30 z-40">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl">K</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Kids Oasis</h1>
+<p class="font-label-xs text-label-xs text-on-surface-variant">Parent Portal</p>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-sm text-label-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 mb-6 hover:bg-primary/90 transition-colors shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">add</span>
+            New Enrollment
+        </button>
+<div class="flex flex-col gap-1 flex-grow">
+<!-- Active Item -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl font-bold font-label-sm text-label-sm Active: translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">child_care</span>
+                Children
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">calendar_today</span>
+                Bookings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">credit_card</span>
+                Payments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chat_bubble</span>
+                Messages
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto border-t border-outline-variant/30 pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+                Help Center
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-variant/50 transition-all rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+                Sign Out
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-[280px] h-screen overflow-y-auto relative bg-surface">
+<!-- Header -->
+<header class="sticky top-0 z-30 glass-panel border-b border-glass-stroke px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-text-primary">Good Morning, Sarah</h2>
+<p class="font-body-md text-body-md text-on-surface-variant hidden md:block">Here's what's happening with your little ones today.</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-surface object-cover shadow-sm z-20" data-alt="A small circular portrait photograph of a young boy smiling brightly in a well-lit modern studio setting. The lighting is soft and flattering, highlighting his joyful expression. The background is a blurred pastel blue, creating a high-quality, professional avatar aesthetic typical of premium educational platforms." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBID2iBO634ogCC1DeLuePTm4qWzdvfTVjqOMvDSlhKsEgzXU4D61OSvUh03JSrpBwt04fHcCCTWknyYpwwtQsauUUPY3uC14lSMe0EnveSpKOXPN4yrTOIUlj-LYNh5TBBC_nvjshNj4VdZf3Swt2f6y9-zhO43AK0acPthB-rHhhAuMCP0H-E91lNsVA3TrOW0ljK2T2UVP_zanmorwMYrNjgkm3-QwMwE4j05AdSPj3BxKMGqtcbZq7siKUco-sdiDPzLzKxcI2W"/>
+<img class="w-10 h-10 rounded-full border-2 border-surface object-cover shadow-sm z-10" data-alt="A small circular portrait photograph of a young girl with curly hair looking thoughtfully slightly off-camera. The lighting is warm and natural, suggesting an outdoor setting. The background is a soft, blurred green, conveying a wholesome, premium feel suitable for a high-end educational app profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEq4ggr2Nh3wORZBRwTpS3Gk6wUvx1sLBuhruVs4g_IXtyo3Giitwg-7q8PB5lFvlL7hOmNosyllm7wDGpO1YJY9yau_pUw_Tj70WBmafHL5tpgOK3RBX4yyKsFvplDl7b9Z8tkAU98-vwEzXlWaiWOXvGQG5A4dMdQgfB2F1a5EY6UtARClePIvm1ZC0uCziKxdQhgNbQn4rQm9FCjb23BHDu7vc2IZTT3OG8QE_TKpRVetvusTySAv96hRfwDkjamXmv8zjlrPr5"/>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant relative hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-surface"></span>
+</button>
+</div>
+</header>
+<div class="p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto pb-24">
+<!-- Bento Grid Stats -->
+<div class="bento-grid mb-8">
+<!-- Upcoming Visit Card (Col span 4) -->
+<div class="col-span-4 md:col-span-8 lg:col-span-5 bg-surface-container-lowest rounded-[20px] p-6 soft-shadow border border-outline-variant/10 relative overflow-hidden group">
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-secondary-container rounded-full blur-3xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">calendar_clock</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Upcoming Visit</span>
+</div>
+<span class="px-2 py-1 bg-surface-container-high text-on-surface-variant rounded-md font-label-xs text-label-xs">Today</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-text-primary mb-1">Creative Arts Workshop</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Oakridge Early Learning Academy</p>
+<div class="flex items-center gap-4 border-t border-outline-variant/10 pt-4">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular portrait photograph of a young boy smiling brightly in a well-lit modern studio setting. The lighting is soft and flattering, highlighting his joyful expression. The background is a blurred pastel blue, creating a high-quality, professional avatar aesthetic typical of premium educational platforms." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5jM2dG8uT3tPMxur3reA-6HT61tEfTzn4q62vUufItu2ZlMVUPL2Xc5V_ChtyXIvSkSPQCDxjIRwVstN9IZrpFaqhbLdDCaBqkBn93dShYWDWiObNOpcyx2Ex5bG1I7hzm1E3c4BxK4KzVZfYWCAcvVX-X24ubQ5vi2C09QGn9Apu54zxZ5RbjWwJH8Q0RZ2t2TEH-292XJyNTCxJy2k2eXaaYuCnpwRZLOmo6w03gzXMuby2gqD0RAhZ3k_8j_JsiML9C1zDrLkF"/>
+<div>
+<p class="font-label-sm text-label-sm text-text-primary">Leo's Session</p>
+<p class="font-label-xs text-label-xs text-secondary font-medium">Starts in 2 hours (10:00 AM)</p>
+</div>
+</div>
+</div>
+<!-- Pending Applications (Col span 4) -->
+<div class="col-span-4 md:col-span-4 lg:col-span-3 bg-surface-container-lowest rounded-[20px] p-6 soft-shadow border border-outline-variant/10 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">assignment</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pending Apps</span>
+</div>
+<div class="font-display-lg text-display-lg text-text-primary">2</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mt-1">Awaiting academy review</p>
+</div>
+<button class="text-primary font-label-sm text-label-sm flex items-center gap-1 mt-4 hover:underline">
+                        View details <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Child Progress Mini Chart (Col span 4) -->
+<div class="col-span-4 md:col-span-8 lg:col-span-4 bg-surface-container-lowest rounded-[20px] p-6 soft-shadow border border-outline-variant/10 relative overflow-hidden">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container/10 text-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Weekly Progress</span>
+</div>
+<span class="text-tertiary font-label-xs text-label-xs bg-tertiary-container/20 px-2 py-1 rounded-md">+12%</span>
+</div>
+<div class="h-24 w-full flex items-end justify-between gap-2 mt-4 relative">
+<!-- Simulated Chart Bars -->
+<div class="w-full bg-surface-container-high rounded-t-sm h-[40%] hover:bg-primary-container transition-colors relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface font-label-xs text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">Mon</div>
+</div>
+<div class="w-full bg-surface-container-high rounded-t-sm h-[65%] hover:bg-primary-container transition-colors relative group"></div>
+<div class="w-full bg-surface-container-high rounded-t-sm h-[45%] hover:bg-primary-container transition-colors relative group"></div>
+<div class="w-full bg-primary rounded-t-sm h-[80%] hover:bg-primary-container transition-colors relative group shadow-[0_0_10px_rgba(79,70,229,0.3)]"></div>
+<div class="w-full bg-surface-container-high rounded-t-sm h-[55%] hover:bg-primary-container transition-colors relative group"></div>
+</div>
+<div class="flex justify-between mt-2 font-label-xs text-[10px] text-outline">
+<span>M</span><span>T</span><span>W</span><span>T</span><span>F</span>
+</div>
+</div>
+</div>
+<!-- Main Layout Split -->
+<div class="bento-grid">
+<!-- Left Column: Activity & Recommendations -->
+<div class="col-span-4 md:col-span-8 lg:col-span-8 flex flex-col gap-6">
+<!-- Recommendations (AI) -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 soft-shadow border border-outline-variant/10">
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<h3 class="font-headline-md text-[20px] font-semibold text-text-primary">Suggested for Mia</h3>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Suggestion Card 1 -->
+<div class="border border-outline-variant/30 rounded-xl p-4 flex gap-4 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="w-16 h-16 rounded-lg bg-surface-container-highest overflow-hidden flex-shrink-0">
+<div class="bg-cover bg-center w-full h-full" data-alt="A close-up, high-quality photograph of children's hands painting brightly colored abstract shapes on a large white canvas. The scene is well-lit with natural light streaming in, highlighting the vibrant primary colors of the paint. The aesthetic is clean, educational, and creative, fitting for a premium learning platform." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSXO3AMiu7PXkdBM_AVdSEMOELuOdHdO28gb0E6Ae4zHei1hBIPb5lyPNyl8UcqDwKpE5IMoE6OS6y8o0kFx4aidxLiMx2Y94UQGxc0mpOkNl0w9RkiHFkxi6cUZt_7BDOD-x7nKGpSS7LnZSKJB6CXZFqhLKfqdDiJgPj_yX7MrmHwam6yTzxf7QVhNcVwBfd6j4w8SxshKq2aXfm2xLz1y5hSDnw6yo3tlk8br-b1kYX5nzYWX62-9JqoHP7CvZAesVmCbRXA957')"></div>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-label-sm text-label-sm font-semibold text-text-primary group-hover:text-primary transition-colors">Intro to Watercolors</h4>
+<p class="font-label-xs text-label-xs text-on-surface-variant line-clamp-1">Based on her recent art classes</p>
+<div class="flex items-center gap-1 mt-1 text-secondary font-label-xs text-[10px]">
+<span class="material-symbols-outlined text-[12px]">schedule</span> Starts next week
+                                    </div>
+</div>
+</div>
+<!-- Suggestion Card 2 -->
+<div class="border border-outline-variant/30 rounded-xl p-4 flex gap-4 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="w-16 h-16 rounded-lg bg-surface-container-highest overflow-hidden flex-shrink-0">
+<div class="bg-cover bg-center w-full h-full" data-alt="A bright, clear photograph of small children's wooden musical instruments, like a xylophone and tambourine, neatly arranged on a light wood floor. Soft, warm lighting creates an inviting and educational atmosphere. The composition is minimal and modern, emphasizing high-quality early childhood education materials." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6Jbevsb9mQ5YTnN8GkZhbNsoSUDNQ9A16Go7TaMTdwxPyx4VFO6E27nl4OKlUZosjHQfdg-zsxkr0QiX_jKXemfg2F-r5tbqnHlEKKGVXPcHViIDeG8P4Xz2eI9-9YHokYPpTHcnKC4dqH_aFSUbS4rh4Fu78HM_l_uhXUQ6iQfGl6zt31ev00mU5uu97XRrw_vsiR4ym_zlUBN-mBnZag8WJ-2eZuIOn5KSoPz8SlIc5etaV5w411lk68xv_e3oEnRe_muiazDiY')"></div>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-label-sm text-label-sm font-semibold text-text-primary group-hover:text-primary transition-colors">Little Musicians</h4>
+<p class="font-label-xs text-label-xs text-on-surface-variant line-clamp-1">Popular in your area</p>
+<div class="flex items-center gap-1 mt-1 text-secondary font-label-xs text-[10px]">
+<span class="material-symbols-outlined text-[12px]">local_fire_department</span> High demand
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Timeline -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 soft-shadow border border-outline-variant/10">
+<h3 class="font-headline-md text-[20px] font-semibold text-text-primary mb-6">Recent Activity</h3>
+<div class="relative border-l border-outline-variant/30 ml-4 space-y-8 pb-4">
+<!-- Timeline Item 1 -->
+<div class="relative pl-6">
+<span class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-1">
+<h4 class="font-label-sm text-label-sm font-semibold text-text-primary">Enrollment Confirmed</h4>
+<span class="font-label-xs text-[11px] text-outline">Today, 9:41 AM</span>
+</div>
+<p class="font-body-md text-[14px] text-on-surface-variant">Leo's enrollment for 'Summer Science Camp' at Oakridge Academy was approved.</p>
+<div class="mt-3 bg-surface-container-low rounded-lg p-3 border border-outline-variant/20 inline-block">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-[18px]">check_circle</span>
+<span class="font-label-sm text-label-xs text-text-primary">View Confirmation Details</span>
+</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-6">
+<span class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-surface-dim ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-1">
+<h4 class="font-label-sm text-label-sm font-semibold text-text-primary">Payment Processed</h4>
+<span class="font-label-xs text-[11px] text-outline">Yesterday</span>
+</div>
+<p class="font-body-md text-[14px] text-on-surface-variant">Monthly tuition of $450.00 was successfully charged to Visa ending in 4242.</p>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative pl-6">
+<span class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-surface-dim ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-1">
+<h4 class="font-label-sm text-label-sm font-semibold text-text-primary">Application Submitted</h4>
+<span class="font-label-xs text-[11px] text-outline">Oct 12</span>
+</div>
+<p class="font-body-md text-[14px] text-on-surface-variant">Application sent to 'Sunrise Montessori' for Mia.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Messages -->
+<div class="col-span-4 md:col-span-8 lg:col-span-4">
+<div class="bg-surface-container-lowest rounded-[20px] p-6 soft-shadow border border-outline-variant/10 h-full flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-[20px] font-semibold text-text-primary">Recent Messages</h3>
+<button class="text-primary font-label-sm text-label-sm hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-4 flex-grow">
+<!-- Message 1 (Unread) -->
+<div class="p-3 rounded-xl bg-primary-container/10 border border-primary/20 cursor-pointer hover:bg-primary-container/20 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+<h4 class="font-label-sm text-label-sm font-semibold text-text-primary">Sarah Jenkins</h4>
+</div>
+<span class="font-label-xs text-[10px] text-primary font-medium">10m ago</span>
+</div>
+<p class="font-label-xs text-[12px] text-on-surface-variant font-medium ml-4">Oakridge Early Learning</p>
+<p class="font-body-md text-[13px] text-on-surface-variant mt-2 line-clamp-2 ml-4">"Hi Sarah, just wanted to let you know Leo did fantastic in the building blocks activity today! He was..."</p>
+</div>
+<!-- Message 2 -->
+<div class="p-3 rounded-xl border border-transparent hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-transparent rounded-full"></div>
+<h4 class="font-label-sm text-label-sm font-medium text-text-primary">Admin Office</h4>
+</div>
+<span class="font-label-xs text-[10px] text-outline">Yesterday</span>
+</div>
+<p class="font-label-xs text-[12px] text-outline ml-4">Sunrise Montessori</p>
+<p class="font-body-md text-[13px] text-on-surface-variant mt-2 line-clamp-2 ml-4">"Please remember to upload the updated immunization records before the start of the next term."</p>
+</div>
+</div>
+<button class="w-full mt-4 py-2 border border-outline-variant/30 rounded-xl font-label-sm text-label-sm text-text-primary hover:bg-surface-container-high transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+                            New Message
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

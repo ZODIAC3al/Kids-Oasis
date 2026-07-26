@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Academy Profile - Kids Oasis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#4d44e3",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#d3daea",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-variant": "#dce2f3",
+                      "on-tertiary-container": "#67f4b7",
+                      "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface": "#f9f9ff",
+                      "surface-container": "#e7eefe",
+                      "on-surface": "#151c27",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#464555",
+                      "tertiary": "#005338",
+                      "inverse-on-surface": "#ebf1ff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "on-tertiary-fixed": "#002113",
+                      "bg-dark": "#0F172A",
+                      "on-secondary-fixed": "#001e2f",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "outline": "#777587",
+                      "secondary": "#006591",
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#f9f9ff",
+                      "bg-light": "#FAFAFC",
+                      "primary-fixed": "#e2dfff",
+                      "inverse-primary": "#c3c0ff",
+                      "surface-container-high": "#e2e8f8",
+                      "inverse-surface": "#2a313d",
+                      "secondary-container": "#39b8fd",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed": "#0f0069",
+                      "tertiary-container": "#006e4b",
+                      "secondary-fixed-dim": "#89ceff",
+                      "surface-container-low": "#f0f3ff",
+                      "background": "#f9f9ff",
+                      "surface-container-highest": "#dce2f3",
+                      "tertiary-fixed": "#6ffbbe",
+                      "primary": "#3525cd",
+                      "outline-variant": "#c7c4d8",
+                      "on-secondary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-secondary-container": "#004666",
+                      "on-background": "#151c27",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "primary-container": "#4f46e5",
+                      "text-primary": "#111827",
+                      "secondary-fixed": "#c9e6ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-container": "#dad7ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "margin-mobile": "16px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "Geist"
+                      ],
+                      "label-xs": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-xs": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        /* Custom scrollbar for gallery */
+        .gallery-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .gallery-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Sticky positioning fix for Safari */
+        .sticky-card {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 100px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col">
+<!-- Top Navigation (Shared Component) -->
+<nav class="bg-surface/70 dark:bg-bg-dark/70 backdrop-blur-xl font-body-md text-body-md docked full-width top-0 sticky border-b border-glass-stroke shadow-sm z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto md:px-margin-desktop px-margin-mobile">
+<!-- Brand -->
+<div class="flex items-center gap-4">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed" href="/">Kids Oasis</a>
+</div>
+<!-- Nav Links (Desktop) -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary pb-1" href="#">Find Classes</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">For Educators</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Pricing</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Resources</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<a class="hidden md:block text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-label-sm text-label-sm" href="#">Log In</a>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-xl hover:bg-primary-container transition-colors shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border-t border-white/20 Active: scale-95 duration-150">Join Now</button>
+</div>
+</div>
+</nav>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<!-- Header & Breadcrumbs -->
+<div class="mb-6">
+<nav aria-label="Breadcrumb" class="flex text-on-surface-variant font-label-sm text-label-sm mb-4">
+<ol class="inline-flex items-center space-x-1 md:space-x-2">
+<li class="inline-flex items-center">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Academies</a>
+</div>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<span class="text-on-surface">Bright Minds Academy</span>
+</div>
+</li>
+</ol>
+</nav>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">Bright Minds Early Learning Academy</h1>
+<div class="flex flex-wrap items-center gap-3 text-on-surface-variant font-body-md text-body-md">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">location_on</span> San Francisco, CA</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-1 text-secondary-container font-medium"><span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.9 (128 reviews)</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">child_care</span> Ages 2-5</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-xl border border-outline-variant text-on-surface-variant hover:bg-surface-variant/50 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">favorite_border</span>
+</button>
+<button class="p-2 rounded-xl border border-outline-variant text-on-surface-variant hover:bg-surface-variant/50 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Hero Gallery Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-2 md:gap-4 h-[400px] md:h-[500px] mb-12 rounded-[24px] overflow-hidden">
+<div class="md:col-span-2 row-span-2 relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A wide, bright photograph of a modern preschool classroom with large windows letting in natural sunlight. High-quality wooden furniture, colorful educational toys neatly organized on shelves, and soft play mats on the floor. A warm, inviting, and highly professional educational environment. Shot with a wide-angle lens, premium lighting, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiTX6vNFBNpPK4A8wN61Cp2MEjgqjmNVE-w-4TLNlBcS4jUPaX8Lte4WRkN_dVBneTDHf8V1yGkr6419czICxRymANNG_UkJRA0fwhUoJbBphVfM27S2pTwwxHdv5dZ5B14SBjGQ7_3QsL2q3FELgkMbIqfejOmPk8PrYZBKxVne36-tkzpMm8ak_zS09p8IdtFF738rq2JPX-E70Sd7C852YAGUwvYKVp1vhyWBlnKSIgszQmevWC72ENruUvK67flmvAjmWN1NTI"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="hidden md:block relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Close-up of a teacher interacting joyfully with a small group of toddlers playing with building blocks. Professional photography, natural lighting from a nearby window, shallow depth of field focusing on a child's happy face. Bright, clean, premium educational setting in a light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAAnmcP1knuzVPPu_3kZ9fofyB3QGGz70VXqELL3tn4cxtXPMVmiR4noJLXAznAQtxgTHL35EtP7ZIxbpAZ6Qxq_MG7UeKNkvuQhb3IqGixvk-t0voPgcZx7DZPw5vXkft21FF7EeRYJcecv4c_fwYXxW4JV5WKiRY0PFTJKMohKcdOsW68byKbxgozQfEBBkWR515BdOiHqaS4eBOLnHlXwPzV1pimopM7G12VsIQKNpeLfjpg_a3H4OsEN_V60yybIyXUoYcOwBU"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="hidden md:block relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Outdoor play area of a premium preschool featuring a modern, safe climbing structure on soft rubberized ground. Lush green trees in the background, bright sunny day, professional architectural photography capturing the high-quality facilities. Clean, bright colors, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKkBNqLMGATa8no9ei9jynjq7ds1V28rJ6bNhUBzvG6J3nXSE6yMPZOlOUFLIsHMZ0tKWzIvyzBxlcUC94MnA9ruJAz9m9ckBEF_bTBM5GjAKiEeUNaj4Ota2Zxs3HuewBTwkU_dkxCvBi545QVcVwA8Z8hbNUVj_0noGIr6G3xQC5n5aeoq6uXW_H6iFI4EMtYcsDR2zecZ770rkDPIQKNf1uOT9il1-rntwOu8p18sBSgEbYYvx0jHbVu5GP5mHAuADseEgP5dxO"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="hidden md:block relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A specialized art and craft room for children. Tiny wooden tables with colorful paints, brushes, and paper set up for an activity. The room is immaculate, well-lit, and designed for creativity. Professional interior photography, soft natural light, premium educational facility, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1dUR_NelSUGS4Pckl2eDGi30KalnW7UCci0aIcW4l_K2HeQITDizXi3Z3r925PjRWt_IZ-wI5U_xFW5rufF-KpSDQuSpwV8t1Ah74QJU_TkDM5OeCsd2B_936URnr1BRsA77mAdVNrie45Sqo7khPWAJj9-_WYRGmiIMoVWULzGexkUjik4wCtnFQ_FUQlTOHG32Q6-uYCegnKZq524vcZwf8cak0iRTzzTjfxS_IO0bPZonOg7Jne-L8829XqBzKIH9L1y90xH9o"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+</div>
+<div class="hidden md:block relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A cozy reading nook in a premium childcare center. A curved wooden bookshelf filled with children's books, soft bean bags, and a plush rug. The setting is warm, peaceful, and inviting. Professional lighting, shallow depth of field, conveying a sense of security and high-end care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWdhAuOpURN1g2nRZr2FljViiTXWktTzeij5ttJ_AMdkQ8WyjcKcKntpCDa829quVmEcdEW0TqjFeHCVBkeKzXcVaS7ELO8vGRgsBNydb697Pt9kURbUEWecpmzccjDGQOdB1XueRTjknmPSDSmYLsYhJweqBUum1IItoqtEB7mDckUhJeOVWzmLeVvF6C6TvMEQtsKeF6zU1mzOanTj7BZIAVkKBWtTNkuYbqPyajvbjKZfF9ZwXSrOS4p9NuuL1Qs3pzGE9pDvBW"/>
+<div class="absolute inset-0 bg-black/20 transition-colors flex items-center justify-center">
+<button class="bg-white/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-4 py-2 rounded-xl shadow-sm hover:bg-white transition-colors">View all 24 photos</button>
+</div>
+</div>
+<button class="md:hidden absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-4 py-2 rounded-xl shadow-sm">View Gallery</button>
+</div>
+<!-- Main Content Area -->
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Left Column (Content) -->
+<div class="w-full lg:w-2/3 flex flex-col gap-12">
+<!-- Sticky Tabs Navigation -->
+<div class="sticky top-[73px] bg-background/90 backdrop-blur-md z-40 py-4 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0 border-b border-outline-variant/30">
+<nav class="flex gap-6 overflow-x-auto gallery-scroll">
+<a class="text-primary font-label-sm text-label-sm font-bold border-b-2 border-primary pb-2 whitespace-nowrap" href="#overview">Overview</a>
+<a class="text-on-surface-variant hover:text-primary font-label-sm text-label-sm pb-2 whitespace-nowrap transition-colors" href="#programs">Programs</a>
+<a class="text-on-surface-variant hover:text-primary font-label-sm text-label-sm pb-2 whitespace-nowrap transition-colors" href="#teachers">Teachers</a>
+<a class="text-on-surface-variant hover:text-primary font-label-sm text-label-sm pb-2 whitespace-nowrap transition-colors" href="#facilities">Facilities</a>
+<a class="text-on-surface-variant hover:text-primary font-label-sm text-label-sm pb-2 whitespace-nowrap transition-colors" href="#reviews">Reviews</a>
+</nav>
+</div>
+<!-- Section: Overview -->
+<section class="scroll-mt-[140px]" id="overview">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">About Bright Minds</h2>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-4">
+<p>At Bright Minds Early Learning Academy, we believe in nurturing the whole child through a balanced approach of play-based discovery and structured learning. Our state-of-the-art facility in the heart of San Francisco is designed specifically to inspire curiosity, creativity, and confidence in young learners.</p>
+<p>Founded in 2015 by a team of passionate educators, our curriculum integrates STEAM concepts early on, ensuring your child is prepared for the modern educational landscape while fostering deep social-emotional skills in a safe, loving environment.</p>
+</div>
+<!-- Highlights Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+<div class="bg-surface p-4 rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-primary text-[32px]">science</span>
+<span class="font-label-sm text-label-sm text-on-surface">STEAM Curriculum</span>
+</div>
+<div class="bg-surface p-4 rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-primary text-[32px]">restaurant</span>
+<span class="font-label-sm text-label-sm text-on-surface">Organic Meals</span>
+</div>
+<div class="bg-surface p-4 rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-primary text-[32px]">park</span>
+<span class="font-label-sm text-label-sm text-on-surface">Outdoor Play</span>
+</div>
+<div class="bg-surface p-4 rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-primary text-[32px]">verified</span>
+<span class="font-label-sm text-label-sm text-on-surface">NAEYC Accredited</span>
+</div>
+</div>
+</section>
+<hr class="border-outline-variant/30"/>
+<!-- Section: Programs -->
+<section class="scroll-mt-[140px]" id="programs">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Available Programs</h2>
+<div class="space-y-4">
+<!-- Program Card 1 -->
+<div class="bg-surface rounded-[20px] p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-1/3 h-40 md:h-auto rounded-xl overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Toddlers engaged in a sensory play activity with safe, colorful materials. Bright, clean classroom setting. Professional photography capturing a learning moment. Premium educational context, soft lighting, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLfMQtQgQ-x2TUAgemKrbXqEXsQrJsoNlQKKNnHvh-SjaEKXajmnOjCoXCzc-BAP9ahUCE4pnbcx0TIoqdEFZs_Yr47yKexu6wI3WPnA4Ss9YiObDOlvoGAcI-LqceLUwK792w3NH5t7ckNOHxlY6XtBddH-qYd8WhwDs5zgu_PAP0KKR6SDDIqCalT8kz-B3_ubVE5GCsgZGDW2yJHsDDLHkj0PxeSOKDJSAgQj2FA3uuvhHHlgsdaPE92hsUTQKXYOrVQ5mO1KE2"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-[20px] leading-tight text-on-surface">Toddler Discovery</h3>
+<span class="bg-surface-container text-primary font-label-xs text-label-xs px-2 py-1 rounded-md">Ages 2-3</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-[14px] leading-relaxed mb-4">A gentle introduction to structured play, focusing on gross motor skills, early language acquisition, and social interaction in a highly supportive environment.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="flex items-center gap-1 font-label-xs text-label-xs text-on-surface-variant bg-surface-variant/50 px-2 py-1 rounded-md"><span class="material-symbols-outlined text-[14px]">schedule</span> Half/Full Day</span>
+<span class="flex items-center gap-1 font-label-xs text-label-xs text-on-surface-variant bg-surface-variant/50 px-2 py-1 rounded-md"><span class="material-symbols-outlined text-[14px]">group</span> 1:4 Ratio</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-headline-md text-headline-md text-[18px] text-on-surface">From $1,800<span class="font-body-md text-body-md text-on-surface-variant text-[14px]">/mo</span></span>
+<button class="text-primary font-label-sm text-label-sm hover:underline">View Details</button>
+</div>
+</div>
+</div>
+<!-- Program Card 2 -->
+<div class="bg-surface rounded-[20px] p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20 flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-1/3 h-40 md:h-auto rounded-xl overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Preschool children working on a science experiment with a teacher. Bright classroom, engaging educational tools. Professional photography, sharp focus on the children's concentration. Premium facility, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPy_7GkVrUNuuTPkPmvFdMKAeX0D6Q4WtvIBk8E7h02CmCjHPEXEgJSsrlyKDOuiVZMAIzLzZWoulItSk8Aw9Q7zzwOWkm72-TmYp4bKG7L__-kgrNbG7glDTrYKgOnFRp2XBcprvVS5JZLTx5lZrx-w7KoraLUUcM7yd_V4akhrg1qUAewwxLdqTwrUiP-JrtMWLbONLuDCLlAokITpgN7MYtKlnE0KyKtxT8ykQox446GxZXHnAiauR3uXNgp9rrsWR7mjuj5we6"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-[20px] leading-tight text-on-surface">Preschool Prep</h3>
+<span class="bg-surface-container text-primary font-label-xs text-label-xs px-2 py-1 rounded-md">Ages 3-5</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-[14px] leading-relaxed mb-4">Preparing children for kindergarten through a robust STEAM-based curriculum, literacy foundations, and collaborative project-based learning.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="flex items-center gap-1 font-label-xs text-label-xs text-on-surface-variant bg-surface-variant/50 px-2 py-1 rounded-md"><span class="material-symbols-outlined text-[14px]">schedule</span> Full Day Only</span>
+<span class="flex items-center gap-1 font-label-xs text-label-xs text-on-surface-variant bg-surface-variant/50 px-2 py-1 rounded-md"><span class="material-symbols-outlined text-[14px]">group</span> 1:8 Ratio</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<span class="font-headline-md text-headline-md text-[18px] text-on-surface">From $2,100<span class="font-body-md text-body-md text-on-surface-variant text-[14px]">/mo</span></span>
+<button class="text-primary font-label-sm text-label-sm hover:underline">View Details</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<hr class="border-outline-variant/30"/>
+<!-- Section: Teachers / Leadership -->
+<section class="scroll-mt-[140px]" id="teachers">
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Our Educators</h2>
+<a class="text-primary font-label-sm text-label-sm hover:underline" href="#">Meet all 12 staff</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+<!-- Teacher 1 -->
+<div class="bg-surface p-4 rounded-[20px] border border-outline-variant/20 flex flex-col items-center text-center hover:shadow-[0px_4px_20px_rgba(0,0,0,0.03)] transition-shadow">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a friendly female preschool teacher smiling warmly. Bright, clean background, soft lighting, approachable and trustworthy demeanor. High-quality corporate photography style suitable for a premium educational brand, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxoJ4ckjRNt1qLdzdzt73FcDLjeE15hmHa7ht2kK99wfuf_OjUE_SzruOsW7neVAy2K_hUtthl2YcdPlxup1XzJhPJJVTR-IQF8tzWInzsT8t6KVgM6sPkhzbIBCENisK16vv3lLQX_0BXMetsWqXyQPr323XXdsJ82s4hoHngrrLpNwu0yub-2M0V1o6UoWncKFCvoAXsFsI5RE31KA9zJ2i-vAwvhxpF72qKvHXlR1UC5icO_YFnJ--_OF66nOAkHbBscMGS0RPh"/>
+</div>
+<h4 class="font-label-sm text-label-sm text-on-surface font-bold text-[16px]">Sarah Jenkins</h4>
+<p class="font-label-xs text-label-xs text-primary mb-2">Academy Director</p>
+<p class="font-body-md text-body-md text-[13px] text-on-surface-variant line-clamp-3">M.Ed. in Early Childhood Education with 10+ years experience leading premium facilities.</p>
+</div>
+<!-- Teacher 2 -->
+<div class="bg-surface p-4 rounded-[20px] border border-outline-variant/20 flex flex-col items-center text-center hover:shadow-[0px_4px_20px_rgba(0,0,0,0.03)] transition-shadow">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a welcoming male early childhood educator smiling. Bright, clean background, soft natural lighting, approachable and caring demeanor. High-quality photography suitable for a premium childcare brand, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeheKs6XWe0EhY5cehSugUaMpNVCKqcPY-_sWfLmwWkBJCAKps7tilu8hu0pYnPaI23U6kgfRIx7VBASZ_cWjbTmR_IevxfCcBgQ1-XJnUdF8yShcUR04k05YQW89WCDCp8WdLzlq4PPzaIkAjfPYeVjsbhhK9Qezc4VCxbhjMaRBQN8BY8iz84Zv8-c0rtIJlaBn9TZi7CZkXFI2g13Pe-l9r_W3XSz4rDoOR39j2LgFs2u9I5fjJB69zUwItYHllAAX3qDnmqlMl"/>
+</div>
+<h4 class="font-label-sm text-label-sm text-on-surface font-bold text-[16px]">David Chen</h4>
+<p class="font-label-xs text-label-xs text-primary mb-2">Lead Teacher - Pre-K</p>
+<p class="font-body-md text-body-md text-[13px] text-on-surface-variant line-clamp-3">Specializes in STEAM curriculum integration and foundational literacy development.</p>
+</div>
+<!-- Teacher 3 -->
+<div class="bg-surface p-4 rounded-[20px] border border-outline-variant/20 flex flex-col items-center text-center hover:shadow-[0px_4px_20px_rgba(0,0,0,0.03)] transition-shadow hidden md:flex">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-surface-container">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a cheerful female toddler teacher. Bright, clean background, warm and patient expression. High-quality photography suitable for a premium educational facility, light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLVlZaWvtQyVtPhUc4sw6axoxf8SrpLJbGqf6Utovkl7HFiNZ_uno1qRe5oCMzO4NN80d4RDJ6Quo9RYfAAywG8xGSimcOzKn2YBMMygEFlQ15OJ8pIJkbsoN64gW63KvRWZ-ToglQhFieH1mEilrgY6jDeWo4G95tIPj6cLAXOkTa2mxG0RflQ4xTQOO7AKDvuVp9xbiRpYGKxjgGstJDSR7WSpGODa2glG4PP2aN2COhtHg0jBKimL83RF0Dujxg-lcIEPSZi9dl"/>
+</div>
+<h4 class="font-label-sm text-label-sm text-on-surface font-bold text-[16px]">Maria Rodriguez</h4>
+<p class="font-label-xs text-label-xs text-primary mb-2">Lead Teacher - Toddlers</p>
+<p class="font-body-md text-body-md text-[13px] text-on-surface-variant line-clamp-3">Passionate about sensory play and early language acquisition milestones.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (Sticky Booking & Map) -->
+<div class="w-full lg:w-1/3 relative">
+<div class="sticky-card flex flex-col gap-6">
+<!-- Booking/Action Card -->
+<div class="bg-surface rounded-[24px] p-6 shadow-[0px_20px_50px_rgba(0,0,0,0.05)] border border-outline-variant/20">
+<div class="flex justify-between items-center mb-6">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tuition Starting At</p>
+<p class="font-headline-md text-headline-md text-on-surface text-[28px]">$1,800<span class="font-body-md text-body-md text-[16px] text-on-surface-variant font-normal">/mo</span></p>
+</div>
+<div class="bg-surface-container-low px-3 py-1 rounded-full border border-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-label-xs text-label-xs text-on-surface">Spots Available</span>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<button class="w-full bg-primary text-on-primary font-label-sm text-label-sm py-3 rounded-xl hover:bg-primary-container transition-colors shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border-t border-white/20 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                                Book a Tour
+                            </button>
+<button class="w-full bg-surface text-on-surface border border-outline-variant font-label-sm text-label-sm py-3 rounded-xl hover:bg-surface-variant/50 transition-colors flex justify-center items-center gap-2">
+                                Request Enrollment Info
+                            </button>
+</div>
+<div class="space-y-4 pt-4 border-t border-outline-variant/30">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] mt-0.5">schedule</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Hours of Operation</p>
+<p class="font-body-md text-body-md text-[14px] text-on-surface-variant">Mon - Fri: 7:30 AM - 6:00 PM</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] mt-0.5">mail</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Contact</p>
+<a class="font-body-md text-body-md text-[14px] text-primary hover:underline block" href="mailto:hello@brightminds.edu">hello@brightminds.edu</a>
+<a class="font-body-md text-body-md text-[14px] text-primary hover:underline block" href="tel:+14155550198">(415) 555-0198</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Location / Map Card -->
+<div class="bg-surface rounded-[24px] p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] border border-outline-variant/20">
+<h3 class="font-headline-md text-headline-md text-[18px] text-on-surface mb-4">Location</h3>
+<div class="w-full h-48 rounded-xl overflow-hidden mb-4 bg-surface-variant relative">
+<!-- Simulated Map Image -->
+<img class="w-full h-full object-cover" data-alt="A clean, modern, simplified map UI showing a location pin in San Francisco. The map styling is minimalistic, using light grays, subtle blues for water, and a distinct primary color pin for the academy location. High-end SaaS aesthetic, light mode, clear street lines without clutter." data-location="San Francisco" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR5n-k7_rMXawaeC87mmo7zW7bexAmYNrpL4_gr4aiu3xmAimEdtopV5TnmXYS3Ma803GkIaBpYmKambU7WAZE1oAvOqituhWQ1kysm1Mf1DhOKgEMVDrBaDsQzXvWxjH2wMANnIeLN7duu-c8MjDGrDHVJDy71Ee8Q7-E5hIB7sxS_G_GFldnqceM3qs3NM8CLOWes6-BwkndTxXjtasb9-ZhEbTPiHRUw-RMlvW6bhsLin8Au9qLQkWlJiWNfne9210nPKbiy0ci"/>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-sm border border-outline-variant/20 flex gap-2">
+<button aria-label="Get Directions" class="text-on-surface hover:text-primary transition-colors flex">
+<span class="material-symbols-outlined text-[20px]">directions</span>
+</button>
+</div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface">1234 Discovery Way</p>
+<p class="font-body-md text-body-md text-[14px] text-on-surface-variant mb-4">San Francisco, CA 94107</p>
+<p class="font-body-md text-body-md text-[13px] text-on-surface-variant italic">Conveniently located near the Caltrain station with dedicated drop-off zones.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-highest dark:bg-bg-dark font-body-md text-body-md w-full mt-auto border-t border-outline-variant flat no shadows px-margin-desktop py-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1 md:col-span-1 flex flex-col gap-4">
+<a class="font-headline-md text-headline-md font-bold text-primary" href="/">Kids Oasis</a>
+<p class="text-on-surface-variant text-[14px]">Empowering early education through streamlined management and discovery.</p>
+<p class="text-on-surface-variant text-[14px] mt-auto">© 2024 Kids Oasis. All rights reserved.</p>
+</div>
+<div class="col-span-1 flex flex-col gap-3 md:col-start-3">
+<h4 class="font-label-sm text-label-sm text-on-surface font-bold">Platform</h4>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-[14px]" href="#">About Us</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-[14px]" href="#">Contact</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-[14px]" href="#">Careers</a>
+</div>
+<div class="col-span-1 flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm text-on-surface font-bold">Legal</h4>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-[14px]" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-[14px]" href="#">Terms of Service</a>
+</div>
+</footer>
+</body></html>

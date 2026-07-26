@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #f9f9ff;
+            color: #151c27;
+        }
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Custom scrollbar for sidebar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dce2f3;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c7c4d8;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#464555",
+                        "surface-variant": "#dce2f3",
+                        "on-tertiary-container": "#67f4b7",
+                        "bg-dark": "#0F172A",
+                        "outline": "#777587",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "tertiary": "#005338",
+                        "error": "#ba1a1a",
+                        "surface-container": "#e7eefe",
+                        "surface-dim": "#d3daea",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-container": "#dad7ff",
+                        "surface-bright": "#f9f9ff",
+                        "on-background": "#151c27",
+                        "secondary": "#006591",
+                        "on-tertiary-fixed": "#002113",
+                        "background": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#151c27",
+                        "surface-container-highest": "#dce2f3",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "secondary-fixed-dim": "#89ceff",
+                        "primary": "#3525cd",
+                        "bg-light": "#FAFAFC",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#39b8fd",
+                        "tertiary-container": "#006e4b",
+                        "primary-container": "#4f46e5",
+                        "outline-variant": "#c7c4d8",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface": "#f9f9ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-high": "#e2e8f8",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001e2f",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#c9e6ff",
+                        "inverse-surface": "#2a313d",
+                        "inverse-on-surface": "#ebf1ff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f0f3ff",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "text-primary": "#111827",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary-container": "#004666"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "container-max": "1440px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-xs": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "display-lg-mobile": ["Geist"],
+                        "body-md": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "display-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-xs": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        "soft-floating": "0px 4px 20px rgba(0, 0, 0, 0.03)",
+                        "modal": "0px 20px 50px rgba(0, 0, 0, 0.1)"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface antialiased flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex flex-col p-6 gap-2 bg-surface-container-lowest border-r border-outline-variant w-[280px] h-screen fixed left-0 top-0 overflow-y-auto z-40 font-label-sm text-label-sm">
+<!-- Brand Header -->
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary font-bold text-xl shadow-sm">
+                K
+            </div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Kids Oasis</h1>
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Parent Academy</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-1 w-full">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-2.5 text-primary font-semibold bg-surface-container rounded-lg transition-all scale-98 active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">child_care</span>
+                My Children
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">search</span>
+                Discover
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+                Bookings
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">assignment_ind</span>
+                Enrollments
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Payments
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">mail</span>
+                Messages
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">favorite</span>
+                Favorites
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">event</span>
+                Events
+            </a>
+<div class="mt-auto pt-4 border-t border-outline-variant/30">
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</div>
+</div>
+<!-- CTA -->
+<div class="mt-4">
+<button class="w-full py-3 px-4 bg-primary text-on-primary rounded-[14px] font-label-sm text-label-sm font-semibold shadow-sm shadow-primary/20 hover:bg-primary/90 transition-all active:scale-[0.98] flex items-center justify-center gap-2 border-t border-white/20">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Book New Class
+            </button>
+</div>
+</nav>
+<!-- Main Content Area (Offset by Sidebar Width on Desktop) -->
+<div class="flex-1 md:ml-[280px] flex flex-col min-h-screen">
+<!-- TopNavBar (from JSON) -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-280px)] h-16 z-50 bg-surface/70 backdrop-blur-md border-b border-outline-variant/30 flex justify-between items-center px-4 md:px-margin-desktop font-body-md text-body-md transition-all">
+<!-- Search Bar (Left) -->
+<div class="flex-1 max-w-md relative focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:ring-offset-surface rounded-lg transition-all">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-[14px] py-2 pl-10 pr-4 text-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-0 shadow-sm transition-all h-10" placeholder="Search kids, classes, or payments..." type="text"/>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-surface"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors hidden sm:block">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant mx-1 hidden sm:block"></div>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors p-1 pr-3 rounded-full hover:bg-surface-container-low">
+<img alt="Parent User Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant/50" data-alt="A small, circular avatar portrait of a professional woman with brown hair, smiling gently, shot in natural light against a neutral grey background. The image is crisp, modern, and conveys a trustworthy, high-end professional aesthetic suitable for a premium SaaS dashboard profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMB9fsSHDdbNCQsVsTTkZrzTGG92Cl101P9Uiz072_87MS8QpVrmBhpW9Oa1NtgEAAJEg3xpPAf57s5JvKfWRIqNMReATM7GuJluiF3eJ8RHo60A9XDXtNvUF6NAkEnudUqr7JXFXFK6ozi90iaHVR_S0oVr2udTLfA6ouqFyKrsvHHvwWUkPPZ52IutlLcil2rN4j9jor0pvRMFsRri6_x2gGdrpPeFcjzmnyevTHJNW2CWVpP6w2W9j3_X58Su3LgMW-fl2PvmzW"/>
+<span class="text-sm font-medium hidden sm:block">Profile</span>
+<span class="material-symbols-outlined text-[18px] text-outline hidden sm:block">expand_more</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<main class="flex-1 mt-16 p-4 md:p-8 md:px-margin-desktop max-w-[1440px] mx-auto w-full">
+<!-- Welcome Header -->
+<div class="mb-8 pt-4">
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface font-bold tracking-tight mb-2">Good morning, Jane</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Here's what's happening with Noah and Leo today.</p>
+</div>
+<!-- Row 1: Analytics Bento Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-soft-floating border border-outline-variant/20 hover:border-primary/30 transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-tertiary-fixed-dim/20 text-tertiary text-xs font-semibold flex items-center gap-1 border border-tertiary/10">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 12%
+                        </span>
+</div>
+<p class="text-sm text-on-surface-variant font-medium mb-1">Active Enrollments</p>
+<h3 class="text-3xl font-bold text-on-surface tracking-tight">4</h3>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-soft-floating border border-outline-variant/20 hover:border-primary/30 transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-semibold border border-outline-variant/20">
+                            This Week
+                        </span>
+</div>
+<p class="text-sm text-on-surface-variant font-medium mb-1">Upcoming Visits</p>
+<h3 class="text-3xl font-bold text-on-surface tracking-tight">3</h3>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-soft-floating border border-outline-variant/20 hover:border-primary/30 transition-colors group relative overflow-hidden">
+<div class="absolute -right-6 -top-6 w-24 h-24 bg-primary-fixed/30 rounded-full blur-2xl"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant font-medium mb-1 relative z-10">Total Spent (YTD)</p>
+<div class="flex items-baseline gap-2 relative z-10">
+<h3 class="text-3xl font-bold text-on-surface tracking-tight">$1,240</h3>
+<span class="text-sm text-outline">.00</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Chart & List -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+<!-- Child Progress Chart (Span 2) -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-[20px] p-6 shadow-soft-floating border border-outline-variant/20">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-lg font-semibold text-on-surface">Child Activity &amp; Progress</h3>
+<p class="text-sm text-on-surface-variant">Hours logged across all programs</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 text-xs font-medium bg-surface-container rounded-lg text-primary border border-primary/20">Weekly</button>
+<button class="px-3 py-1.5 text-xs font-medium text-on-surface-variant hover:bg-surface-container rounded-lg transition-colors">Monthly</button>
+</div>
+</div>
+<!-- Faux Chart Area -->
+<div class="h-[250px] w-full relative flex items-end justify-between pb-6 pt-4 border-b border-outline-variant/20">
+<!-- Y-axis labels -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-outline pr-4">
+<span>20h</span>
+<span>15h</span>
+<span>10h</span>
+<span>5h</span>
+<span>0h</span>
+</div>
+<!-- Grid lines -->
+<div class="absolute left-8 right-0 top-0 h-full flex flex-col justify-between pointer-events-none">
+<div class="w-full border-t border-outline-variant/20"></div>
+<div class="w-full border-t border-outline-variant/20"></div>
+<div class="w-full border-t border-outline-variant/20"></div>
+<div class="w-full border-t border-outline-variant/20"></div>
+<div class="w-full border-t border-outline-variant/50"></div>
+</div>
+<!-- Faux Line (SVG) -->
+<div class="absolute left-8 right-0 top-0 bottom-6 z-10 pointer-events-none overflow-hidden">
+<svg class="w-full h-full stroke-primary fill-none" preserveaspectratio="none" style="stroke-width: 3;" viewbox="0 0 500 200">
+<path d="M0,180 C50,150 100,190 150,120 C200,50 250,90 300,100 C350,110 400,40 450,60 C480,70 500,20 500,20"></path>
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#3525cd" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#3525cd" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,180 C50,150 100,190 150,120 C200,50 250,90 300,100 C350,110 400,40 450,60 C480,70 500,20 500,20 L500,200 L0,200 Z" fill="url(#chartGradient)" stroke="none"></path>
+</svg>
+<!-- Data points -->
+<div class="absolute left-[30%] top-[55%] w-3 h-3 bg-white border-2 border-primary rounded-full shadow-sm cursor-pointer hover:scale-125 transition-transform"></div>
+<div class="absolute left-[60%] top-[45%] w-3 h-3 bg-white border-2 border-primary rounded-full shadow-sm cursor-pointer hover:scale-125 transition-transform"></div>
+<div class="absolute left-[90%] top-[25%] w-3 h-3 bg-white border-2 border-primary rounded-full shadow-sm cursor-pointer hover:scale-125 transition-transform"></div>
+</div>
+</div>
+<!-- X-axis labels -->
+<div class="flex justify-between pl-8 pt-4 text-xs text-outline">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+<!-- Upcoming Visits List -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-soft-floating border border-outline-variant/20 flex flex-col h-full">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-semibold text-on-surface">Upcoming Schedule</h3>
+<button class="text-primary hover:bg-surface-container-low p-1.5 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col gap-4 overflow-y-auto pr-2">
+<!-- Visit Item 1 -->
+<div class="flex gap-4 p-3 rounded-xl hover:bg-surface-container-low transition-colors group cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex flex-col items-center justify-center text-primary border border-outline-variant/20">
+<span class="text-xs font-bold uppercase">Oct</span>
+<span class="text-lg font-bold leading-none">12</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-semibold text-on-surface mb-0.5">Advanced Robotics</h4>
+<p class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 3:00 PM - 5:00 PM
+                                </p>
+<div class="mt-2 flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] font-bold flex items-center justify-center border border-white">N</div>
+<span class="text-xs text-outline">Noah</span>
+</div>
+</div>
+</div>
+<!-- Visit Item 2 -->
+<div class="flex gap-4 p-3 rounded-xl hover:bg-surface-container-low transition-colors group cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex flex-col items-center justify-center text-primary border border-outline-variant/20">
+<span class="text-xs font-bold uppercase">Oct</span>
+<span class="text-lg font-bold leading-none">14</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-semibold text-on-surface mb-0.5">Creative Arts Prep</h4>
+<p class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 9:00 AM - 11:30 AM
+                                </p>
+<div class="mt-2 flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold flex items-center justify-center border border-white">L</div>
+<span class="text-xs text-outline">Leo</span>
+</div>
+</div>
+</div>
+<!-- Visit Item 3 -->
+<div class="flex gap-4 p-3 rounded-xl hover:bg-surface-container-low transition-colors group cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex flex-col items-center justify-center text-primary border border-outline-variant/20 opacity-70">
+<span class="text-xs font-bold uppercase">Oct</span>
+<span class="text-lg font-bold leading-none">15</span>
+</div>
+<div class="flex-1 opacity-70">
+<h4 class="text-sm font-semibold text-on-surface mb-0.5">Parent-Teacher Meet</h4>
+<p class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">videocam</span> Online Virtual
+                                </p>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 text-sm font-medium text-primary hover:bg-primary-fixed/50 rounded-lg transition-colors border border-primary/10">
+                        View Full Calendar
+                    </button>
+</div>
+</div>
+<!-- Row 3: Notifications & Quick Actions -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Recent Notifications -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-soft-floating border border-outline-variant/20">
+<h3 class="text-lg font-semibold text-on-surface mb-6">Recent Updates</h3>
+<div class="space-y-4">
+<!-- Notification 1 -->
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-secondary mt-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]">draw</span>
+</div>
+<div class="flex-1 border-b border-outline-variant/20 pb-4">
+<div class="flex justify-between items-baseline mb-1">
+<p class="text-sm font-semibold text-on-surface">Instructor Note: Leo</p>
+<span class="text-xs text-outline">2h ago</span>
+</div>
+<p class="text-sm text-on-surface-variant line-clamp-2">"Leo showed great improvement in color theory today. Attached is a picture of his latest project."</p>
+</div>
+</div>
+<!-- Notification 2 -->
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-error-container/50 flex items-center justify-center text-on-error-container mt-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+</div>
+<div class="flex-1 border-b border-outline-variant/20 pb-4">
+<div class="flex justify-between items-baseline mb-1">
+<p class="text-sm font-semibold text-on-surface">Invoice Due</p>
+<span class="text-xs text-outline">1d ago</span>
+</div>
+<p class="text-sm text-on-surface-variant">Your October tuition invoice for $450.00 is due in 3 days.</p>
+</div>
+</div>
+<!-- Notification 3 -->
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary mt-1 shrink-0">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+</div>
+<div class="flex-1 pb-2">
+<div class="flex justify-between items-baseline mb-1">
+<p class="text-sm font-semibold text-on-surface">Enrollment Confirmed</p>
+<span class="text-xs text-outline">3d ago</span>
+</div>
+<p class="text-sm text-on-surface-variant">Noah's spot in Winter Robotics Camp is secured.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions Bento -->
+<div class="bg-surface-container-lowest rounded-[20px] p-6 shadow-soft-floating border border-outline-variant/20">
+<h3 class="text-lg font-semibold text-on-surface mb-6">Quick Actions</h3>
+<div class="grid grid-cols-2 gap-4 h-[calc(100%-2rem-24px)]">
+<!-- Action 1: Large Primary -->
+<button class="col-span-2 sm:col-span-1 bg-primary text-on-primary rounded-[16px] p-5 flex flex-col justify-between items-start hover:bg-primary/90 transition-all shadow-sm group border-t border-white/20">
+<div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add_circle</span>
+</div>
+<div class="text-left">
+<h4 class="font-semibold text-base mb-1">Book a Class</h4>
+<p class="text-xs text-white/80">Browse new schedules</p>
+</div>
+</button>
+<div class="col-span-2 sm:col-span-1 flex flex-col gap-4">
+<!-- Action 2 -->
+<button class="flex-1 bg-surface-container-highest rounded-[16px] p-4 flex items-center gap-4 hover:bg-outline-variant/30 transition-colors border border-outline-variant/20 group">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">payment</span>
+</div>
+<div class="text-left">
+<h4 class="font-semibold text-sm text-on-surface">Pay Invoice</h4>
+<p class="text-xs text-error font-medium">1 Due</p>
+</div>
+</button>
+<!-- Action 3 -->
+<button class="flex-1 bg-surface-container rounded-[16px] p-4 flex items-center gap-4 hover:bg-surface-container-high transition-colors border border-outline-variant/20 group">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<div class="text-left">
+<h4 class="font-semibold text-sm text-on-surface">Message</h4>
+<p class="text-xs text-on-surface-variant">Teachers &amp; Staff</p>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

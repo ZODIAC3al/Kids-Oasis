@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kids Oasis - Discover the Perfect Place for Your Child</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#0f0069",
+                        "on-tertiary-container": "#67f4b7",
+                        "outline-variant": "#c7c4d8",
+                        "error": "#ba1a1a",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface-container": "#e7eefe",
+                        "surface-tint": "#4d44e3",
+                        "text-primary": "#111827",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "background": "#f9f9ff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#002113",
+                        "inverse-surface": "#2a313d",
+                        "surface-dim": "#d3daea",
+                        "surface-bright": "#f9f9ff",
+                        "on-surface-variant": "#464555",
+                        "outline": "#777587",
+                        "on-surface": "#151c27",
+                        "tertiary": "#005338",
+                        "bg-dark": "#0F172A",
+                        "tertiary-fixed": "#6ffbbe",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#001e2f",
+                        "secondary": "#006591",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-secondary-container": "#004666",
+                        "surface-container-high": "#e2e8f8",
+                        "surface-variant": "#dce2f3",
+                        "on-primary": "#ffffff",
+                        "on-background": "#151c27",
+                        "secondary-container": "#39b8fd",
+                        "primary-container": "#4f46e5",
+                        "secondary-fixed-dim": "#89ceff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "inverse-on-surface": "#ebf1ff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface": "#f9f9ff",
+                        "primary-fixed": "#e2dfff",
+                        "bg-light": "#FAFAFC",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "inverse-primary": "#c3c0ff",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#dce2f3",
+                        "surface-container-low": "#f0f3ff",
+                        "tertiary-container": "#006e4b",
+                        "primary": "#3525cd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist", "sans-serif"],
+                        "body-lg": ["Geist", "sans-serif"],
+                        "display-lg": ["Geist", "sans-serif"],
+                        "headline-md": ["Geist", "sans-serif"],
+                        "label-xs": ["Geist", "sans-serif"],
+                        "body-md": ["Geist", "sans-serif"],
+                        "display-lg-mobile": ["Geist", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-xs": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .soft-shadow { box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03); }
+        .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.08); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar -->
+<nav class="bg-surface/70 dark:bg-bg-dark/70 backdrop-blur-xl docked full-width top-0 sticky border-b border-glass-stroke shadow-sm z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<img alt="Kids Oasis Logo" class="h-10 w-10 object-contain rounded-md" data-alt="Kids Oasis Logo - Education Marketplace &amp; Academy Management. Primary color: #4f46e5. Light mode rounded logo design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGDx26r3yqtdD8llvu_p9WSYsakcaEoamqJXpbdOmrK2PVrKy32H0etuG2G0KMitCKDH7vZEc_GiPN41SumcadWlQN_07FskkkR_K95fHFkHRfxifrgyGdpbgrwmXz_lxuZoYLAqR4IQah68l0UefwsThSXu8944l5wYMtQrY6HUJp8O-NJU3quRCHpWNXp7dTv2OPPzWQaIjDrm_9md003MKnjj-k6HOcYxm5w_EMHFq11x-fH-LmeVdjQoRDq1JB6GKv5cWqTTmu"/>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Kids Oasis</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary pb-1" href="#">Find Classes</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors pb-1 border-b-2 border-transparent" href="#">For Educators</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors pb-1 border-b-2 border-transparent" href="#">Pricing</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors pb-1 border-b-2 border-transparent" href="#">Resources</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors hidden md:block">Log In</button>
+<button class="font-label-sm text-label-sm bg-primary text-on-primary px-6 py-2.5 rounded-[14px] hover:bg-surface-tint transition-colors shadow-sm">Join Now</button>
+</div>
+</div>
+</nav>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="relative pt-20 pb-32 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-low to-surface-bright -z-10"></div>
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<div class="flex flex-col gap-8 z-10">
+<div class="space-y-4">
+<span class="inline-block py-1.5 px-3 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-xs text-label-xs tracking-wider uppercase">Education Marketplace</span>
+<h1 class="font-display-lg-mobile md:font-display-lg text-on-surface text-display-lg-mobile md:text-display-lg">
+                            Discover the <span class="text-primary">Perfect Place</span> for Your Child
+                        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                            Explore top-rated academies, engaging programs, and inspiring educators tailored to your child's unique potential and schedule.
+                        </p>
+</div>
+<!-- Search Bar (Airbnb Style) -->
+<div class="glass-panel p-2 rounded-[20px] shadow-lg border border-glass-stroke max-w-2xl flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-outline-variant/20">
+<div class="flex-1 px-4 py-3 hover:bg-surface/50 rounded-t-[16px] md:rounded-l-[16px] md:rounded-tr-none transition-colors cursor-pointer group">
+<label class="block font-label-xs text-label-xs text-on-surface-variant group-hover:text-primary mb-1">Looking for</label>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 font-body-md text-on-surface placeholder:text-outline text-sm" placeholder="Academy, Skill..." type="text"/>
+</div>
+<div class="flex-1 px-4 py-3 hover:bg-surface/50 transition-colors cursor-pointer group">
+<label class="block font-label-xs text-label-xs text-on-surface-variant group-hover:text-primary mb-1">Location</label>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 font-body-md text-on-surface placeholder:text-outline text-sm" placeholder="City or Zip" type="text"/>
+</div>
+<div class="flex-1 px-4 py-3 hover:bg-surface/50 transition-colors cursor-pointer group">
+<label class="block font-label-xs text-label-xs text-on-surface-variant group-hover:text-primary mb-1">Age</label>
+<select class="w-full bg-transparent border-none p-0 focus:ring-0 font-body-md text-on-surface text-sm cursor-pointer">
+<option disabled="" selected="" value="">Select age</option>
+<option value="toddler">Toddler (1-3)</option>
+<option value="preschool">Preschool (4-5)</option>
+<option value="elementary">Elementary (6-11)</option>
+</select>
+</div>
+<div class="px-2 py-2 flex items-center justify-center bg-surface-container-lowest md:bg-transparent rounded-b-[16px] md:rounded-b-none md:rounded-r-[16px]">
+<button class="bg-primary text-on-primary h-12 w-12 rounded-full flex items-center justify-center hover:bg-surface-tint transition-colors shadow-md w-full md:w-12">
+<span class="material-symbols-outlined">search</span>
+<span class="md:hidden ml-2 font-label-sm">Search</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mt-2">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span> Verified Reviews</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span> Secure Booking</span>
+</div>
+</div>
+<div class="relative hidden lg:block z-0">
+<div class="absolute inset-0 bg-primary/10 rounded-full blur-[100px] -z-10 transform translate-x-10 translate-y-10"></div>
+<img class="w-full h-auto object-contain max-h-[600px] animate-float drop-shadow-2xl" data-alt="A 3D illustration of a family interacting with a digital interface to find schools and sports activities. A father points to a floating translucent glass screen showing icons for 'Schools' and 'Sports'. A child stands next to him, and a mother on the right points to the screen. Clean, bright, modern aesthetic with soft lighting, solid white background, high-quality 3D render in a friendly corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsS6ZaB-rvV5Zfrto9UM0g-hqCW0wH4Q1eZpLzlcpOXKZI_3Whuk3LNSiicX146gzAw4X3cxfPbqXPuQQftvj6_i0yR_E9gPR8aYEjraMbLuNNsV6NQNwXGwhi2NEsjUu9DsSkOhIQaEiWxO_1nwwA7NmVvjd6AnB6n6lALmsQw9u3IoflVrj-t5ugb-6erLGsVJdMM1zkdvTRiOmtB79yjHACRj2FKw0_H9ciOEVVmQ8gBnwL1qKx_Z2RJAf6nCNJg1KdpxstkIqE"/>
+</div>
+</div>
+</section>
+<!-- Featured Academies -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Featured Academies</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Top-rated institutions with verified excellence.</p>
+</div>
+<a class="hidden md:flex items-center gap-2 font-label-sm text-label-sm text-primary hover:text-surface-tint transition-colors" href="#">View All <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface rounded-[20px] overflow-hidden soft-shadow border border-surface-variant hover-lift flex flex-col group">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A brightly lit, modern classroom setting for children's education. Large windows let in natural light, overlooking a courtyard. Children in uniforms are sitting on the floor interacting with educational robots, supervised by a female teacher. Wooden desks and extensive wooden shelving filled with educational kits and tablets. High-end, premium aesthetic, spacious and clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWro9vWRmyNo1JS9GuorcAzJ-FpSyl6MxfuttZQDxHHvYdHjh_pTdBADd2o8S8_940cKTZwNijoHdO-hyLDRcsvh62cNVlC2CskC-f_FUZKZKHlPGsWGjaXm9OdQVWvuYY8FDf-EkL1biSeEqZEX2KNnKpj0VdLClzkp8EZ4pc7tgPeseLpLnSykPv_Ez5HIV6Ee2e8clcssbDJlLCWfloIQDMLqIJ4JgYif07me_HP7GEvODZJ86MekH0-JxCxF3hfJo03BCsswcg"/>
+<div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">star</span>
+<span class="font-label-xs text-label-xs text-on-surface">4.9</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface text-[20px] font-semibold leading-tight">Bright Minds Robotics Academy</h3>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant mb-4 line-clamp-2">Premium STEM education focusing on robotics, coding, and logical thinking for young innovators.</p>
+<div class="flex flex-wrap gap-2 mb-6 mt-auto">
+<span class="bg-surface-variant text-on-surface-variant px-2.5 py-1 rounded-md font-label-xs text-[11px]">Ages 7-12</span>
+<span class="bg-surface-variant text-on-surface-variant px-2.5 py-1 rounded-md font-label-xs text-[11px]">STEM</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-surface-variant/50">
+<div class="flex flex-col">
+<span class="font-label-xs text-outline">Starting at</span>
+<span class="font-label-sm text-on-surface font-semibold">$250/mo</span>
+</div>
+<button class="font-label-sm text-primary bg-primary/10 hover:bg-primary hover:text-on-primary px-4 py-2 rounded-lg transition-colors">Book Visit</button>
+</div>
+</div>
+</div>
+<!-- Card 2 (Placeholder Data) -->
+<div class="bg-surface rounded-[20px] overflow-hidden soft-shadow border border-surface-variant hover-lift flex flex-col group">
+<div class="relative h-48 w-full overflow-hidden bg-surface-container-high">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Children participating in a high-end indoor sports facility. Bright lighting, clean wooden floors, children wearing matching sports uniforms practicing gymnastics or martial arts. Professional instructors guiding them. Premium aesthetic, dynamic and active mood." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJuHNjPEJvffcXIKorr8SJtMAppg1agbhCcZZG7ZnJI94-4CN6QsPAvGynwyZZANZ66sl0-5AETp4P3-z8C9v3ZPmCo-5hwdBKEx0Ln_JENoRN82h4o-ejmzcqfJJTpSWQvyHqFmvNaaT7ZO9IjkAVUDqnXHJ_RQ-kOi_raAx-PV7tSv3MDuEN0llIyje2B0uYjjExXS-A8PSGt1xkKMrE37Je3XBZ2N7sfPemL74x9lof0eVxOy94kntmWFJ7ra8q5zAqr4Y0JxMH')"></div>
+<div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">star</span>
+<span class="font-label-xs text-label-xs text-on-surface">4.8</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface text-[20px] font-semibold leading-tight">Elite Athletics Youth Club</h3>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant mb-4 line-clamp-2">Comprehensive physical development programs fostering teamwork, discipline, and healthy habits.</p>
+<div class="flex flex-wrap gap-2 mb-6 mt-auto">
+<span class="bg-surface-variant text-on-surface-variant px-2.5 py-1 rounded-md font-label-xs text-[11px]">Ages 5-15</span>
+<span class="bg-surface-variant text-on-surface-variant px-2.5 py-1 rounded-md font-label-xs text-[11px]">Sports</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-surface-variant/50">
+<div class="flex flex-col">
+<span class="font-label-xs text-outline">Starting at</span>
+<span class="font-label-sm text-on-surface font-semibold">$180/mo</span>
+</div>
+<button class="font-label-sm text-primary bg-primary/10 hover:bg-primary hover:text-on-primary px-4 py-2 rounded-lg transition-colors">Book Visit</button>
+</div>
+</div>
+</div>
+<!-- Card 3 (Placeholder Data) -->
+<div class="bg-surface rounded-[20px] overflow-hidden soft-shadow border border-surface-variant hover-lift flex flex-col group hidden lg:flex">
+<div class="relative h-48 w-full overflow-hidden bg-surface-container-high">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A serene, high-end art studio for children. Spacious white walls, natural wood easels, soft natural light streaming in. Children are focused on painting canvases. Clean, organized, creative atmosphere, premium educational setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDYvM2TiUVqzuDSrN6b2djA_P8FwBCgUOm_yVwQ0UC26JNtHWTPcOmC2hCPE1BOq_dRjyJw9lXvKE8SkD3O8onCAJjq2j-2iycnjO8gCV8QdG5qjYTcuw8H5n5vIy07WDsYsHtz0ohwbPwaeK-M-94-HEzr12CRCWAiFwOaJnC6KQXRuvCirVRfxHwNgB9LKob4vzVlwOrBhUvInrmZt5kBkDQ5as0lL4rVzITUUjZD6jTmufsB5RpaWuMf8sPoaadZu9hV26BAesvd')"></div>
+<div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">star</span>
+<span class="font-label-xs text-label-xs text-on-surface">5.0</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-on-surface text-[20px] font-semibold leading-tight">Creative Canvas Studio</h3>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant mb-4 line-clamp-2">Nurturing artistic expression through various mediums in a professional studio environment.</p>
+<div class="flex flex-wrap gap-2 mb-6 mt-auto">
+<span class="bg-surface-variant text-on-surface-variant px-2.5 py-1 rounded-md font-label-xs text-[11px]">Ages 4-18</span>
+<span class="bg-surface-variant text-on-surface-variant px-2.5 py-1 rounded-md font-label-xs text-[11px]">Arts</span>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-surface-variant/50">
+<div class="flex flex-col">
+<span class="font-label-xs text-outline">Starting at</span>
+<span class="font-label-sm text-on-surface font-semibold">$200/mo</span>
+</div>
+<button class="font-label-sm text-primary bg-primary/10 hover:bg-primary hover:text-on-primary px-4 py-2 rounded-lg transition-colors">Book Visit</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 text-center md:hidden">
+<a class="inline-flex items-center justify-center gap-2 font-label-sm text-label-sm text-primary border border-primary px-6 py-3 rounded-lg w-full" href="#">View All Academies</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-bg-dark w-full mt-auto border-t border-outline-variant flat no shadows">
+<div class="w-full px-margin-desktop py-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="flex flex-col gap-4 col-span-1 md:col-span-1">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Kids Oasis</span>
+<p class="font-body-md text-sm text-on-surface-variant max-w-xs">Connecting families with premium educational experiences and managing academy operations seamlessly.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm font-bold text-on-surface">Platform</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">About Us</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Contact</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Careers</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm font-bold text-on-surface">Legal</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-label-sm text-label-sm font-bold text-on-surface">Connect</h4>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+</div>
+<div class="border-t border-outline-variant/30 py-6 text-center">
+<p class="font-body-md text-sm text-on-surface-variant">© 2024 Kids Oasis. All rights reserved.</p>
+</div>
+</footer>
+<style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</body></html>
