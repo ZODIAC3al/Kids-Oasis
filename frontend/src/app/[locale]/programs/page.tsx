@@ -16,6 +16,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { API_URL } from "@/lib/config";
 import { useTranslations, useLocale } from "next-intl";
 import LottieAnimation from "@/components/LottieAnimation";
 
@@ -35,7 +36,7 @@ export default function ProgramsPage() {
   const tHome = useTranslations("home");
   const locale = useLocale();
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+  const apiUrl = API_URL;
 
   useEffect(() => {
     let cancelled = false;

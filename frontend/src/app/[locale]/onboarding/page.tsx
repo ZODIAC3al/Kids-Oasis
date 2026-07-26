@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import axios from 'axios';
+import { API_URL } from '@/lib/config';
 import { User, Shield, Compass, ChevronRight, ChevronLeft, Plus, Trash2, Heart, Award } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import LottieAnimation from '@/components/LottieAnimation';
@@ -67,7 +68,7 @@ export default function OnboardingWizard() {
       setStep(step + 1);
     } else {
       setSubmitting(true);
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1';
+      const apiUrl = API_URL;
       const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 

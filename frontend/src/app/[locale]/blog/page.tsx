@@ -9,6 +9,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { API_URL } from "@/lib/config";
 
 interface NewsItem {
   _id?: string;
@@ -27,7 +28,7 @@ export default function BlogPage() {
   const tBlog = useTranslations("blogPage");
   const locale = useLocale();
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+  const apiUrl = API_URL;
 
   useEffect(() => {
     let cancelled = false;

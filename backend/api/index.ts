@@ -1,43 +1,49 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../src/app.module';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import * as express from 'express';
-import helmet from 'helmet';
-import * as compression from 'compression';
-import * as cookieParser from 'cookie-parser';
+import { VersioningType } from '@nestjs/common';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const express = require('express');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const helmet = require('helmet');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const compression = require('compression');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cookieParser = require('cookie-parser');
 
 const server = express();
+let isAppInitialized = false;
 
-export const createNestServer = async (expressInstance: express.Express) => {
-  const app = await NestFactory.create(
-    AppModule,
-    new ExpressAdapter(expressInstance),
-    { bodyParser: false },
-  );
+async function bootstrapServerless() {
+  if (!isAppInitialized) {
+    const app = await NestFactory.create(
+      AppModule,
+      new ExpressAdapter(server),
+      { bodyParser: false },
+    );
 
-  // Custom 50mb body limit for Cloudinary photo uploads
-  app.use(express.json({ limit: '50mb' }));
-  app.use(express.urlencoded({ limit: '50mb', extended: true }));
+    app.use(express.json({ limit: '50mb' }));
+    app.use(express.urlencoded({ limit: '50mb', extended: true }));
+    app.use(helmet({ contentSecurityPolicy: false }));
+    app.enableCors({
+      origin: true,
+      credentials: true,
+    });
+    app.use(compression());
+    app.use(cookieParser());
 
-  // Security Headers
-  app.use(helmet({ contentSecurityPolicy: false }));
+    app.setGlobalPrefix(process.env.API_PREFIX || 'api');
+    app.enableVersioning({
+      type: VersioningType.URI,
+    });
 
-  // CORS Origin Configuration for Vercel
-  app.enableCors({
-    origin: process.env.ALLOWED_ORIGINS
-      ? process.env.ALLOWED_ORIGINS.split(',')
-      : true,
-    credentials: true,
-  });
+    await app.init();
+    isAppInitialized = true;
+  }
+}
 
-  app.use(compression());
-  app.use(cookieParser());
-  app.setGlobalPrefix(process.env.API_PREFIX || 'api');
-
-  await app.init();
-  return app;
-};
-
-createNestServer(server);
-
-export default server;
+export default async function handler(req: any, res: any) {
+  await bootstrapServerless();
+  server(req, res);
+}

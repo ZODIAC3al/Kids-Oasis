@@ -19,6 +19,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "react-toastify";
+import { API_URL } from "@/lib/config";
 import LottieAnimation from "@/components/LottieAnimation";
 
 const avatarPresets = [
@@ -111,7 +112,7 @@ export default function Profile() {
     reset: resetPasswordForm,
   } = useForm<PasswordFormValues>({ resolver: zodResolver(passwordSchema) });
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+  const apiUrl = API_URL;
 
   const rawRole = (user?.role || "").toLowerCase();
 

@@ -10,6 +10,7 @@ import * as z from "zod";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { API_URL } from "@/lib/config";
 import { setCredentials } from "@/store/authSlice";
 import { Navbar } from "@/components/marketing/navbar";
 import { Footer } from "@/components/marketing/footer";
@@ -68,7 +69,7 @@ export default function Login() {
   const onSubmit = (values: LoginFormValues) => {
     setLoading(true);
     setErrMessage("");
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+    const apiUrl = API_URL;
     axios
       .post(`${apiUrl}/auth/login`, values, { withCredentials: true })
       .then((res) => {
@@ -98,7 +99,7 @@ export default function Login() {
     if (!mfaPin || mfaPin.length < 6) return;
     setMfaLoading(true);
     setErrMessage("");
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+    const apiUrl = API_URL;
     axios
       .post(`${apiUrl}/auth/mfa/validate`, { userId: mfaChallenge.userId, token: mfaPin }, { withCredentials: true })
       .then((res) => {
@@ -115,7 +116,7 @@ export default function Login() {
 
   const handleGoogleAuth = () => {
     setLoading(true);
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+    const apiUrl = API_URL;
     // Mock interactive Google OAuth account chooser payload
     const mockGoogleProfile = {
       email: `parent_${Date.now().toString().slice(-4)}@kidsoasis.com`,

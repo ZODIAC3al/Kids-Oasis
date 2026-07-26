@@ -5,6 +5,8 @@ import { motion, AnimatePresence, useInView, animate, useScroll, useSpring } fro
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { API_URL } from "@/lib/config";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -107,7 +109,7 @@ export default function HomePage() {
   const [testimonialsList, setTestimonialsList] = useState<Testimonial[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+  const apiUrl = API_URL;
 
   // Animated scroll progress bar
   const { scrollYProgress } = useScroll();

@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { toast } from "react-toastify";
+import { API_URL } from "@/lib/config";
 
 const signupSchema = z
   .object({
@@ -62,7 +63,7 @@ export default function Signup() {
   const onSubmit = (values: SignupFormValues) => {
     setLoading(true);
     setErrMessage("");
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+    const apiUrl = API_URL;
     axios
       .post(`${apiUrl}/auth/register`, values, { withCredentials: true })
       .then((res) => {
@@ -96,7 +97,7 @@ export default function Signup() {
 
   const handleGoogleAuth = () => {
     setLoading(true);
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+    const apiUrl = API_URL;
     const mockGoogleProfile = {
       email: `parent_${Date.now().toString().slice(-4)}@kidsoasis.com`,
       firstName: "Amira",

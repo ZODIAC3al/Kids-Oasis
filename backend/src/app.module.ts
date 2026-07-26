@@ -31,13 +31,16 @@ import { BullModule } from '@nestjs/bull';
       inject: [ConfigService],
     }),
 
-    // BullMQ background queue setup
+    // BullMQ background queue setup (Non-blocking for serverless)
     BullModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         redis: {
           host: configService.get<string>('REDIS_HOST') || 'localhost',
           port: configService.get<number>('REDIS_PORT') || 6379,
+          connectTimeout: 1000,
+          maxRetriesPerRequest: 1,
+          enableOfflineQueue: false,
         },
       }),
       inject: [ConfigService],

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, Suspense } from "react";
 import axios from "axios";
+import { API_URL } from "@/lib/config";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -117,7 +118,7 @@ function AcademySearchContent() {
   const tNav = useTranslations("nav");
   const locale = useLocale();
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+  const apiUrl = API_URL;
 
   useEffect(() => {
     let cancelled = false;

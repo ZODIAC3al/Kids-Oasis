@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://backend-alpha-one-57.vercel.app/api/v1";
 
 export const apiClient = axios.create({
   baseURL: apiUrl,

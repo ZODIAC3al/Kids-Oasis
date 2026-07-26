@@ -14,6 +14,7 @@ import { RootState } from '@/store/store';
 import { logout } from '@/store/authSlice';
 import apiClient from '@/lib/axios';
 import axios from 'axios';
+import { API_URL } from '@/lib/config';
 import { toast } from 'react-toastify';
 import { ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
@@ -106,7 +107,7 @@ export default function AdminDashboard() {
     if (!token) return;
     setLoading(true);
     try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1'}/academies`, {
+      const res = await axios.get(`${API_URL}/academies`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const allAcademies = res.data || [];
@@ -143,7 +144,7 @@ export default function AdminDashboard() {
   const handleVerify = async (id: string, isVerified: boolean) => {
     if (!token) return;
     try {
-      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1'}/academies/${id}/verify`, { isVerified }, {
+      await axios.patch(`${API_URL}/academies/${id}/verify`, { isVerified }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAcademies(prev =>

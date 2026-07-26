@@ -13,6 +13,7 @@ import { Footer } from "@/components/marketing/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Lock, ArrowRight } from "lucide-react";
+import { API_URL } from "@/lib/config";
 
 const resetSchema = z
   .object({
@@ -52,7 +53,7 @@ function ResetPasswordFormContent() {
 
     setLoading(true);
     setMsg("");
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+    const apiUrl = API_URL;
 
     axios
       .post(`${apiUrl}/auth/reset-password`, {

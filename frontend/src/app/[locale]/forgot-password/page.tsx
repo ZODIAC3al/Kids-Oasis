@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sparkles, ArrowRight, KeyRound } from "lucide-react";
 
+import { API_URL } from "@/lib/config";
+
 const forgotSchema = z.object({
   email: z.string().email("Invalid email address"),
 });
@@ -38,7 +40,7 @@ export default function ForgotPasswordPage() {
     setLoading(true);
     setMsg("");
     setDemoToken("");
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+    const apiUrl = API_URL;
 
     axios
       .post(`${apiUrl}/auth/forgot-password`, values)

@@ -9,7 +9,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
 import { clearCredentials } from '@/store/authSlice';
 import { useTheme } from 'next-themes';
-import axios from 'axios';
+import axios from "axios";
+import { API_URL } from "@/lib/config";
 
 export default function NavBarClient() {
   const [scrolled, setScrolled] = useState(false);
@@ -47,7 +48,7 @@ export default function NavBarClient() {
   ];
 
   const handleLogout = () => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1";
+    const apiUrl = API_URL;
     axios
       .post(`${apiUrl}/auth/logout`, {}, { headers: { Authorization: `Bearer ${token}` } })
       .finally(() => {
