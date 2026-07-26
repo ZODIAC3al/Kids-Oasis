@@ -15,6 +15,26 @@ const cookieParser = require('cookie-parser');
 const server = express();
 let isAppInitialized = false;
 
+// Global CORS & OPTIONS Preflight Middleware for Vercel
+server.use((req: any, res: any, next: any) => {
+  const origin = req.headers.origin || '*';
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, X-Requested-With, Accept',
+  );
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+});
+
 async function bootstrapServerless() {
   if (!isAppInitialized) {
     const app = await NestFactory.create(
@@ -33,9 +53,10 @@ async function bootstrapServerless() {
     app.use(compression());
     app.use(cookieParser());
 
-    app.setGlobalPrefix(process.env.API_PREFIX || 'api');
+    app.setGlobalPrefix('api');
     app.enableVersioning({
       type: VersioningType.URI,
+      defaultVersion: '1',
     });
 
     await app.init();
@@ -45,5 +66,8 @@ async function bootstrapServerless() {
 
 export default async function handler(req: any, res: any) {
   await bootstrapServerless();
+  if (req.url && !req.url.startsWith('/api')) {
+    req.url = '/api' + req.url;
+  }
   server(req, res);
 }
