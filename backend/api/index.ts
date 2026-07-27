@@ -15,10 +15,10 @@ const cookieParser = require('cookie-parser');
 const server = express();
 let isAppInitialized = false;
 
-// Global CORS & OPTIONS Preflight Middleware for Vercel
+// Universal CORS & OPTIONS Preflight Middleware
 server.use((req: any, res: any, next: any) => {
-  const origin = req.headers.origin || '*';
-  res.setHeader('Access-Control-Allow-Origin', origin);
+  const requestOrigin = req.headers.origin || '*';
+  res.setHeader('Access-Control-Allow-Origin', requestOrigin);
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader(
     'Access-Control-Allow-Methods',
@@ -26,11 +26,11 @@ server.use((req: any, res: any, next: any) => {
   );
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, X-Requested-With, Accept',
+    'Content-Type, Authorization, X-Requested-With, Accept, X-Api-Version',
   );
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    return res.status(200).send('OK');
   }
   next();
 });
@@ -47,8 +47,12 @@ async function bootstrapServerless() {
     app.use(express.urlencoded({ limit: '50mb', extended: true }));
     app.use(helmet({ contentSecurityPolicy: false }));
     app.enableCors({
-      origin: true,
+      origin: (origin, callback) => {
+        callback(null, true);
+      },
       credentials: true,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      allowedHeaders: 'Content-Type, Authorization, X-Requested-With, Accept',
     });
     app.use(compression());
     app.use(cookieParser());
