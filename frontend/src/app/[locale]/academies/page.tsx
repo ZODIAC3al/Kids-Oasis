@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, Suspense, useCallback } from "react";
 import axios from "axios";
 import { useDebounce } from "use-debounce";
-import { API_URL } from "@/lib/config";
+import { API_URL, getApiUrl } from "@/lib/config";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -128,11 +128,10 @@ function AcademySearchContent() {
   const tNav = useTranslations("nav");
   const locale = useLocale();
 
-  const apiUrl = API_URL;
+  const apiUrl = getApiUrl();
   const [debouncedSearch] = useDebounce(searchQuery, 400);
 
-  const fetchAcademies = useCallback(async (page: number) => {
-    let cancelled = false;
+  const fetchAcademies = useCallback(async (page: number, signal?: AbortSignal) => {
     setLoading(true);
     try {
       const params: Record<string, any> = { page, limit: ITEMS_PER_PAGE };
@@ -140,49 +139,55 @@ function AcademySearchContent() {
       if (minPrice) params.minPrice = minPrice;
       if (maxPrice) params.maxPrice = maxPrice;
 
-      const res = await axios.get<any>(`${apiUrl}/academies`, { params });
+      const res = await axios.get<any>(`${apiUrl}/academies`, { params, signal });
       const envelope = res.data;
-      const rawList = Array.isArray(envelope) ? envelope : (envelope?.data ?? []);
-      const serverTotal = envelope?.total ?? rawList.length;
-      const serverPages = envelope?.totalPages ?? Math.ceil(serverTotal / ITEMS_PER_PAGE);
 
-      if (!cancelled && rawList.length > 0) {
+      // Handle both old flat-array response and new paginated envelope
+      const rawList = Array.isArray(envelope) ? envelope : (envelope?.data ?? []);
+      const serverTotal: number = !Array.isArray(envelope) && envelope?.total
+        ? envelope.total
+        : rawList.length;
+      const serverPages: number = !Array.isArray(envelope) && envelope?.totalPages
+        ? envelope.totalPages
+        : 1;
+
+      if (rawList.length > 0) {
         const mapped: AcademyItem[] = rawList.map((item: any) => ({
           id: item._id || item.id,
           name: item.name,
           description: item.description,
-          location: item.location || item.city ? `${item.city || ""}, ${item.governorate || ""}`.trim().replace(/^,\s*/, '') : (item.address || "Alexandria, Egypt"),
+          location: item.city
+            ? `${item.city}${item.governorate ? ", " + item.governorate : ""}`
+            : (item.address || item.location || "Egypt"),
           rating: item.rating || 4.8,
           totalReviews: item.totalReviews || 95,
           price: item.price || 1400,
           logo: item.logo || "https://images.unsplash.com/photo-1587616211892-b8e563e0fd94?q=80&w=1200&auto=format&fit=crop",
-          activities: item.activities || ["STEM Focus", "Verified"],
+          activities: Array.isArray(item.activities) ? item.activities : (item.activities ? String(item.activities).split(" ") : ["Verified"]),
           curriculum: item.curriculum,
-          languages: item.languages,
+          languages: Array.isArray(item.languages) ? item.languages : (item.languages ? String(item.languages).split(" ") : []),
           minAgeAllowed: item.minAgeAllowed || 2,
           maxAgeAllowed: item.maxAgeAllowed || 6,
         }));
         setAcademies(mapped);
         setTotalCount(serverTotal);
-        setTotalPages(serverPages || 1);
+        setTotalPages(serverPages);
         dispatch(setAcademiesList(mapped));
-      } else if (!cancelled) {
+      } else {
         setAcademies(mockAcademies);
         setTotalCount(mockAcademies.length);
         setTotalPages(1);
         dispatch(setAcademiesList(mockAcademies));
       }
-    } catch {
-      if (!cancelled) {
-        setAcademies(mockAcademies);
-        setTotalCount(mockAcademies.length);
-        setTotalPages(1);
-        dispatch(setAcademiesList(mockAcademies));
-      }
+    } catch (err: any) {
+      if (err?.name === "CanceledError" || err?.name === "AbortError") return;
+      setAcademies(mockAcademies);
+      setTotalCount(mockAcademies.length);
+      setTotalPages(1);
+      dispatch(setAcademiesList(mockAcademies));
     } finally {
-      if (!cancelled) setLoading(false);
+      setLoading(false);
     }
-    return () => { cancelled = true; };
   }, [apiUrl, dispatch, debouncedSearch, minPrice, maxPrice]);
 
   useEffect(() => {
@@ -190,8 +195,11 @@ function AcademySearchContent() {
   }, [debouncedSearch, minPrice, maxPrice, selectedAge, selectedFacilities]);
 
   useEffect(() => {
-    fetchAcademies(currentPage);
+    const controller = new AbortController();
+    fetchAcademies(currentPage, controller.signal);
+    return () => controller.abort();
   }, [fetchAcademies, currentPage]);
+
 
   const toggleFavorite = (id: string) => {
     setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
