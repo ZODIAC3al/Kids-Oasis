@@ -93,56 +93,61 @@ export default function GoogleAuthModal({
                   onClick={() => {
                     window.location.href = `${API_URL}/auth/google`;
                   }}
-                  className="w-full flex items-center justify-center gap-3 p-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-500/20 transition mb-2"
+                  className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-lg shadow-indigo-500/25 transition"
                 >
-                  <Sparkles size={16} />
-                  <span>Launch Official Google OAuth 2.0 Redirect</span>
+                  <Sparkles size={18} className="text-amber-300" />
+                  <span>Continue with Official Google Account</span>
                 </button>
 
-                <div className="relative my-2 flex items-center justify-center">
-                  <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-200 dark:border-slate-800" /></div>
-                  <span className="relative bg-white dark:bg-slate-900 px-3 text-[10px] font-bold uppercase text-slate-400">or quick select</span>
-                </div>
+                {typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") && (
+                  <>
+                    <div className="relative my-3 flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-slate-200 dark:border-slate-800" /></div>
+                      <span className="relative bg-white dark:bg-slate-900 px-3 text-[10px] font-bold uppercase text-slate-400">Dev Quick Select</span>
+                    </div>
 
-                {defaultGoogleAccounts.map((account) => (
-                  <button
-                    key={account.email}
-                    disabled={loading}
-                    onClick={() => {
-                      const nameParts = account.name.split(" ");
-                      onSelectAccount({
-                        email: account.email,
-                        firstName: nameParts[0] || "Google",
-                        lastName: nameParts[1] || "User",
-                        avatar: account.avatar,
-                      });
-                    }}
-                    className="w-full flex items-center gap-4 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/30 transition group text-left"
-                  >
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 shrink-0">
-                      <Image src={account.avatar} alt={account.name} fill className="object-cover" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                        {account.name}
-                      </p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{account.email}</p>
-                    </div>
-                    <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition">
-                      <Check size={14} />
-                    </div>
-                  </button>
-                ))}
+                    {defaultGoogleAccounts.map((account) => (
+                      <button
+                        key={account.email}
+                        disabled={loading}
+                        onClick={() => {
+                          const nameParts = account.name.split(" ");
+                          onSelectAccount({
+                            email: account.email,
+                            firstName: nameParts[0] || "Google",
+                            lastName: nameParts[1] || "User",
+                            avatar: account.avatar,
+                          });
+                        }}
+                        className="w-full flex items-center gap-4 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/30 transition group text-left"
+                      >
+                        <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 shrink-0">
+                          <Image src={account.avatar} alt={account.name} fill className="object-cover" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold text-slate-900 dark:text-white truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                            {account.name}
+                          </p>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{account.email}</p>
+                        </div>
+                        <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition">
+                          <Check size={14} />
+                        </div>
+                      </button>
+                    ))}
+                  </>
+                )}
 
                 <button
                   type="button"
                   onClick={() => setShowCustom(true)}
-                  className="w-full flex items-center gap-3 p-3.5 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 transition"
+                  className="w-full flex items-center justify-center gap-2 p-3 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600 transition mt-2"
                 >
-                  <UserPlus size={16} className="text-indigo-500" />
-                  <span>Use another Google email account</span>
+                  <UserPlus size={15} className="text-indigo-500" />
+                  <span>Enter Google Email Address</span>
                 </button>
               </>
+
             ) : (
               <div className="space-y-4">
                 <div>
