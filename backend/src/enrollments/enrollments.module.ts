@@ -5,6 +5,7 @@ import { Child, ChildSchema } from '../children/schemas/child.schema';
 import { User, UserSchema } from '../users/schemas/user.schema';
 import { EnrollmentsService } from './enrollments.service';
 import { EnrollmentsController } from './enrollments.controller';
+import { ResendEmailService } from '../site/resend.service';
 
 @Module({
   imports: [
@@ -14,8 +15,9 @@ import { EnrollmentsController } from './enrollments.controller';
       { name: User.name, schema: UserSchema },
     ]),
   ],
-  providers: [EnrollmentsService],
+  providers: [EnrollmentsService, ResendEmailService],
   controllers: [EnrollmentsController],
   exports: [EnrollmentsService],
 })
 export class EnrollmentsModule {}
+

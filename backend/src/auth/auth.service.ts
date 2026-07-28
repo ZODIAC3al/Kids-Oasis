@@ -264,8 +264,10 @@ export class AuthService {
         },
       });
     }
-    return this.login(user);
+    const tokens = await this.login(user);
+    return { ...tokens, user };
   }
+
 
   private validateTotp(secretBase32: string, token: string): boolean {
     if (!secretBase32 || !token) return false;

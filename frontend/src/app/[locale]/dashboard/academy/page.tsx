@@ -312,8 +312,68 @@ export default function AcademyDashboard() {
               <RefreshCw className="w-8 h-8 text-[#4F46E5] animate-spin" />
               <p className="text-sm font-semibold text-slate-450">Synchronizing database records...</p>
             </div>
+          ) : ((user as any)?.status === 'Pending Verification' || (academies.length > 0 && academies[0]?.isVerified === false)) ? (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-8 sm:p-12 rounded-[28px] bg-white dark:bg-[#1E293B] border border-amber-200 dark:border-amber-900/50 shadow-soft text-center max-w-2xl mx-auto space-y-6 my-8"
+            >
+              <div className="w-16 h-16 rounded-3xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto border border-amber-500/20">
+                <ShieldAlert className="w-8 h-8 animate-pulse" />
+              </div>
+
+              <div className="space-y-2">
+                <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 text-xs font-bold uppercase tracking-wider">
+                  Verification Pending
+                </span>
+                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+                  Academy Commercial Audit Under Review
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
+                  Your onboarding application for{" "}
+                  <strong className="text-slate-800 dark:text-white font-bold">
+                    {academies[0]?.name || (user as any)?.academyName || "Your Registered Academy"}
+                  </strong>{" "}
+                  and 10% platform revenue share agreement are currently undergoing verification by System Administrators.
+                </p>
+              </div>
+
+
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 text-left space-y-2.5 text-xs">
+                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                  <span>Commercial License Verification</span>
+                  <span className="font-bold text-amber-600 dark:text-amber-400">Under Review</span>
+                </div>
+                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                  <span>Owner National ID Scan</span>
+                  <span className="font-bold text-amber-600 dark:text-amber-400">Received & Auditing</span>
+                </div>
+                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                  <span>10% Platform Commission Agreement</span>
+                  <span className="font-bold text-emerald-600 dark:text-emerald-400">Signed & Active</span>
+                </div>
+              </div>
+
+              <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  type="button"
+                  onClick={fetchAcademyData}
+                  className="px-6 py-3 rounded-xl bg-[#4F46E5] hover:bg-[#3F37C9] text-white font-bold text-xs shadow-soft transition flex items-center justify-center gap-2"
+                >
+                  <RefreshCw className="w-4 h-4" /> Sync Verification Status
+                </button>
+                <button
+                  type="button"
+                  onClick={() => alert("Platform Administrator Contact: support@kidsoasis.com")}
+                  className="px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+                >
+                  Contact Platform Admin
+                </button>
+              </div>
+            </motion.div>
           ) : (
             <>
+
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                 {[
                   { label: 'Monthly Revenue', value: `EGP ${monthlyRevenue || (academies.length * 15000)}`, sub: '+12.5% vs last month', icon: TrendingUp, color: 'text-emerald-500 bg-emerald-50 dark:bg-emerald-950/50' },

@@ -2,6 +2,7 @@
 
 import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface LottieAnimationProps {
   animationPath: string;
@@ -26,7 +27,20 @@ export default function LottieAnimation({
   }, [animationPath]);
 
   if (!animationData) {
-    return <div className={`animate-pulse bg-slate-100 dark:bg-slate-800 rounded-2xl ${className}`} />;
+    const svgFallback = animationPath.endsWith(".json")
+      ? animationPath.replace(".json", ".svg")
+      : animationPath;
+    return (
+      <div className={`relative flex items-center justify-center ${className}`}>
+        <Image
+          src={svgFallback}
+          alt="Money animation"
+          width={110}
+          height={110}
+          className="object-contain animate-bounce"
+        />
+      </div>
+    );
   }
 
   return (

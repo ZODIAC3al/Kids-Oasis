@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Enrollment } from './schemas/enrollment.schema';
 import { Child } from '../children/schemas/child.schema';
 import { User } from '../users/schemas/user.schema';
+import { ResendEmailService } from '../site/resend.service';
 
 @Injectable()
 export class EnrollmentsService {
@@ -11,6 +12,7 @@ export class EnrollmentsService {
     @InjectModel(Enrollment.name) private enrollmentModel: Model<Enrollment>,
     @InjectModel(Child.name) private childModel: Model<Child>,
     @InjectModel(User.name) private userModel: Model<User>,
+    private resendEmailService: ResendEmailService,
   ) {}
 
   async create(parentId: string, dto: Partial<Enrollment>): Promise<Enrollment> {
@@ -85,6 +87,30 @@ export class EnrollmentsService {
   }
 
   async update(id: string, updateDto: Partial<Enrollment>): Promise<Enrollment | null> {
-    return this.enrollmentModel.findByIdAndUpdate(id, updateDto, { new: true }).exec();
+    const updated = await this.enrollmentModel.findByIdAndUpdate(id, updateDto, { new: true })
+      .populate('childId')
+      .populate('academyId')
+      .populate('parentId')
+      .exec();
+
+    if (updated && updateDto.status) {
+      const parent = updated.parentId as any;
+      const child = updated.childId as any;
+      const academy = updated.academyId as any;
+
+      const parentEmail = parent?.email || 'parent@kidsoasis.com';
+      const parentName = parent?.firstName ? `${parent.firstName} ${parent.lastName || ''}`.trim() : 'Valued Parent';
+      const childName = child?.name || 'Your Child';
+      const academyName = academy?.name || 'Oasis Academy';
+
+      if (updateDto.status === 'Accepted' || updateDto.status === 'Approved') {
+        this.resendEmailService.sendEnrollmentApproval(parentEmail, parentName, childName, academyName);
+      } else if (updateDto.status === 'Declined' || updateDto.status === 'Rejected') {
+        this.resendEmailService.sendEnrollmentDeclined(parentEmail, parentName, childName, academyName);
+      }
+    }
+
+    return updated;
   }
 }
+

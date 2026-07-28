@@ -134,10 +134,18 @@ h1, h2, h3, h4, .font-display {
   letter-spacing: -0.02em;
 }
 
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: var(--outline); }
+/* Global Scrollbar Hiding (Preserves 100% full mousewheel & touch scrolling) */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+
+html, body, * {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
 
 :focus-visible {
   outline: 2px solid var(--primary);

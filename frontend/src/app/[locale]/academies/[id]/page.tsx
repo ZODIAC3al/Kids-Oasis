@@ -30,6 +30,8 @@ import { setSelectedAcademy } from "@/store/academiesSlice";
 import apiClient from "@/lib/axios";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
+import ApplyChildModal from "@/components/ApplyChildModal";
+
 
 interface AcademyData {
   id?: string;
@@ -77,6 +79,8 @@ export default function AcademyDetailsPage() {
   const [visitTime, setVisitTime] = useState("10:00 AM");
   const [bookingLoading, setBookingLoading] = useState(false);
   const [enrollLoading, setEnrollLoading] = useState(false);
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -252,26 +256,15 @@ export default function AcademyDetailsPage() {
     }
   };
 
-  const handleEnrollApply = async () => {
+  const handleEnrollApply = () => {
     if (!token) {
-      toast.error("Please login to submit enrollment.");
+      toast.error("Please login to submit enrollment application.");
       router.push(`/${locale}/login`);
       return;
     }
-    setEnrollLoading(true);
-    try {
-      await apiClient.post("/enrollments", {
-        academyId: academy?._id || academy?.id || id,
-        programName: academy?.curriculum || "Standard Program",
-        fee: academy?.price || academy?.monthlyFee || 1400,
-      });
-      toast.success("Enrollment application submitted!");
-    } catch (err) {
-      toast.error("Failed to submit enrollment application.");
-    } finally {
-      setEnrollLoading(false);
-    }
+    setIsApplyModalOpen(true);
   };
+
 
   if (loading) {
     return (
@@ -559,7 +552,16 @@ export default function AcademyDetailsPage() {
         </div>
       </main>
 
+      <ApplyChildModal
+        isOpen={isApplyModalOpen}
+        onClose={() => setIsApplyModalOpen(false)}
+        academyName={academy?.name || "Oasis Academy"}
+        academyId={academy?._id || academy?.id || id}
+        programName={academy?.curriculum || "Standard Montessori Program"}
+        fee={academy?.price || academy?.monthlyFee || 1800}
+      />
       <Footer />
     </div>
   );
 }
+

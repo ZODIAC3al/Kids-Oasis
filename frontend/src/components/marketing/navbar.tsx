@@ -62,6 +62,9 @@ export function Navbar() {
 
   const toggleLanguage = () => {
     const nextLocale = locale === "en" ? "ar" : "en";
+    if (typeof window !== "undefined") {
+      document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; SameSite=Lax`;
+    }
     const segments = pathname.split("/");
     if (segments[1] === "en" || segments[1] === "ar") {
       segments[1] = nextLocale;
@@ -70,6 +73,7 @@ export function Navbar() {
     }
     router.push(segments.join("/"));
   };
+
 
   const rawRole = (user?.role || "").toLowerCase();
 
@@ -276,7 +280,9 @@ export function Navbar() {
                 {notifOpen && (
                   <div className="absolute end-0 z-50 mt-2 w-72 rounded-[var(--radius-card)] card-surface border border-outline-variant p-3 shadow-elevation-3 space-y-2">
                     <div className="flex items-center justify-between border-b border-outline-variant pb-2">
-                      <span className="text-xs font-bold text-on-surface">Notifications</span>
+                      <span className="text-xs font-bold text-on-surface">
+                        {locale === "ar" ? "الإشعارات" : "Notifications"}
+                      </span>
                       <button
                         type="button"
                         onClick={() =>
@@ -284,30 +290,49 @@ export function Navbar() {
                         }
                         className="text-[10px] font-semibold text-primary hover:underline"
                       >
-                        Mark all as read
+                        {locale === "ar" ? "تحديد الكل كقروء" : "Mark all as read"}
                       </button>
                     </div>
 
                     <div className="space-y-2 max-h-60 overflow-y-auto">
-                      {notifications.map((n) => (
-                        <div
-                          key={n.id}
-                          className={`p-2 rounded-lg text-xs transition ${
-                            n.unread ? "bg-primary-container/10 border-l-2 border-primary" : "bg-transparent"
-                          }`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="font-bold text-on-surface">{n.title}</span>
-                            <span className="text-[10px] text-on-surface-variant">{n.time}</span>
+                      {notifications.map((n) => {
+                        const isAr = locale === "ar";
+                        const title = isAr
+                          ? n.id === 1
+                            ? "تم تأكيد حجز الزيارة"
+                            : "إدراج أكاديمية جديدة"
+                          : n.title;
+                        const body = isAr
+                          ? n.id === 1
+                            ? "تم تأكيد زيارتك الميدانية في أكاديمية الواحة النموذجية."
+                            : "أكاديمية الفنار فتحت باب القبول لعام 2026."
+                          : n.body;
+                        const time = isAr
+                          ? n.id === 1
+                            ? "منذ 10 دقائق"
+                            : "منذ ساعتين"
+                          : n.time;
+                        return (
+                          <div
+                            key={n.id}
+                            className={`p-2 rounded-lg text-xs transition ${
+                              n.unread ? "bg-primary-container/10 border-l-2 border-primary" : "bg-transparent"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-on-surface">{title}</span>
+                              <span className="text-[10px] text-on-surface-variant">{time}</span>
+                            </div>
+                            <p className="mt-0.5 text-[11px] text-on-surface-variant leading-tight">
+                              {body}
+                            </p>
                           </div>
-                          <p className="mt-0.5 text-[11px] text-on-surface-variant leading-tight">
-                            {n.body}
-                          </p>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 )}
+
               </div>
 
               {/* User Avatar Button & Menu Toggle */}

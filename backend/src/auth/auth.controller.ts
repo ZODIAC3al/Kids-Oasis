@@ -1,6 +1,7 @@
 import { Controller, Post, UseGuards, Req, Res, Body, Get } from '@nestjs/common';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { GoogleAuthGuard } from './guards/google-auth.guard';
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import { Response, Request } from 'express';
@@ -176,8 +177,54 @@ export class AuthController {
   }
 
   // ---------------------------------------------------------
-  // Google OAuth Endpoint
+  // Google OAuth Endpoints
   // ---------------------------------------------------------
+
+  @Get('google')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuthRedirect() {
+    // Passport redirects to Google login consent screen
+  }
+
+  @Get('google/callback')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuthCallback(@Req() req: any, @Res() res: Response) {
+    const authResult = req.user;
+    const defaultFrontend = process.env.NODE_ENV === 'production'
+      ? 'https://kids-oasis-platform.vercel.app'
+      : 'http://localhost:3000';
+    const frontendUrl = process.env.FRONTEND_URL || defaultFrontend;
+
+    if (!authResult || !authResult.accessToken) {
+      return res.redirect(`${frontendUrl}/en/login?error=google_auth_failed`);
+    }
+
+    res.cookie('accessToken', authResult.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+    res.cookie('refreshToken', authResult.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+
+    const userObj = authResult.user || authResult;
+    const userEncoded = encodeURIComponent(JSON.stringify({
+      id: userObj.id || userObj._id,
+      email: userObj.email,
+      firstName: userObj.firstName || 'Google',
+      lastName: userObj.lastName || 'User',
+      role: userObj.role || 'parent',
+      avatar: userObj.avatar || '',
+    }));
+    return res.redirect(`${frontendUrl}/en/login?token=${authResult.accessToken}&user=${userEncoded}`);
+  }
+
+
 
   @Post('google')
   async googleAuth(
@@ -200,3 +247,4 @@ export class AuthController {
     return result;
   }
 }
+

@@ -4,8 +4,9 @@ import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ClipboardList, FileText, CheckCircle2, RefreshCw, Sun, Moon, Search,
-  Home, LogOut, Award, Users, TrendingUp, Calendar, Clock, Check, Sparkles, User
+  Home, LogOut, Award, Users, TrendingUp, Calendar, Clock, Check, Sparkles, User, GraduationCap
 } from 'lucide-react';
+
 import NavBar from '@/components/NavBar';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -302,8 +303,61 @@ export default function TeacherDashboard() {
               <RefreshCw className="w-8 h-8 text-[#4F46E5] animate-spin" />
               <p className="text-sm font-semibold text-slate-400">Loading class data from database...</p>
             </div>
+          ) : (user as any)?.status === 'Pending Verification' ? (
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-8 sm:p-12 rounded-[28px] bg-white dark:bg-[#1E293B] border border-sky-200 dark:border-sky-900/50 shadow-soft text-center max-w-2xl mx-auto space-y-6 my-8"
+            >
+              <div className="w-16 h-16 rounded-3xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center mx-auto border border-sky-500/20">
+                <GraduationCap className="w-8 h-8 animate-pulse" />
+              </div>
+
+              <div className="space-y-2">
+                <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300 text-xs font-bold uppercase tracking-wider">
+                  Verification Pending
+                </span>
+                <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+                  Educator Credentials Under Audit
+                </h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
+                  Your educator application for{" "}
+                  <strong className="text-slate-800 dark:text-white font-bold">
+                    {user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : "Educator"}
+                  </strong>{" "}
+                  is undergoing review by your selected Academy Principal. You will gain access to classroom rosters upon team sign-off.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 text-left space-y-2.5 text-xs">
+                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                  <span>Teaching License & Specialization</span>
+                  <span className="font-bold text-sky-600 dark:text-sky-400">Under Review</span>
+                </div>
+                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                  <span>Educator Resume (CV)</span>
+                  <span className="font-bold text-sky-600 dark:text-sky-400 font-mono">Received</span>
+                </div>
+                <div className="flex justify-between items-center text-slate-600 dark:text-slate-300">
+                  <span>Academy Faculty Association</span>
+                  <span className="font-bold text-indigo-600 dark:text-indigo-400">Awaiting Principal Approval</span>
+                </div>
+              </div>
+
+              <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  type="button"
+                  onClick={fetchTeacherData}
+                  className="px-6 py-3 rounded-xl bg-[#4F46E5] hover:bg-[#3F37C9] text-white font-bold text-xs shadow-soft transition flex items-center justify-center gap-2"
+                >
+                  <RefreshCw className="w-4 h-4" /> Sync Verification Status
+                </button>
+              </div>
+            </motion.div>
           ) : (
             <>
+
               {/* KPI Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                 {[

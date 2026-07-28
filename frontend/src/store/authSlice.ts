@@ -25,17 +25,18 @@ const authSlice = createSlice({
   reducers: {
     setCredentials(
       state,
-      action: PayloadAction<{ token: string; user: AuthState['user'] }>
+      action: PayloadAction<{ token: string; user: AuthState['user']; saveToAccountGroup?: boolean }>
     ) {
       state.token = action.payload.token;
       state.user = action.payload.user;
       if (typeof window !== 'undefined') {
         localStorage.setItem('authToken', action.payload.token);
-        if (action.payload.user) {
+        if (action.payload.user && action.payload.saveToAccountGroup) {
           saveAccount(action.payload.user, action.payload.token);
         }
       }
     },
+
     clearCredentials(state) {
       state.token = null;
       state.user = null;

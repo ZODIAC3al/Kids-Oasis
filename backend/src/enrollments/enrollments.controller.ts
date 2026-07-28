@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Body, Param, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Put, Patch, Body, Param, UseGuards, Req } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { EnrollmentsService } from './enrollments.service';
 
@@ -26,4 +26,10 @@ export class EnrollmentsController {
   async updateStatus(@Param('id') id: string, @Body() updateDto: any) {
     return this.enrollmentsService.update(id, updateDto);
   }
+
+  @Patch(':id/status')
+  async patchStatus(@Param('id') id: string, @Body() body: any) {
+    return this.enrollmentsService.update(id, { status: body.status });
+  }
 }
+

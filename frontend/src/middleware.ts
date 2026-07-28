@@ -4,8 +4,10 @@ import { NextRequest, NextResponse } from 'next/server';
 const intlMiddleware = createMiddleware({
   locales: ['en', 'ar'],
   defaultLocale: 'en',
-  localePrefix: 'always'
+  localePrefix: 'always',
+  localeDetection: false,
 });
+
 
 const protectedRoutes = [
   '/dashboard',

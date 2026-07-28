@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, LogIn } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
+import GoogleAuthModal from "@/components/GoogleAuthModal";
+import { motion } from "framer-motion";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -26,13 +28,13 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-import { motion } from "framer-motion";
-
 export default function Login() {
   const [errMessage, setErrMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
+  const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const locale = useLocale();
   const tAuth = useTranslations("auth");
@@ -65,6 +67,28 @@ export default function Login() {
       router.push(`/${locale}/dashboard/parent`);
     }
   };
+
+  useEffect(() => {
+    const token = searchParams.get("token");
+    const userStr = searchParams.get("user");
+    const errorParam = searchParams.get("error");
+
+    if (errorParam) {
+      setErrMessage("Google Authentication failed. Please try again.");
+      toast.error("Google Authentication failed.");
+    } else if (token) {
+      try {
+        let user: any = { role: 'parent', firstName: 'Google User' };
+        if (userStr && userStr !== "undefined") {
+          user = JSON.parse(decodeURIComponent(userStr));
+        }
+        handleLoginSuccess(user, token);
+      } catch (err) {
+        console.error("Failed to parse Google OAuth user callback data", err);
+      }
+    }
+
+  }, [searchParams]);
 
   const onSubmit = (values: LoginFormValues) => {
     setLoading(true);
@@ -115,29 +139,28 @@ export default function Login() {
   };
 
   const handleGoogleAuth = () => {
+    setIsGoogleModalOpen(true);
+  };
+
+  const handleGoogleAccountSelect = (profile: { email: string; firstName: string; lastName: string; avatar: string }) => {
     setLoading(true);
     const apiUrl = API_URL;
-    // Mock interactive Google OAuth account chooser payload
-    const mockGoogleProfile = {
-      email: `parent_${Date.now().toString().slice(-4)}@kidsoasis.com`,
-      firstName: "Amira",
-      lastName: "Google User",
-      avatar: "https://lh3.googleusercontent.com/a/default-avatar=s96-c",
-    };
-
     axios
-      .post(`${apiUrl}/auth/google`, mockGoogleProfile, { withCredentials: true })
+      .post(`${apiUrl}/auth/google`, profile, { withCredentials: true })
       .then((res) => {
         const { accessToken, user } = res.data;
         handleLoginSuccess(user, accessToken);
+        setIsGoogleModalOpen(false);
       })
       .catch((err) => {
         setErrMessage("Google Authentication failed.");
+        toast.error("Google Authentication failed.");
       })
       .finally(() => {
         setLoading(false);
       });
   };
+
 
   return (
     <div className="flex h-screen flex-col bg-surface text-on-surface overflow-hidden relative">
@@ -359,6 +382,13 @@ export default function Login() {
           </motion.div>
         </div>
       )}
+      {/* Google Auth Modal */}
+      <GoogleAuthModal
+        isOpen={isGoogleModalOpen}
+        onClose={() => setIsGoogleModalOpen(false)}
+        onSelectAccount={handleGoogleAccountSelect}
+        loading={loading}
+      />
     </div>
   );
 }

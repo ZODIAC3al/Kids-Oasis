@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import NavBar from '@/components/NavBar';
 import PaymentModal from '@/components/PaymentModal';
+import ReceiptModal from '@/components/ReceiptModal';
+
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
@@ -176,6 +178,29 @@ export default function ParentDashboard() {
     academyId: string;
     enrollmentId?: string;
   } | null>(null);
+
+  const [selectedReceipt, setSelectedReceipt] = useState<any>(null);
+
+  const handleOpenReceipt = (enroll: any) => {
+    const parentFullName = user?.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : 'Valued Parent';
+    const childName = enroll.childId?.name || enroll.childName || 'Enrolled Student';
+    const academyName = enroll.academyId?.name || 'Oasis Academy Partner';
+    const amount = enroll.fee || enroll.programId?.price || 1800;
+
+    setSelectedReceipt({
+      receiptId: `REC-2026-${(enroll._id || '9876').slice(-4).toUpperCase()}`,
+      parentName: parentFullName,
+      parentEmail: user?.email || 'parent@kidsoasis.com',
+      childName,
+      academyName,
+      programName: enroll.programId?.name || enroll.programName || 'Preschool Class',
+      amount,
+      paymentMethod: 'Stripe Card',
+      paidAt: enroll.updatedAt ? new Date(enroll.updatedAt).toLocaleDateString() : new Date().toLocaleDateString(),
+      transactionRef: `ch_stripe_${(enroll._id || 'tx98').slice(-6)}`,
+    });
+  };
+
 
   const handleOpenPayModal = (enroll: any) => {
     setPayModalData({
@@ -971,58 +996,90 @@ export default function ParentDashboard() {
                     Enrollment applications & invoices
                   </h2>
                   <div className="bg-white dark:bg-[#1E293B] rounded-[20px] border border-slate-100 dark:border-slate-800 shadow-soft overflow-hidden overflow-x-auto">
-                    <table className="w-full text-left border-collapse text-sm min-w-[560px]">
+                    <table className="w-full text-left border-collapse text-sm min-w-[620px]">
                       <thead>
                         <tr className="bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-800">
                           <th className="p-4 font-bold text-slate-600 dark:text-slate-300">Academy</th>
+                          <th className="p-4 font-bold text-slate-600 dark:text-slate-300">Student</th>
                           <th className="p-4 font-bold text-slate-600 dark:text-slate-300">Program</th>
-                          <th className="p-4 font-bold text-slate-600 dark:text-slate-300">Tuition cost</th>
+                          <th className="p-4 font-bold text-slate-600 dark:text-slate-300">Tuition</th>
                           <th className="p-4 font-bold text-slate-600 dark:text-slate-300">Status</th>
-                          <th className="p-4 font-bold text-slate-600 dark:text-slate-300">Stripe Action</th>
+                          <th className="p-4 font-bold text-slate-600 dark:text-slate-300">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
                         {enrollments.length > 0 ? (
-                          enrollments.map((enroll, i) => (
-                            <tr key={i} className="border-b border-slate-50 dark:border-slate-800/80">
-                              <td className="p-4 font-bold text-slate-900 dark:text-white">
-                                {enroll.academyId?.name || 'Academy partner'}
-                              </td>
-                              <td className="p-4 text-slate-500 dark:text-slate-400">
-                                {enroll.programId?.name || enroll.programName || 'Preschool class'}
-                              </td>
-                              <td className="p-4 font-bold text-[#4F46E5] dark:text-[#818CF8]">
-                                EGP {(enroll.fee || enroll.programId?.price || 1800).toLocaleString()}
-                              </td>
-                              <td className="p-4">
-                                <span
-                                  className={`px-2.5 py-1 rounded-full text-xs font-bold ${enroll.status === 'Accepted' || enroll.status === 'Enrolled'
-                                    ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
-                                    : 'bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300'
-                                    }`}
-                                >
-                                  {enroll.status || 'Pending'}
-                                </span>
-                              </td>
-                              <td className="p-4">
-                                {enroll.isPaid ? (
-                                  <span className="px-3 py-1 bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 rounded-lg text-xs font-bold flex items-center gap-1.5 w-fit">
-                                    <CheckCircle2 className="w-3.5 h-3.5" /> Paid with Stripe
-                                  </span>
-                                ) : (
-                                  <button
-                                    onClick={() => handleOpenPayModal(enroll)}
-                                    className="px-3.5 py-1.5 bg-[#4F46E5] hover:bg-[#3F37C9] text-white rounded-xl text-xs font-bold shadow-soft transition-all flex items-center gap-1.5"
-                                  >
-                                    <CreditCard className="w-3.5 h-3.5" /> Pay Tuition
-                                  </button>
-                                )}
-                              </td>
-                            </tr>
-                          ))
+                          enrollments.map((enroll, i) => {
+                            const childName = enroll.childId?.name || enroll.childName || 'Child Applicant';
+                            const isPaid = enroll.isPaid || enroll.status === 'Enrolled' || enroll.status === 'Paid';
+                            const isAccepted = enroll.status === 'Accepted' || enroll.status === 'Approved';
+                            const isDeclined = enroll.status === 'Declined' || enroll.status === 'Rejected';
+
+                            return (
+                              <tr key={i} className="border-b border-slate-50 dark:border-slate-800/80">
+                                <td className="p-4 font-bold text-slate-900 dark:text-white">
+                                  {enroll.academyId?.name || 'Academy partner'}
+                                </td>
+                                <td className="p-4 font-bold text-indigo-600 dark:text-indigo-400">
+                                  {childName}
+                                </td>
+                                <td className="p-4 text-slate-500 dark:text-slate-400 text-xs">
+                                  {enroll.programId?.name || enroll.programName || 'Preschool class'}
+                                </td>
+                                <td className="p-4 font-bold text-slate-900 dark:text-white">
+                                  EGP {(enroll.fee || enroll.programId?.price || 1800).toLocaleString()}
+                                </td>
+                                <td className="p-4">
+                                  {isPaid ? (
+                                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 flex items-center gap-1 w-fit">
+                                      <CheckCircle2 className="w-3.5 h-3.5" /> Enrolled & Paid
+                                    </span>
+                                  ) : isAccepted ? (
+                                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 flex items-center gap-1 w-fit">
+                                      <Sparkles className="w-3.5 h-3.5" /> Approved - Pay Now
+                                    </span>
+                                  ) : isDeclined ? (
+                                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 flex items-center gap-1 w-fit">
+                                      Declined
+                                    </span>
+                                  ) : (
+                                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 flex items-center gap-1 w-fit">
+                                      <Clock className="w-3.5 h-3.5" /> Pending Review
+                                    </span>
+                                  )}
+                                </td>
+                                <td className="p-4">
+                                  {isPaid ? (
+                                    <button
+                                      onClick={() => handleOpenReceipt(enroll)}
+                                      className="px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded-xl text-xs font-bold transition flex items-center gap-1.5"
+                                    >
+                                      <Download className="w-3.5 h-3.5" /> PDF Receipt
+                                    </button>
+                                  ) : isAccepted ? (
+                                    <button
+                                      onClick={() => handleOpenPayModal(enroll)}
+                                      className="px-3.5 py-1.5 bg-[#4F46E5] hover:bg-[#3F37C9] text-white rounded-xl text-xs font-bold shadow-soft transition flex items-center gap-1.5"
+                                    >
+                                      <CreditCard className="w-3.5 h-3.5" /> Pay Tuition
+                                    </button>
+                                  ) : isDeclined ? (
+                                    <button
+                                      onClick={() => alert("Apology Note: Current seat capacity for this program is full. We invite you to explore other recommended academies on Kids-Oasis.")}
+                                      className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold hover:bg-slate-200 transition"
+                                    >
+                                      View Note
+                                    </button>
+                                  ) : (
+                                    <span className="text-xs text-slate-400 font-semibold italic">Awaiting Owner Approval</span>
+                                  )}
+                                </td>
+                              </tr>
+                            );
+                          })
                         ) : (
                           <tr>
-                            <td colSpan={5} className="p-8 text-center text-slate-400 font-semibold">
+                            <td colSpan={6} className="p-8 text-center text-slate-400 font-semibold">
                               No enrollment records or invoices found.
                             </td>
                           </tr>
@@ -1034,7 +1091,10 @@ export default function ParentDashboard() {
                   {payModalData && (
                     <PaymentModal
                       isOpen={payModalOpen}
-                      onClose={() => setPayModalOpen(false)}
+                      onClose={() => {
+                        setPayModalOpen(false);
+                        setPayModalData(null);
+                      }}
                       academyName={payModalData.academyName}
                       programName={payModalData.programName}
                       amount={payModalData.amount}
@@ -1045,8 +1105,17 @@ export default function ParentDashboard() {
                       }}
                     />
                   )}
+
+                  {selectedReceipt && (
+                    <ReceiptModal
+                      isOpen={!!selectedReceipt}
+                      onClose={() => setSelectedReceipt(null)}
+                      receiptData={selectedReceipt}
+                    />
+                  )}
                 </motion.div>
               )}
+
 
               {activeTab === 'settings' && (
                 <motion.div

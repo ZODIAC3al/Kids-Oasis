@@ -2,373 +2,835 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "@/store/authSlice";
 import { Navbar } from "@/components/marketing/navbar";
 import { Footer } from "@/components/marketing/footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Sparkles, ArrowRight } from "lucide-react";
+import {
+  Sparkles,
+  ArrowRight,
+  UserCheck,
+  Building2,
+  GraduationCap,
+  Upload,
+  CheckCircle2,
+  ShieldCheck,
+  FileText,
+  Lock,
+  ChevronRight,
+  ArrowLeft,
+  Heart,
+  Plus,
+} from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { toast } from "react-toastify";
 import { API_URL } from "@/lib/config";
-
-const signupSchema = z
-  .object({
-    firstName: z.string().min(2, "First name too short"),
-    lastName: z.string().min(2, "Last name too short"),
-    email: z.string().email("Invalid email address"),
-    phoneNumber: z.string().min(8, "Invalid phone number"),
-    address: z.string().min(5, "Address too short"),
-    role: z.enum(["parent", "nurseryOwner", "serviceProvider"], {
-      errorMap: () => ({ message: "Please select a role" }),
-    }),
-    gender: z.enum(["male", "female"], {
-      errorMap: () => ({ message: "Please select gender" }),
-    }),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-    passwordConfirm: z.string(),
-  })
-  .refine((data) => data.password === data.passwordConfirm, {
-    message: "Passwords do not match",
-    path: ["passwordConfirm"],
-  });
-
-type SignupFormValues = z.infer<typeof signupSchema>;
-
-import { motion } from "framer-motion";
+import GoogleAuthModal from "@/components/GoogleAuthModal";
+import TermsModal from "@/components/TermsModal";
+import SignupFaqSection from "@/components/SignupFaqSection";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Signup() {
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [selectedRole, setSelectedRole] = useState<"parent" | "nurseryOwner" | "teacher">("parent");
+
+  // Step 1: Base Credentials
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [gender, setGender] = useState<"male" | "female">("female");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  // Step 2: Role-Specific Data & Documents
+  // Parent Data
+  const [parentIdDoc, setParentIdDoc] = useState<File | null>(null);
+  const [parentPhoto, setParentPhoto] = useState<File | null>(null);
+  const [childName, setChildName] = useState("");
+  const [childBirthday, setChildBirthday] = useState("2022-04-10");
+  const [childGender, setChildGender] = useState<"male" | "female">("male");
+  const [childMedical, setChildMedical] = useState("");
+
+  // Academy Owner Data
+  const [academyName, setAcademyName] = useState("");
+  const [registrationNumber, setRegistrationNumber] = useState("");
+  const [taxId, setTaxId] = useState("");
+  const [commercialLicenseDoc, setCommercialLicenseDoc] = useState<File | null>(null);
+  const [ownerIdDoc, setOwnerIdDoc] = useState<File | null>(null);
+  const [propertyLeaseDoc, setPropertyLeaseDoc] = useState<File | null>(null);
+
+  // Educator / Teacher Data
+  const [specialization, setSpecialization] = useState("Montessori & Early Childhood");
+  const [experienceYears, setExperienceYears] = useState("3");
+  const [teachingLicenseDoc, setTeachingLicenseDoc] = useState<File | null>(null);
+  const [resumeCvDoc, setResumeCvDoc] = useState<File | null>(null);
+  const [teacherIdDoc, setTeacherIdDoc] = useState<File | null>(null);
+
+  // Step 3: Terms Checkbox
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+
   const [errMessage, setErrMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
+
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const locale = useLocale();
-  const tAuth = useTranslations("auth");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignupFormValues>({
-    resolver: zodResolver(signupSchema),
-  });
+  const handleSignupSuccess = (user: any, accessToken: string) => {
+    dispatch(setCredentials({ token: accessToken, user }));
+    localStorage.setItem("authToken", accessToken);
+    toast.success("Account & Profile registered! Welcome to Kids-Oasis.");
 
-  const onSubmit = (values: SignupFormValues) => {
+    if (user.role === "admin") {
+      router.push(`/${locale}/dashboard/admin`);
+    } else if (user.role === "nurseryOwner" || user.role === "academyOwner" || user.role === "owner") {
+      router.push(`/${locale}/dashboard/academy`);
+    } else if (user.role === "teacher") {
+      router.push(`/${locale}/dashboard/teacher`);
+    } else {
+      router.push(`/${locale}/dashboard/parent`);
+    }
+  };
+
+  useEffect(() => {
+    const token = searchParams.get("token");
+    const userStr = searchParams.get("user");
+    if (token) {
+      try {
+        let user: any = { role: "parent", firstName: "Google User" };
+        if (userStr && userStr !== "undefined") {
+          user = JSON.parse(decodeURIComponent(userStr));
+        }
+        handleSignupSuccess(user, token);
+      } catch (err) {
+        console.error("Failed to parse Google OAuth user callback data", err);
+      }
+    }
+  }, [searchParams]);
+
+  const validateStep1 = () => {
+    if (!firstName || !lastName || !email || !phoneNumber || !password) {
+      setErrMessage("Please fill in all mandatory account fields.");
+      toast.error("Please fill in all mandatory account fields.");
+      return false;
+    }
+    if (password !== passwordConfirm) {
+      setErrMessage("Passwords do not match.");
+      toast.error("Passwords do not match.");
+      return false;
+    }
+    setErrMessage("");
+    return true;
+  };
+
+  const handleNextStep = () => {
+    if (step === 1 && validateStep1()) {
+      setStep(2);
+    } else if (step === 2) {
+      setStep(3);
+    }
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!acceptedTerms) {
+      toast.error("Please accept the Terms of Service & Child Protection Policy to complete registration.");
+      return;
+    }
+
     setLoading(true);
     setErrMessage("");
-    const apiUrl = API_URL;
-    axios
-      .post(`${apiUrl}/auth/register`, values, { withCredentials: true })
-      .then((res) => {
-        const { accessToken, user } = res.data;
-        dispatch(setCredentials({ token: accessToken, user }));
-        localStorage.setItem("authToken", accessToken);
-        toast.success("Account created successfully! Welcome to Kids-Oasis.");
 
-        if (user.role === "admin") {
-          router.push(`/${locale}/dashboard/admin`);
-        } else if (user.role === "nurseryOwner" || user.role === "academyOwner" || user.role === "owner") {
-          router.push(`/${locale}/dashboard/academy`);
-        } else if (user.role === "teacher") {
-          router.push(`/${locale}/dashboard/teacher`);
-        } else {
-          router.push(`/${locale}/dashboard/parent`);
-        }
-      })
-      .catch((err) => {
-        const dataMsg = err.response?.data?.message;
-        const msg = Array.isArray(dataMsg)
-          ? dataMsg.join(", ")
-          : dataMsg || "Signup failed. Please try again.";
-        setErrMessage(msg);
-        toast.error(msg);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const handleGoogleAuth = () => {
-    setLoading(true);
-    const apiUrl = API_URL;
-    const mockGoogleProfile = {
-      email: `parent_${Date.now().toString().slice(-4)}@kidsoasis.com`,
-      firstName: "Amira",
-      lastName: "Google User",
-      avatar: "https://lh3.googleusercontent.com/a/default-avatar=s96-c",
+    const payload = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      address: address || "Alexandria, Egypt",
+      gender,
+      role: selectedRole,
+      password,
+      passwordConfirm,
+      // Metadata fields
+      academyName,
+      registrationNumber,
+      taxId,
+      specialization,
+      experienceYears,
+      childName,
+      childBirthday,
+      childGender,
+      childMedical,
+      status: selectedRole === "nurseryOwner" ? "Pending Verification" : "Active",
     };
 
-    axios
-      .post(`${apiUrl}/auth/google`, mockGoogleProfile, { withCredentials: true })
-      .then((res) => {
-        const { accessToken, user } = res.data;
-        dispatch(setCredentials({ token: accessToken, user }));
-        router.push(`/${locale}/dashboard/parent`);
-      })
-      .catch((err) => {
-        setErrMessage("Google Authentication failed.");
-      })
-      .finally(() => {
-        setLoading(false);
+    try {
+      const apiUrl = API_URL;
+      const res = await axios.post(`${apiUrl}/auth/register`, payload, {
+        withCredentials: true,
       });
+
+      // If parent created child info, create initial child document
+      if (selectedRole === "parent" && childName) {
+        try {
+          const userToken = res.data?.accessToken;
+          if (userToken) {
+            await axios.post(
+              `${apiUrl}/children`,
+              {
+                name: childName,
+                birthday: childBirthday,
+                gender: childGender,
+                medicalNotes: childMedical,
+              },
+              { headers: { Authorization: `Bearer ${userToken}` } }
+            );
+          }
+        } catch (childErr) {
+          console.warn("Child initial profile creation note:", childErr);
+        }
+      }
+
+      handleSignupSuccess(res.data.user, res.data.accessToken);
+    } catch (err: any) {
+      const dataMsg = err.response?.data?.message;
+      const msg = Array.isArray(dataMsg)
+        ? dataMsg.join(", ")
+        : dataMsg || "Registration failed. Please verify your details.";
+      setErrMessage(msg);
+      toast.error(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="flex h-screen flex-col bg-surface text-on-surface overflow-hidden">
+    <div className="flex min-h-screen flex-col bg-surface text-on-surface">
       <Navbar />
 
-      <main className="flex-1 w-full h-[calc(100vh-68px)] grid grid-cols-1 lg:grid-cols-2 bg-surface overflow-hidden">
-        {/* Animated Left Illustration Panel (Viewport Height, No Scroll) */}
-        <div className="relative hidden lg:flex flex-col items-center justify-center p-8 overflow-hidden bg-gradient-to-br from-tertiary-container/25 via-surface-container-low to-primary-container/20">
-          {/* Glowing Ambient Background */}
-          <div className="absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-tertiary/20 blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 h-64 w-64 rounded-full bg-primary/20 blur-3xl animate-pulse" />
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative z-10 flex flex-col items-center max-w-md text-center"
-          >
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative aspect-square w-full max-w-[360px]"
-            >
-              <Image
-                src="/register.svg"
-                alt="Kids Oasis Signup"
-                fill
-                priority
-                className="object-contain drop-shadow-xl"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.4 }}
-              className="mt-5 space-y-1.5"
-            >
-              <span className="inline-block rounded-full bg-secondary/10 px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-secondary">
-                Join Oasis Academy Network
-              </span>
-              <h2 className="font-display text-2xl font-bold text-on-surface">
-                Unlock Premium Early Education
-              </h2>
-              <p className="text-xs text-on-surface-variant max-w-sm">
-                Create your account to access verified academy profiles, instant tour bookings, and direct enrollments.
-              </p>
-            </motion.div>
-          </motion.div>
+      <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-8 space-y-12">
+        {/* Banner Header */}
+        <div className="text-center space-y-2 max-w-2xl mx-auto">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs font-extrabold">
+            <Sparkles className="w-4 h-4 text-amber-500" /> Multi-Role Enterprise Onboarding
+          </span>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            Create Your Kids-Oasis Account
+          </h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Tailored registration and verification workflows for Parents, Academy Managers, and Educators.
+          </p>
         </div>
 
-        {/* Right Form Panel (Viewport Height, No Scroll, No Star Icon) */}
-        <motion.div
-          initial={{ opacity: 0, x: 15 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-4 w-full max-w-xl mx-auto h-full overflow-y-auto"
-        >
-          <div className="mb-3 text-center lg:text-start">
-            <h1 className="font-display text-2xl font-extrabold uppercase tracking-wide text-on-surface sm:text-3xl">
-              {tAuth("signupTitle")}
-            </h1>
-            <p className="mt-1 text-xs text-on-surface-variant">
-              {tAuth("signupSubtitle")}
-            </p>
-          </div>
+        {/* Stepper Progress Indicator */}
+        <div className="max-w-xl mx-auto flex items-center justify-between relative px-6">
+          <div className="absolute left-10 right-10 top-1/2 -translate-y-1/2 h-1 bg-slate-200 dark:bg-slate-800 -z-0" />
+          
+          {[
+            { num: 1, label: "1. Role & Credentials" },
+            { num: 2, label: "2. Verification Data" },
+            { num: 3, label: "3. Terms & Submit" },
+          ].map((s) => {
+            const isActive = step >= s.num;
+            return (
+              <div key={s.num} className="relative z-10 flex flex-col items-center gap-1">
+                <div
+                  className={`w-9 h-9 rounded-full flex items-center justify-center font-extrabold text-xs transition ${
+                    isActive
+                      ? "bg-indigo-600 text-white shadow-md shadow-indigo-500/30"
+                      : "bg-slate-200 dark:bg-slate-800 text-slate-500"
+                  }`}
+                >
+                  {s.num}
+                </div>
+                <span className="text-[11px] font-extrabold text-slate-600 dark:text-slate-400">
+                  {s.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
 
-          {/* Google OAuth Button */}
-          <button
-            type="button"
-            onClick={handleGoogleAuth}
-            className="mb-3 flex w-full items-center justify-center gap-3 rounded-lg border border-outline-variant bg-surface-container-lowest py-2 text-xs font-bold text-on-surface transition hover:bg-surface-container-low shadow-sm"
-          >
-            <svg className="h-4 w-4" viewBox="0 0 24 24">
-              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-            </svg>
-            Sign up with Google
-          </button>
-
-          <div className="relative mb-3 flex items-center justify-center">
-            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-outline-variant/60" /></div>
-            <span className="relative bg-surface px-3 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">or email registration</span>
-          </div>
-
+        {/* Stepper Form Body */}
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xl max-w-3xl mx-auto">
           {errMessage && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="mb-3 rounded-xl bg-error-container p-2.5 text-center text-xs font-semibold text-on-error-container border border-error/20"
-            >
-              <span>{errMessage}</span>
-              {errMessage.includes("already in use") && (
-                <Link href={`/${locale}/login`} className="font-bold underline hover:text-primary block mt-0.5">
-                  Click here to log in
-                </Link>
-              )}
-            </motion.div>
+            <div className="mb-6 p-3 rounded-2xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-xs font-semibold text-red-600 dark:text-red-400 text-center">
+              {errMessage}
+            </div>
           )}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-2.5" noValidate>
-            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-              <div>
-                <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                  {tAuth("firstNameLabel")}
-                </label>
-                <Input placeholder="Amira" className="h-9 text-xs rounded-lg" {...register("firstName")} />
-                {errors.firstName && (
-                  <p className="mt-0.5 text-[11px] font-medium text-error">{errors.firstName.message}</p>
+          <form onSubmit={handleFormSubmit} className="space-y-6">
+            {/* STEP 1: ROLE SELECTION & BASE CREDENTIALS */}
+            {step === 1 && (
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="space-y-6"
+              >
+                <div className="space-y-3">
+                  <label className="text-xs font-extrabold text-slate-700 dark:text-slate-200 uppercase tracking-wider block">
+                    Select Your Registration Role:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {[
+                      {
+                        id: "parent",
+                        title: "Parent / Guardian",
+                        desc: "Enroll children, track attendance, & pay tuition securely",
+                        icon: UserCheck,
+                      },
+                      {
+                        id: "nurseryOwner",
+                        title: "Academy Owner",
+                        desc: "Register nursery, upload credentials, & manage enrollments",
+                        icon: Building2,
+                      },
+                      {
+                        id: "teacher",
+                        title: "Educator / Teacher",
+                        desc: "Upload teaching licenses & manage assigned classroom rosters",
+                        icon: GraduationCap,
+                      },
+                    ].map((roleCard) => {
+                      const isSelected = selectedRole === roleCard.id;
+                      const Icon = roleCard.icon;
+                      return (
+                        <div
+                          key={roleCard.id}
+                          onClick={() => setSelectedRole(roleCard.id as any)}
+                          className={`p-4 rounded-2xl border-2 transition cursor-pointer space-y-2 ${
+                            isSelected
+                              ? "border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/30 shadow-md"
+                              : "border-slate-200 dark:border-slate-800 hover:border-slate-300"
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300">
+                              <Icon className="w-5 h-5" />
+                            </div>
+                            {isSelected && <CheckCircle2 className="w-5 h-5 text-indigo-600" />}
+                          </div>
+                          <h4 className="font-extrabold text-sm text-slate-900 dark:text-white">
+                            {roleCard.title}
+                          </h4>
+                          <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
+                            {roleCard.desc}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Base Credentials Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                      First Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                      placeholder="e.g. Amira"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                      Last Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      required
+                      placeholder="e.g. Hassan"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      placeholder="parent@kidsoasis.com"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      required
+                      placeholder="+20 100 123 4567"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                      Password *
+                    </label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      placeholder="••••••••"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                      Confirm Password *
+                    </label>
+                    <input
+                      type="password"
+                      value={passwordConfirm}
+                      onChange={(e) => setPasswordConfirm(e.target.value)}
+                      required
+                      placeholder="••••••••"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-4 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md flex items-center gap-2"
+                  >
+                    Continue to Role Verification <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            {/* STEP 2: ROLE-TAILORED EVIDENCE & DOCUMENT VERIFICATION */}
+            {step === 2 && (
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="space-y-6"
+              >
+                {/* ROLE 1: PARENT */}
+                {selectedRole === "parent" && (
+                  <div className="space-y-5">
+                    <div className="p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-xs text-indigo-900 dark:text-indigo-300">
+                      <strong>Parent Identity & Child Profile Setup:</strong> Upload your parent ID verification proof and add your initial child profile for nursery application.
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Upload Parent National ID / Passport Proof
+                        </label>
+                        <div className="p-3.5 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-center bg-slate-50 dark:bg-slate-800">
+                          <Upload className="w-5 h-5 text-indigo-600 mx-auto mb-1" />
+                          <span className="text-[11px] font-semibold text-slate-500 block">
+                            {parentIdDoc ? parentIdDoc.name : "Choose ID document scan"}
+                          </span>
+                          <input
+                            type="file"
+                            onChange={(e) => setParentIdDoc(e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="parent-id-file"
+                          />
+                          <label
+                            htmlFor="parent-id-file"
+                            className="mt-1 inline-block px-3 py-1 bg-white dark:bg-slate-700 rounded-md text-[10px] font-bold text-indigo-600 dark:text-indigo-300 cursor-pointer border"
+                          >
+                            Browse File
+                          </label>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Upload Real Parent Profile Photo
+                        </label>
+                        <div className="p-3.5 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-center bg-slate-50 dark:bg-slate-800">
+                          <Upload className="w-5 h-5 text-indigo-600 mx-auto mb-1" />
+                          <span className="text-[11px] font-semibold text-slate-500 block">
+                            {parentPhoto ? parentPhoto.name : "Choose real profile photo"}
+                          </span>
+                          <input
+                            type="file"
+                            onChange={(e) => setParentPhoto(e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="parent-photo-file"
+                          />
+                          <label
+                            htmlFor="parent-photo-file"
+                            className="mt-1 inline-block px-3 py-1 bg-white dark:bg-slate-700 rounded-md text-[10px] font-bold text-indigo-600 dark:text-indigo-300 cursor-pointer border"
+                          >
+                            Browse Photo
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Initial Child Section */}
+                    <div className="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                      <h4 className="text-xs font-extrabold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                        <Heart className="w-4 h-4 text-red-500" /> Initial Child Profile (Optional)
+                      </h4>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                            Child Full Name
+                          </label>
+                          <input
+                            type="text"
+                            value={childName}
+                            onChange={(e) => setChildName(e.target.value)}
+                            placeholder="e.g. Noah Hassan"
+                            className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                            Date of Birth
+                          </label>
+                          <input
+                            type="date"
+                            value={childBirthday}
+                            onChange={(e) => setChildBirthday(e.target.value)}
+                            className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 )}
-              </div>
 
-              <div>
-                <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                  {tAuth("lastNameLabel")}
-                </label>
-                <Input placeholder="Hassan" className="h-9 text-xs rounded-lg" {...register("lastName")} />
-                {errors.lastName && (
-                  <p className="mt-0.5 text-[11px] font-medium text-error">{errors.lastName.message}</p>
+                {/* ROLE 2: ACADEMY OWNER */}
+                {selectedRole === "nurseryOwner" && (
+                  <div className="space-y-5">
+                    <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-xs text-amber-900 dark:text-amber-300">
+                      <strong>Academy Verification & Contract Audit:</strong> Academy owners must submit commercial licensing evidence and owner ID. Upon submission, your account contract is reviewed by System Administrators before platform activation.
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Academy Official Name *
+                        </label>
+                        <input
+                          type="text"
+                          value={academyName}
+                          onChange={(e) => setAcademyName(e.target.value)}
+                          placeholder="e.g. Oasis International Nursery"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Commercial Registration License # *
+                        </label>
+                        <input
+                          type="text"
+                          value={registrationNumber}
+                          onChange={(e) => setRegistrationNumber(e.target.value)}
+                          placeholder="CR-2026-987654"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Commercial License Document
+                        </label>
+                        <div className="p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-center bg-slate-50 dark:bg-slate-800">
+                          <Upload className="w-4 h-4 text-indigo-600 mx-auto mb-1" />
+                          <span className="text-[10px] font-semibold text-slate-500 block truncate">
+                            {commercialLicenseDoc ? commercialLicenseDoc.name : "License PDF"}
+                          </span>
+                          <input
+                            type="file"
+                            onChange={(e) => setCommercialLicenseDoc(e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="commercial-doc-file"
+                          />
+                          <label
+                            htmlFor="commercial-doc-file"
+                            className="mt-1 inline-block px-2 py-0.5 bg-white dark:bg-slate-700 rounded text-[9px] font-bold text-indigo-600 dark:text-indigo-300 cursor-pointer border"
+                          >
+                            Browse File
+                          </label>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Owner National ID Scan
+                        </label>
+                        <div className="p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-center bg-slate-50 dark:bg-slate-800">
+                          <Upload className="w-4 h-4 text-indigo-600 mx-auto mb-1" />
+                          <span className="text-[10px] font-semibold text-slate-500 block truncate">
+                            {ownerIdDoc ? ownerIdDoc.name : "Owner ID Scan"}
+                          </span>
+                          <input
+                            type="file"
+                            onChange={(e) => setOwnerIdDoc(e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="owner-id-file"
+                          />
+                          <label
+                            htmlFor="owner-id-file"
+                            className="mt-1 inline-block px-2 py-0.5 bg-white dark:bg-slate-700 rounded text-[9px] font-bold text-indigo-600 dark:text-indigo-300 cursor-pointer border"
+                          >
+                            Browse File
+                          </label>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Facility Lease / Deed
+                        </label>
+                        <div className="p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-center bg-slate-50 dark:bg-slate-800">
+                          <Upload className="w-4 h-4 text-indigo-600 mx-auto mb-1" />
+                          <span className="text-[10px] font-semibold text-slate-500 block truncate">
+                            {propertyLeaseDoc ? propertyLeaseDoc.name : "Lease Deed"}
+                          </span>
+                          <input
+                            type="file"
+                            onChange={(e) => setPropertyLeaseDoc(e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="property-doc-file"
+                          />
+                          <label
+                            htmlFor="property-doc-file"
+                            className="mt-1 inline-block px-2 py-0.5 bg-white dark:bg-slate-700 rounded text-[9px] font-bold text-indigo-600 dark:text-indigo-300 cursor-pointer border"
+                          >
+                            Browse File
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 )}
-              </div>
-            </div>
 
-            <div>
-              <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                {tAuth("emailLabel")}
-              </label>
-              <Input type="email" autoComplete="email" placeholder={tAuth("emailPlaceholder")} className="h-9 text-xs rounded-lg" {...register("email")} />
-              {errors.email && (
-                <p className="mt-0.5 text-[11px] font-medium text-error">{errors.email.message}</p>
-              )}
-            </div>
+                {/* ROLE 3: EDUCATOR / TEACHER */}
+                {selectedRole === "teacher" && (
+                  <div className="space-y-5">
+                    <div className="p-4 rounded-2xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 text-xs text-sky-900 dark:text-sky-300">
+                      <strong>Educator Credential Submission:</strong> Upload your teaching license, resume (CV), and ID to join accredited nursery teams.
+                    </div>
 
-            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-              <div>
-                <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                  Phone Number
-                </label>
-                <Input placeholder="+20 123 456 7890" className="h-9 text-xs rounded-lg" {...register("phoneNumber")} />
-                {errors.phoneNumber && (
-                  <p className="mt-0.5 text-[11px] font-medium text-error">{errors.phoneNumber.message}</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Teaching Specialization *
+                        </label>
+                        <input
+                          type="text"
+                          value={specialization}
+                          onChange={(e) => setSpecialization(e.target.value)}
+                          placeholder="e.g. Montessori & Early STEM"
+                          className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Years of Teaching Experience
+                        </label>
+                        <input
+                          type="number"
+                          value={experienceYears}
+                          onChange={(e) => setExperienceYears(e.target.value)}
+                          placeholder="3"
+                          className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-xs font-semibold"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Teaching License / Educator Certificate
+                        </label>
+                        <div className="p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-center bg-slate-50 dark:bg-slate-800">
+                          <Upload className="w-4 h-4 text-indigo-600 mx-auto mb-1" />
+                          <span className="text-[10px] font-semibold text-slate-500 block truncate">
+                            {teachingLicenseDoc ? teachingLicenseDoc.name : "License PDF"}
+                          </span>
+                          <input
+                            type="file"
+                            onChange={(e) => setTeachingLicenseDoc(e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="teaching-license-file"
+                          />
+                          <label
+                            htmlFor="teaching-license-file"
+                            className="mt-1 inline-block px-2 py-0.5 bg-white dark:bg-slate-700 rounded text-[9px] font-bold text-indigo-600 dark:text-indigo-300 cursor-pointer border"
+                          >
+                            Browse File
+                          </label>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                          Resume / CV Document
+                        </label>
+                        <div className="p-3 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-center bg-slate-50 dark:bg-slate-800">
+                          <Upload className="w-4 h-4 text-indigo-600 mx-auto mb-1" />
+                          <span className="text-[10px] font-semibold text-slate-500 block truncate">
+                            {resumeCvDoc ? resumeCvDoc.name : "Resume CV PDF"}
+                          </span>
+                          <input
+                            type="file"
+                            onChange={(e) => setResumeCvDoc(e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="resume-cv-file"
+                          />
+                          <label
+                            htmlFor="resume-cv-file"
+                            className="mt-1 inline-block px-2 py-0.5 bg-white dark:bg-slate-700 rounded text-[9px] font-bold text-indigo-600 dark:text-indigo-300 cursor-pointer border"
+                          >
+                            Browse File
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 )}
-              </div>
 
-              <div>
-                <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                  Address
-                </label>
-                <Input placeholder="Alexandria, Egypt" className="h-9 text-xs rounded-lg" {...register("address")} />
-                {errors.address && (
-                  <p className="mt-0.5 text-[11px] font-medium text-error">{errors.address.message}</p>
-                )}
-              </div>
-            </div>
+                <div className="pt-4 flex justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setStep(1)}
+                    className="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-extrabold text-xs flex items-center gap-1.5"
+                  >
+                    <ArrowLeft className="w-4 h-4" /> Back
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-md flex items-center gap-2"
+                  >
+                    Proceed to Terms & Review <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            )}
 
-            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-              <div>
-                <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                  {tAuth("roleLabel")}
-                </label>
-                <select
-                  {...register("role")}
-                  className="h-9 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 text-xs text-on-surface outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                >
-                  <option value="">Select Role</option>
-                  <option value="parent">{tAuth("roleParent")}</option>
-                  <option value="nurseryOwner">{tAuth("roleOwner")}</option>
-                  <option value="serviceProvider">{tAuth("roleTeacher")}</option>
-                </select>
-                {errors.role && (
-                  <p className="mt-0.5 text-[11px] font-medium text-error">{errors.role.message}</p>
-                )}
-              </div>
+            {/* STEP 3: TERMS & FINAL REGISTRATION */}
+            {step === 3 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="space-y-6"
+              >
+                <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 space-y-4">
+                  <h4 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-wider">
+                    Registration Summary & Contract Terms
+                  </h4>
 
-              <div>
-                <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                  Gender
-                </label>
-                <select
-                  {...register("gender")}
-                  className="h-9 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 text-xs text-on-surface outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                >
-                  <option value="">Select Gender</option>
-                  <option value="female">Female</option>
-                  <option value="male">Male</option>
-                </select>
-                {errors.gender && (
-                  <p className="mt-0.5 text-[11px] font-medium text-error">{errors.gender.message}</p>
-                )}
-              </div>
-            </div>
+                  <div className="grid grid-cols-2 gap-4 text-xs">
+                    <div>
+                      <span className="text-slate-400 text-[10px] font-bold uppercase block">Registrant Name</span>
+                      <strong className="text-slate-800 dark:text-slate-200">{firstName} {lastName}</strong>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 text-[10px] font-bold uppercase block">Selected Role</span>
+                      <strong className="text-indigo-600 dark:text-indigo-400 capitalize">{selectedRole}</strong>
+                    </div>
+                  </div>
 
-            <div className="grid grid-cols-1 gap-2.5 pt-0.5 sm:grid-cols-2">
-              <div>
-                <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                  {tAuth("passwordLabel")}
-                </label>
-                <Input type="password" autoComplete="new-password" placeholder={tAuth("passwordPlaceholder")} className="h-9 text-xs rounded-lg" {...register("password")} />
-                {errors.password && (
-                  <p className="mt-0.5 text-[11px] font-medium text-error">{errors.password.message}</p>
-                )}
-              </div>
+                  <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <p>
+                      By completing registration, you confirm that all provided identity proofs and credentials are authentic. {selectedRole === "nurseryOwner" && "Your academy onboarding contract is subject to 10% platform commission and System Admin approval."}
+                    </p>
+                  </div>
 
-              <div>
-                <label className="mb-1 block text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
-                  Confirm Password
-                </label>
-                <Input type="password" autoComplete="new-password" placeholder={tAuth("passwordPlaceholder")} className="h-9 text-xs rounded-lg" {...register("passwordConfirm")} />
-                {errors.passwordConfirm && (
-                  <p className="mt-0.5 text-[11px] font-medium text-error">{errors.passwordConfirm.message}</p>
-                )}
-              </div>
-            </div>
+                  <div className="flex items-center gap-3 pt-2">
+                    <input
+                      type="checkbox"
+                      id="terms-checkbox"
+                      checked={acceptedTerms}
+                      onChange={(e) => setAcceptedTerms(e.target.checked)}
+                      className="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500 cursor-pointer"
+                    />
+                    <label htmlFor="terms-checkbox" className="text-xs text-slate-700 dark:text-slate-300 font-semibold cursor-pointer">
+                      I agree to the{" "}
+                      <Link
+                        href={`/${locale}/terms`}
+                        target="_blank"
+                        className="text-indigo-600 dark:text-indigo-400 underline font-bold"
+                      >
+                        Terms of Service & Role Governance Agreement
+                      </Link>
+                    </label>
 
-            <div className="pt-2">
-              <Button type="submit" loading={loading} className="w-full justify-center text-xs font-bold h-10 rounded-lg shadow-elevation-1">
-                {tAuth("createAccount")} <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    className="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-extrabold text-xs flex items-center gap-1.5"
+                  >
+                    <ArrowLeft className="w-4 h-4" /> Back to Verification
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={loading || !acceptedTerms}
+                    className="px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs shadow-lg shadow-indigo-500/30 transition disabled:opacity-50 flex items-center gap-2"
+                  >
+                    {loading ? "Registering Account..." : "Complete Registration & Launch"}
+                  </button>
+                </div>
+              </motion.div>
+            )}
           </form>
+        </div>
 
-          <div className="mt-4 border-t border-outline-variant/60 pt-3 text-center text-xs text-on-surface-variant">
-            {tAuth("alreadyHaveAccount")}{" "}
-            <Link href={`/${locale}/login`} className="font-bold text-primary hover:underline ms-1">
-              {tAuth("loginButton")}
-            </Link>
-          </div>
-        </motion.div>
+        {/* Marketing Role-Based FAQ Section */}
+        <SignupFaqSection />
       </main>
-    </div>
-  );
-}
 
-// Same illustration used on the login page, kept local to this file so the
-// page stays a single self-contained component. Purely decorative — uses
-// theme color tokens so it follows light/dark automatically.
-function AuthIllustration() {
-  return (
-    <div className="relative flex h-full w-full max-w-md items-center justify-center p-4">
-      <div className="relative aspect-square w-full max-w-[360px] overflow-hidden rounded-2xl">
-        <Image
-          src="/register.svg"
-          alt="Kids Oasis Signup Illustration"
-          fill
-          priority
-          className="object-contain"
-        />
-      </div>
+      {/* Terms Modal */}
+      <TermsModal
+        isOpen={isTermsModalOpen}
+        onClose={() => setIsTermsModalOpen(false)}
+      />
+
+      <Footer />
     </div>
   );
 }

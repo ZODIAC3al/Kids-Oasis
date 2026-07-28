@@ -475,9 +475,11 @@ function AcademySearchContent() {
                         </h3>
                         <div className="text-right shrink-0 ml-2">
                           <span className="font-display text-lg font-bold text-primary">
-                            ${ac.price}
+                            {locale === "ar" ? `ج.م ${ac.price}` : `$${ac.price}`}
                           </span>
-                          <span className="text-[11px] text-on-surface-variant block">/ mo</span>
+                          <span className="text-[11px] text-on-surface-variant block">
+                            {locale === "ar" ? "/ شهرياً" : "/ mo"}
+                          </span>
                         </div>
                       </div>
 
@@ -490,15 +492,40 @@ function AcademySearchContent() {
                       </p>
 
                       <div className="mt-4 pt-4 border-t border-outline-variant flex flex-wrap gap-1.5">
-                        {(ac.activities || ["STEM Focus", "NAEYC"]).map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                        {(ac.activities || ["STEM Focus", "NAEYC"]).map((tag) => {
+                          const translatedTag =
+                            locale === "ar"
+                              ? tag === "STEM Focus" || tag === "STEM"
+                                ? "منهج STEM"
+                                : tag === "Montessori"
+                                ? "مونتيسوري"
+                                : tag === "Quran"
+                                ? "تحفيظ قرآن"
+                                : tag === "Robotics"
+                                ? "روبوتات"
+                                : tag === "Coding"
+                                ? "برمجة"
+                                : tag === "Gymnastics"
+                                ? "جمباز"
+                                : tag === "Art"
+                                ? "فنون إبداعية"
+                                : tag === "Swimming"
+                                ? "سباحة"
+                                : tag === "Chess"
+                                ? "شطرنج"
+                                : tag
+                              : tag;
+                          return (
+                            <span
+                              key={tag}
+                              className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant"
+                            >
+                              {translatedTag}
+                            </span>
+                          );
+                        })}
                       </div>
+
 
                       <div className="mt-5 pt-3 flex items-center justify-end">
                         <Button size="sm" href={`/${locale}/academies/${ac.id}`}>
