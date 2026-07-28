@@ -196,7 +196,7 @@ export class AuthController {
 
     const frontendUrl = (isProd || isVercelHost)
       ? 'https://kids-oasis-platform.vercel.app'
-      : (process.env.FRONTEND_URL || 'http://localhost:3000');
+      : (process.env.FRONTEND_URL || 'https://kids-oasis-platform.vercel.app');
 
     if (!authResult || !authResult.accessToken) {
       return res.redirect(`${frontendUrl}/en/login?error=google_auth_failed`);
@@ -204,14 +204,14 @@ export class AuthController {
 
     res.cookie('accessToken', authResult.accessToken, {
       httpOnly: true,
-      secure: isProd || isVercelHost,
-      sameSite: (isProd || isVercelHost) ? 'none' : 'lax',
+      secure: true,
+      sameSite: 'none',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
     res.cookie('refreshToken', authResult.refreshToken, {
       httpOnly: true,
-      secure: isProd || isVercelHost,
-      sameSite: (isProd || isVercelHost) ? 'none' : 'lax',
+      secure: true,
+      sameSite: 'none',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -227,6 +227,7 @@ export class AuthController {
     const userEncoded = encodeURIComponent(JSON.stringify(sanitizedUser));
     return res.redirect(`${frontendUrl}/en/login?token=${authResult.accessToken}&user=${userEncoded}`);
   }
+
 
 
 
