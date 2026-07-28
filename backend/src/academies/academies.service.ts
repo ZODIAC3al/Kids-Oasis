@@ -309,8 +309,8 @@ export class AcademiesService {
   async findAcademiesByOwner(ownerId: string): Promise<Academy[]> {
     const academies = await this.academyModel.find({ ownerId }).exec();
     if (academies.length === 0) {
-      // Return all academies if specific owner has none, or user is an owner
-      return this.findAllAcademies();
+      // Return all academies if specific owner has none
+      return this.academyModel.find({}).sort({ isVerified: -1, rating: -1 }).limit(20).exec();
     }
     return academies;
   }
