@@ -190,10 +190,13 @@ export class AuthController {
   @UseGuards(GoogleAuthGuard)
   async googleAuthCallback(@Req() req: any, @Res() res: Response) {
     const authResult = req.user;
-    const defaultFrontend = process.env.NODE_ENV === 'production'
+    const isProd = process.env.NODE_ENV === 'production' || process.env.VERCEL === '1';
+    const host = req.get('host') || '';
+    const isVercelHost = host.includes('vercel.app');
+
+    const frontendUrl = (isProd || isVercelHost)
       ? 'https://kids-oasis-platform.vercel.app'
-      : 'http://localhost:3000';
-    const frontendUrl = process.env.FRONTEND_URL || defaultFrontend;
+      : (process.env.FRONTEND_URL || 'http://localhost:3000');
 
     if (!authResult || !authResult.accessToken) {
       return res.redirect(`${frontendUrl}/en/login?error=google_auth_failed`);
@@ -201,28 +204,30 @@ export class AuthController {
 
     res.cookie('accessToken', authResult.accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: isProd || isVercelHost,
+      sameSite: (isProd || isVercelHost) ? 'none' : 'lax',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
     res.cookie('refreshToken', authResult.refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: isProd || isVercelHost,
+      sameSite: (isProd || isVercelHost) ? 'none' : 'lax',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
     const userObj = authResult.user || authResult;
-    const userEncoded = encodeURIComponent(JSON.stringify({
-      id: userObj.id || userObj._id,
-      email: userObj.email,
+    const sanitizedUser = {
+      id: userObj.id || userObj._id || 'google_user_id',
+      email: userObj.email || 'user@kidsoasis.com',
       firstName: userObj.firstName || 'Google',
       lastName: userObj.lastName || 'User',
       role: userObj.role || 'parent',
       avatar: userObj.avatar || '',
-    }));
+    };
+    const userEncoded = encodeURIComponent(JSON.stringify(sanitizedUser));
     return res.redirect(`${frontendUrl}/en/login?token=${authResult.accessToken}&user=${userEncoded}`);
   }
+
 
 
 
