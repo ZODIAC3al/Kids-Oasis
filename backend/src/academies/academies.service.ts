@@ -33,10 +33,44 @@ export class AcademiesService {
     return course.save();
   }
 
-  async findAllAcademies(): Promise<Academy[]> {
-    let academies = await this.academyModel.find().exec();
-    if (!academies || academies.length === 0) {
-      console.log('Academies collection is empty. Auto-seeding default academies into MongoDB...');
+  async findAllAcademies(query?: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    curriculum?: string;
+    minAge?: number;
+    maxAge?: number;
+    minPrice?: number;
+    maxPrice?: number;
+  }): Promise<{ data: Academy[]; total: number; page: number; totalPages: number }> {
+    const page = Math.max(1, query?.page || 1);
+    const limit = Math.min(100, Math.max(1, query?.limit || 6));
+    const skip = (page - 1) * limit;
+
+    const filter: any = {};
+
+    if (query?.search) {
+      const rx = new RegExp(query.search, 'i');
+      filter.$or = [
+        { name: rx },
+        { description: rx },
+        { city: rx },
+        { governorate: rx },
+        { curriculum: rx },
+      ];
+    }
+
+    if (query?.curriculum) filter.curriculum = query.curriculum;
+    if (query?.minAge !== undefined) filter.minAgeAllowed = { $lte: query.minAge };
+    if (query?.maxAge !== undefined) filter.maxAgeAllowed = { $gte: query.maxAge };
+    if (query?.minPrice !== undefined) filter.price = { ...filter.price, $gte: query.minPrice };
+    if (query?.maxPrice !== undefined) filter.price = { ...filter.price, $lte: query.maxPrice };
+
+    let academies = await this.academyModel.find(filter).sort({ isVerified: -1, rating: -1 }).skip(skip).limit(limit).exec();
+    const total = await this.academyModel.countDocuments(filter).exec();
+
+    if (total === 0 && page === 1) {
+
       academies = await this.academyModel.insertMany([
         {
           name: 'روضة الواحة النموذجية - Oasis Model Academy',
@@ -107,8 +141,11 @@ export class AcademiesService {
           isVerified: true,
         },
       ]);
+      const seededTotal = await this.academyModel.countDocuments({}).exec();
+      const seededAcademies = await this.academyModel.find({}).sort({ isVerified: -1, rating: -1 }).skip(skip).limit(limit).exec();
+      return { data: seededAcademies, total: seededTotal, page, totalPages: Math.ceil(seededTotal / limit) };
     }
-    return academies;
+    return { data: academies, total, page, totalPages: Math.ceil(total / limit) };
   }
 
   async findAcademyById(id: string): Promise<any> {

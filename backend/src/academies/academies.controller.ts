@@ -7,8 +7,26 @@ export class AcademiesController {
   constructor(private readonly academiesService: AcademiesService) {}
 
   @Get()
-  async getAcademies() {
-    return this.academiesService.findAllAcademies();
+  async getAcademies(
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+    @Query('search') search?: string,
+    @Query('curriculum') curriculum?: string,
+    @Query('minAge') minAge?: string,
+    @Query('maxAge') maxAge?: string,
+    @Query('minPrice') minPrice?: string,
+    @Query('maxPrice') maxPrice?: string,
+  ) {
+    return this.academiesService.findAllAcademies({
+      page: page ? parseInt(page) : 1,
+      limit: limit ? parseInt(limit) : 6,
+      search,
+      curriculum,
+      minAge: minAge ? parseInt(minAge) : undefined,
+      maxAge: maxAge ? parseInt(maxAge) : undefined,
+      minPrice: minPrice ? parseFloat(minPrice) : undefined,
+      maxPrice: maxPrice ? parseFloat(maxPrice) : undefined,
+    });
   }
 
   @Get(':id')

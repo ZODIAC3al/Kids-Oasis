@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useMemo, Suspense } from "react";
+import { useState, useEffect, useMemo, Suspense, useCallback } from "react";
 import axios from "axios";
+import { useDebounce } from "use-debounce";
 import { API_URL } from "@/lib/config";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,6 +19,10 @@ import {
   RotateCcw,
   Check,
   Calendar,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
 } from "lucide-react";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -99,6 +104,8 @@ import { useTranslations, useLocale } from "next-intl";
 import { useDispatch } from "react-redux";
 import { setAcademiesList } from "@/store/academiesSlice";
 
+const ITEMS_PER_PAGE = 6;
+
 function AcademySearchContent() {
   const dispatch = useDispatch();
   const [academies, setAcademies] = useState<AcademyItem[]>([]);
@@ -113,53 +120,78 @@ function AcademySearchContent() {
   const [showMap, setShowMap] = useState<boolean>(false);
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
 
   const tAcad = useTranslations("academies");
   const tNav = useTranslations("nav");
   const locale = useLocale();
 
   const apiUrl = API_URL;
+  const [debouncedSearch] = useDebounce(searchQuery, 400);
+
+  const fetchAcademies = useCallback(async (page: number) => {
+    let cancelled = false;
+    setLoading(true);
+    try {
+      const params: Record<string, any> = { page, limit: ITEMS_PER_PAGE };
+      if (debouncedSearch) params.search = debouncedSearch;
+      if (minPrice) params.minPrice = minPrice;
+      if (maxPrice) params.maxPrice = maxPrice;
+
+      const res = await axios.get<any>(`${apiUrl}/academies`, { params });
+      const envelope = res.data;
+      const rawList = Array.isArray(envelope) ? envelope : (envelope?.data ?? []);
+      const serverTotal = envelope?.total ?? rawList.length;
+      const serverPages = envelope?.totalPages ?? Math.ceil(serverTotal / ITEMS_PER_PAGE);
+
+      if (!cancelled && rawList.length > 0) {
+        const mapped: AcademyItem[] = rawList.map((item: any) => ({
+          id: item._id || item.id,
+          name: item.name,
+          description: item.description,
+          location: item.location || item.city ? `${item.city || ""}, ${item.governorate || ""}`.trim().replace(/^,\s*/, '') : (item.address || "Alexandria, Egypt"),
+          rating: item.rating || 4.8,
+          totalReviews: item.totalReviews || 95,
+          price: item.price || 1400,
+          logo: item.logo || "https://images.unsplash.com/photo-1587616211892-b8e563e0fd94?q=80&w=1200&auto=format&fit=crop",
+          activities: item.activities || ["STEM Focus", "Verified"],
+          curriculum: item.curriculum,
+          languages: item.languages,
+          minAgeAllowed: item.minAgeAllowed || 2,
+          maxAgeAllowed: item.maxAgeAllowed || 6,
+        }));
+        setAcademies(mapped);
+        setTotalCount(serverTotal);
+        setTotalPages(serverPages || 1);
+        dispatch(setAcademiesList(mapped));
+      } else if (!cancelled) {
+        setAcademies(mockAcademies);
+        setTotalCount(mockAcademies.length);
+        setTotalPages(1);
+        dispatch(setAcademiesList(mockAcademies));
+      }
+    } catch {
+      if (!cancelled) {
+        setAcademies(mockAcademies);
+        setTotalCount(mockAcademies.length);
+        setTotalPages(1);
+        dispatch(setAcademiesList(mockAcademies));
+      }
+    } finally {
+      if (!cancelled) setLoading(false);
+    }
+    return () => { cancelled = true; };
+  }, [apiUrl, dispatch, debouncedSearch, minPrice, maxPrice]);
 
   useEffect(() => {
-    let cancelled = false;
-    const fetchAcademies = async () => {
-      try {
-        const res = await axios.get<any[]>(`${apiUrl}/academies`);
-        if (!cancelled && Array.isArray(res.data) && res.data.length > 0) {
-          const mapped: AcademyItem[] = res.data.map((item) => ({
-            id: item._id || item.id,
-            name: item.name,
-            description: item.description,
-            location: item.location || item.address || "Alexandria, Egypt",
-            rating: item.rating || 4.8,
-            totalReviews: item.totalReviews || 95,
-            price: item.price || 1400,
-            logo: item.logo || "https://images.unsplash.com/photo-1587616211892-b8e563e0fd94?q=80&w=1200&auto=format&fit=crop",
-            activities: item.activities || ["STEM Focus", "Verified"],
-            minAgeAllowed: item.minAgeAllowed || 2,
-            maxAgeAllowed: item.maxAgeAllowed || 6,
-          }));
-          setAcademies(mapped);
-          dispatch(setAcademiesList(mapped));
-        } else if (!cancelled) {
-          setAcademies(mockAcademies);
-          dispatch(setAcademiesList(mockAcademies));
-        }
-      } catch (err) {
-        if (!cancelled) {
-            setAcademies(mockAcademies);
-            dispatch(setAcademiesList(mockAcademies));
-        }
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    };
+    setCurrentPage(1);
+  }, [debouncedSearch, minPrice, maxPrice, selectedAge, selectedFacilities]);
 
-    fetchAcademies();
-    return () => {
-      cancelled = true;
-    };
-  }, [apiUrl, dispatch]);
+  useEffect(() => {
+    fetchAcademies(currentPage);
+  }, [fetchAcademies, currentPage]);
 
   const toggleFavorite = (id: string) => {
     setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -180,47 +212,25 @@ function AcademySearchContent() {
     setSelectedFacilities([]);
   };
 
+  // Client-side age & facility filter applied on top of server results
   const filteredAcademies = useMemo(() => {
     return academies.filter((ac) => {
-      // 1. Search Query (Name, Description, Location, Curriculum, Activities, Languages)
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const nameMatch = ac.name.toLowerCase().includes(q);
-        const locMatch = ac.location.toLowerCase().includes(q);
-        const descMatch = (ac.description || "").toLowerCase().includes(q);
-        const currMatch = (ac.curriculum || "").toLowerCase().includes(q);
-        const actMatch = (ac.activities || []).some((a) => a.toLowerCase().includes(q));
-        const langMatch = (ac.languages || []).some((l) => l.toLowerCase().includes(q));
-        if (!nameMatch && !locMatch && !descMatch && !currMatch && !actMatch && !langMatch) {
-          return false;
-        }
-      }
-
-      // 2. Age Range Filter
+      // Age Range Filter (kept client-side for UX)
       if (selectedAge !== "all") {
         const minAge = ac.minAgeAllowed ?? 0;
         const maxAge = ac.maxAgeAllowed ?? 12;
-
         if (selectedAge === "0-3 Yrs" && (minAge > 3 || maxAge < 0)) return false;
         if (selectedAge === "4-6 Yrs" && (minAge > 6 || maxAge < 4)) return false;
         if (selectedAge === "7-9 Yrs" && (minAge > 9 || maxAge < 7)) return false;
         if (selectedAge === "10+ Yrs" && maxAge < 10) return false;
       }
-
-      // 3. Price Filter
-      if (minPrice && ac.price < Number(minPrice)) return false;
-      if (maxPrice && ac.price > Number(maxPrice)) return false;
-
-      // 4. Facilities & Activities Filter
+      // Facilities & Activities Filter (kept client-side)
       if (selectedFacilities.length > 0) {
         const acActivitiesStr = [
           ...(ac.activities || []),
           ac.curriculum || "",
           ac.description || "",
-        ]
-          .join(" ")
-          .toLowerCase();
-
+        ].join(" ").toLowerCase();
         const matchesAllFacilities = selectedFacilities.every((fac) => {
           const keyword = fac.toLowerCase();
           if (keyword.includes("stem")) return acActivitiesStr.includes("stem") || acActivitiesStr.includes("robotics");
@@ -229,13 +239,11 @@ function AcademySearchContent() {
           if (keyword.includes("transport")) return acActivitiesStr.includes("transport") || acActivitiesStr.includes("bus");
           return acActivitiesStr.includes(keyword);
         });
-
         if (!matchesAllFacilities) return false;
       }
-
       return true;
     });
-  }, [academies, searchQuery, selectedAge, minPrice, maxPrice, selectedFacilities]);
+  }, [academies, selectedAge, selectedFacilities]);
 
   return (
     <div className="flex min-h-screen flex-col bg-surface text-on-surface">
@@ -373,7 +381,7 @@ function AcademySearchContent() {
                   {tAcad("academiesAndNurseries")}
                 </h1>
                 <p className="text-sm text-on-surface-variant mt-1">
-                  {filteredAcademies.length} {tAcad("facilitiesFound")}
+                  {totalCount} {tAcad("facilitiesFound")}
                 </p>
               </div>
 
@@ -536,6 +544,110 @@ function AcademySearchContent() {
                   </motion.div>
                 ))}
               </div>
+            )}
+
+            {/* ── PAGINATION ── */}
+            {!loading && totalPages > 1 && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="mt-10 flex flex-col items-center gap-4"
+              >
+                {/* Page info text */}
+                <p className="text-xs text-on-surface-variant">
+                  Showing page <span className="font-semibold text-on-surface">{currentPage}</span> of{" "}
+                  <span className="font-semibold text-on-surface">{totalPages}</span> —{" "}
+                  <span className="font-semibold text-primary">{totalCount}</span> total academies
+                </p>
+
+                {/* Pagination controls */}
+                <div className="flex items-center gap-1.5">
+                  {/* First page */}
+                  <button
+                    onClick={() => setCurrentPage(1)}
+                    disabled={currentPage === 1}
+                    aria-label="First page"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant transition hover:bg-primary-container/20 hover:text-primary disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    <ChevronsLeft className="h-4 w-4" />
+                  </button>
+
+                  {/* Previous page */}
+                  <button
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    aria-label="Previous page"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant transition hover:bg-primary-container/20 hover:text-primary disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+
+                  {/* Page number buttons */}
+                  {(() => {
+                    const pages: (number | "...")[] = [];
+                    if (totalPages <= 7) {
+                      for (let i = 1; i <= totalPages; i++) pages.push(i);
+                    } else {
+                      pages.push(1);
+                      if (currentPage > 3) pages.push("...");
+                      for (
+                        let i = Math.max(2, currentPage - 1);
+                        i <= Math.min(totalPages - 1, currentPage + 1);
+                        i++
+                      ) {
+                        pages.push(i);
+                      }
+                      if (currentPage < totalPages - 2) pages.push("...");
+                      pages.push(totalPages);
+                    }
+                    return pages.map((p, i) =>
+                      p === "..." ? (
+                        <span
+                          key={`ellipsis-${i}`}
+                          className="flex h-9 w-7 items-center justify-center text-xs text-on-surface-variant select-none"
+                        >
+                          …
+                        </span>
+                      ) : (
+                        <button
+                          key={p}
+                          onClick={() => setCurrentPage(p as number)}
+                          aria-label={`Page ${p}`}
+                          aria-current={currentPage === p ? "page" : undefined}
+                          className={`flex h-9 min-w-[2.25rem] items-center justify-center rounded-xl border px-2.5 text-sm font-semibold transition ${
+                            currentPage === p
+                              ? "border-primary bg-primary text-on-primary shadow-elevation-1"
+                              : "border-outline-variant bg-surface-container-low text-on-surface hover:bg-primary-container/20 hover:text-primary hover:border-primary/40"
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      )
+                    );
+                  })()}
+
+                  {/* Next page */}
+                  <button
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    aria-label="Next page"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant transition hover:bg-primary-container/20 hover:text-primary disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+
+                  {/* Last page */}
+                  <button
+                    onClick={() => setCurrentPage(totalPages)}
+                    disabled={currentPage === totalPages}
+                    aria-label="Last page"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant transition hover:bg-primary-container/20 hover:text-primary disabled:cursor-not-allowed disabled:opacity-30"
+                  >
+                    <ChevronsRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </motion.div>
             )}
           </div>
         </div>
