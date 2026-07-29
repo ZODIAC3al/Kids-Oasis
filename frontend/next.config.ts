@@ -22,6 +22,36 @@ const nextConfig = {
       },
     ],
   },
+
+  // ── PWA: Headers for service worker & manifest ──────────────────
+  async headers() {
+    return [
+      {
+        // Service Worker must never be cached by the browser itself
+        source: '/sw.js',
+        headers: [
+          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
+          { key: 'Service-Worker-Allowed', value: '/' },
+        ],
+      },
+      {
+        // Web App Manifest: short cache
+        source: '/manifest.json',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=3600' },
+          { key: 'Content-Type', value: 'application/manifest+json' },
+        ],
+      },
+      {
+        // PWA icons: long cache (they're versioned via icon names)
+        source: '/icons/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);
+

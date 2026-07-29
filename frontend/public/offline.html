@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline - Kids Oasis</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #FAFAFC 0%, #EEF2FF 100%);
+      color: #1E293B;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .logo-ring {
+      width: 96px; height: 96px;
+      background: linear-gradient(135deg, #4F46E5 0%, #0EA5E9 100%);
+      border-radius: 28px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 12px 40px rgba(79,70,229,0.3), 0 0 0 8px rgba(79,70,229,0.08);
+    }
+    .tag {
+      display: inline-block;
+      background: rgba(79,70,229,0.1);
+      color: #4F46E5;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    h1 { font-size: 1.85rem; font-weight: 800; margin-bottom: 0.75rem; color: #0F172A; }
+    p { color: #64748B; font-size: 1rem; line-height: 1.65; max-width: 320px; margin-bottom: 2rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, #4F46E5, #6366F1);
+      color: white;
+      padding: 0.9rem 2.25rem; border-radius: 16px;
+      font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; border: none; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(79,70,229,0.4);
+      transition: transform 0.15s, opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn:active { transform: scale(0.97); }
+    .note {
+      margin-top: 2.5rem;
+      font-size: 0.78rem;
+      color: #94A3B8;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #10B981; }
+    .wave {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: 180px; pointer-events: none;
+      background: linear-gradient(180deg, transparent, rgba(79,70,229,0.04));
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-ring">&#127944;</div>
+  <span class="tag">Kids Oasis</span>
+  <h1>You are offline</h1>
+  <p>No internet connection detected. Check your network and tap retry &mdash; your previously visited pages are still available.</p>
+  <button class="btn" onclick="window.location.reload()">
+    &#8635; Try Again
+  </button>
+  <p class="note">
+    <span class="dot"></span>
+    Saved pages are available offline
+  </p>
+  <div class="wave"></div>
+</body>
+</html>

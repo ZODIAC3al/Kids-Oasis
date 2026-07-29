@@ -253,6 +253,13 @@ function AcademySearchContent() {
     });
   }, [academies, selectedAge, selectedFacilities]);
 
+  // Count active filters for badge
+  const activeFilterCount =
+    (selectedAge !== "all" ? 1 : 0) +
+    (minPrice ? 1 : 0) +
+    (maxPrice ? 1 : 0) +
+    selectedFacilities.length;
+
   return (
     <div className="flex min-h-screen flex-col bg-surface text-on-surface">
       <NavBar />
@@ -394,11 +401,17 @@ function AcademySearchContent() {
               </div>
 
               <div className="flex items-center gap-3">
+                {/* Mobile filters trigger button with badge */}
                 <button
                   onClick={() => setShowMobileFilters(true)}
-                  className="flex lg:hidden items-center gap-1.5 rounded-[var(--radius-control)] border border-outline-variant bg-surface-container-low px-3 py-2 text-xs font-semibold text-on-surface"
+                  className="relative flex lg:hidden items-center gap-1.5 rounded-[var(--radius-control)] border border-outline-variant bg-surface-container-low px-3 py-2 text-xs font-semibold text-on-surface"
                 >
                   <SlidersHorizontal className="h-4 w-4" /> {tAcad("filters")}
+                  {activeFilterCount > 0 && (
+                    <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-on-primary">
+                      {activeFilterCount}
+                    </span>
+                  )}
                 </button>
 
                 <div className="hidden sm:flex items-center rounded-xl bg-surface-container-low p-1 border border-outline-variant">
@@ -508,40 +521,15 @@ function AcademySearchContent() {
                       </p>
 
                       <div className="mt-4 pt-4 border-t border-outline-variant flex flex-wrap gap-1.5">
-                        {(ac.activities || ["STEM Focus", "NAEYC"]).map((tag) => {
-                          const translatedTag =
-                            locale === "ar"
-                              ? tag === "STEM Focus" || tag === "STEM"
-                                ? "منهج STEM"
-                                : tag === "Montessori"
-                                ? "مونتيسوري"
-                                : tag === "Quran"
-                                ? "تحفيظ قرآن"
-                                : tag === "Robotics"
-                                ? "روبوتات"
-                                : tag === "Coding"
-                                ? "برمجة"
-                                : tag === "Gymnastics"
-                                ? "جمباز"
-                                : tag === "Art"
-                                ? "فنون إبداعية"
-                                : tag === "Swimming"
-                                ? "سباحة"
-                                : tag === "Chess"
-                                ? "شطرنج"
-                                : tag
-                              : tag;
-                          return (
-                            <span
-                              key={tag}
-                              className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant"
-                            >
-                              {translatedTag}
-                            </span>
-                          );
-                        })}
+                        {(ac.activities || ["Verified"]).slice(0, 4).map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-surface-container-high px-2.5 py-0.5 text-[11px] font-medium text-on-surface-variant"
+                          >
+                            {tag}
+                          </span>
+                        ))}
                       </div>
-
 
                       <div className="mt-5 pt-3 flex items-center justify-end">
                         <Button size="sm" href={`/${locale}/academies/${ac.id}`}>
@@ -562,16 +550,13 @@ function AcademySearchContent() {
                 transition={{ duration: 0.3 }}
                 className="mt-10 flex flex-col items-center gap-4"
               >
-                {/* Page info text */}
                 <p className="text-xs text-on-surface-variant">
                   Showing page <span className="font-semibold text-on-surface">{currentPage}</span> of{" "}
                   <span className="font-semibold text-on-surface">{totalPages}</span> —{" "}
                   <span className="font-semibold text-primary">{totalCount}</span> total academies
                 </p>
 
-                {/* Pagination controls */}
-                <div className="flex items-center gap-1.5">
-                  {/* First page */}
+                <div className="flex items-center gap-1.5 flex-wrap justify-center">
                   <button
                     onClick={() => setCurrentPage(1)}
                     disabled={currentPage === 1}
@@ -580,8 +565,6 @@ function AcademySearchContent() {
                   >
                     <ChevronsLeft className="h-4 w-4" />
                   </button>
-
-                  {/* Previous page */}
                   <button
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                     disabled={currentPage === 1}
@@ -591,7 +574,6 @@ function AcademySearchContent() {
                     <ChevronLeft className="h-4 w-4" />
                   </button>
 
-                  {/* Page number buttons */}
                   {(() => {
                     const pages: (number | "...")[] = [];
                     if (totalPages <= 7) {
@@ -603,25 +585,17 @@ function AcademySearchContent() {
                         let i = Math.max(2, currentPage - 1);
                         i <= Math.min(totalPages - 1, currentPage + 1);
                         i++
-                      ) {
-                        pages.push(i);
-                      }
+                      ) { pages.push(i); }
                       if (currentPage < totalPages - 2) pages.push("...");
                       pages.push(totalPages);
                     }
                     return pages.map((p, i) =>
                       p === "..." ? (
-                        <span
-                          key={`ellipsis-${i}`}
-                          className="flex h-9 w-7 items-center justify-center text-xs text-on-surface-variant select-none"
-                        >
-                          …
-                        </span>
+                        <span key={`e-${i}`} className="flex h-9 w-7 items-center justify-center text-xs text-on-surface-variant select-none">…</span>
                       ) : (
                         <button
                           key={p}
                           onClick={() => setCurrentPage(p as number)}
-                          aria-label={`Page ${p}`}
                           aria-current={currentPage === p ? "page" : undefined}
                           className={`flex h-9 min-w-[2.25rem] items-center justify-center rounded-xl border px-2.5 text-sm font-semibold transition ${
                             currentPage === p
@@ -635,7 +609,6 @@ function AcademySearchContent() {
                     );
                   })()}
 
-                  {/* Next page */}
                   <button
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
@@ -644,8 +617,6 @@ function AcademySearchContent() {
                   >
                     <ChevronRight className="h-4 w-4" />
                   </button>
-
-                  {/* Last page */}
                   <button
                     onClick={() => setCurrentPage(totalPages)}
                     disabled={currentPage === totalPages}
@@ -660,6 +631,176 @@ function AcademySearchContent() {
           </div>
         </div>
       </main>
+
+      {/* ═══════════════════════════════════════════════════════
+          MOBILE FILTER BOTTOM SHEET DRAWER (lg:hidden)
+      ═══════════════════════════════════════════════════════ */}
+      <AnimatePresence>
+        {showMobileFilters && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="mobile-filter-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm lg:hidden"
+              onClick={() => setShowMobileFilters(false)}
+            />
+
+            {/* Drawer panel */}
+            <motion.div
+              key="mobile-filter-drawer"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
+              className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-surface rounded-t-3xl shadow-2xl max-h-[88dvh] flex flex-col"
+            >
+              {/* Handle bar */}
+              <div className="flex justify-center pt-3 pb-1 shrink-0">
+                <div className="h-1 w-10 rounded-full bg-outline-variant/60" />
+              </div>
+
+              {/* Header row */}
+              <div className="flex items-center justify-between px-5 py-3 border-b border-outline-variant shrink-0">
+                <div className="flex items-center gap-2">
+                  <SlidersHorizontal className="h-5 w-5 text-primary" />
+                  <h2 className="font-display text-lg font-bold text-on-surface">Filters</h2>
+                  {activeFilterCount > 0 && (
+                    <span className="flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-primary px-1.5 text-[11px] font-bold text-on-primary">
+                      {activeFilterCount}
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest transition"
+                  aria-label="Close filters"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Scrollable filter content */}
+              <div className="overflow-y-auto flex-1 px-5 py-4 space-y-6">
+
+                {/* Age Range */}
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Age Range</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {["all", "0-3 Yrs", "4-6 Yrs", "7-9 Yrs", "10+ Yrs"].map((age) => (
+                      <button
+                        key={age}
+                        onClick={() => setSelectedAge(age)}
+                        className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                          selectedAge === age
+                            ? "bg-primary text-on-primary shadow-elevation-1"
+                            : "bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest"
+                        }`}
+                      >
+                        {age === "all" ? "All Ages" : age}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Monthly Fee */}
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Monthly Fee (EGP)</h3>
+                  <div className="flex items-center gap-3">
+                    <div className="flex-1">
+                      <input
+                        type="number"
+                        inputMode="numeric"
+                        placeholder="Min"
+                        value={minPrice}
+                        onChange={(e) => setMinPrice(e.target.value)}
+                        className="w-full rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                      />
+                    </div>
+                    <span className="text-on-surface-variant font-medium">—</span>
+                    <div className="flex-1">
+                      <input
+                        type="number"
+                        inputMode="numeric"
+                        placeholder="Max"
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(e.target.value)}
+                        className="w-full rounded-xl border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Distance */}
+                <div>
+                  <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Distance</h3>
+                    <span className="text-sm font-bold text-primary">Up to {maxDistance} mi</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="50"
+                    value={maxDistance}
+                    onChange={(e) => setMaxDistance(Number(e.target.value))}
+                    className="w-full accent-primary cursor-pointer h-2"
+                  />
+                  <div className="flex justify-between text-xs text-on-surface-variant mt-1">
+                    <span>1 mi</span><span>50 mi</span>
+                  </div>
+                </div>
+
+                {/* Facilities & Activities */}
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Facilities & Activities</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {["Transportation", "Meals Included", "STEM Lab", "Outdoor Playground"].map((facility) => {
+                      const checked = selectedFacilities.includes(facility);
+                      return (
+                        <button
+                          key={facility}
+                          onClick={() => toggleFacility(facility)}
+                          className={`flex items-center gap-2 rounded-xl border p-3 text-left text-sm font-medium transition ${
+                            checked
+                              ? "border-primary bg-primary-container/20 text-primary"
+                              : "border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container-low"
+                          }`}
+                        >
+                          <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border text-xs transition ${
+                            checked ? "border-primary bg-primary text-on-primary" : "border-outline-variant"
+                          }`}>
+                            {checked && <Check className="h-3 w-3" />}
+                          </span>
+                          <span className="leading-tight">{facility}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Sticky bottom action row */}
+              <div className="shrink-0 border-t border-outline-variant px-5 py-4 flex gap-3 bg-surface">
+                <button
+                  onClick={() => { resetFilters(); }}
+                  className="flex-1 rounded-xl border border-outline-variant bg-surface-container-low py-3 text-sm font-semibold text-on-surface transition hover:bg-surface-container-high active:scale-[0.97]"
+                >
+                  Reset All
+                </button>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="flex-2 flex-1 rounded-xl bg-primary py-3 text-sm font-bold text-on-primary shadow-elevation-1 transition hover:opacity-90 active:scale-[0.97]"
+                >
+                  Show {totalCount} Results
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>
