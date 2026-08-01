@@ -14,6 +14,8 @@ import { PaymentsModule } from './payments/payments.module';
 import { NewsletterModule } from './newsletter/newsletter.module';
 import { BullModule } from '@nestjs/bull';
 
+import { AppController } from './app.controller';
+
 const imports: any[] = [
   // Configurations
   ConfigModule.forRoot({
@@ -63,5 +65,6 @@ if (process.env.REDIS_HOST && !process.env.VERCEL) {
 
 @Module({
   imports,
+  controllers: [AppController],
 })
 export class AppModule {}

@@ -1,9 +1,11 @@
+import path from 'path';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: path.join(__dirname, '../'),
   reactStrictMode: true,
   transpilePackages: ['react-icons'],
   eslint: {
